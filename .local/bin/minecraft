@@ -1,0 +1,25 @@
+#!/bin/bash
+
+HEIGHT=20
+WIDTH=50
+CHOICE_HEIGHT=9
+BACKTITLE="Minecraft"
+TITLE="Launchers"
+MENU="Select a Minecraft Launcher"
+LAUNCHERS=("BetaCraft" "MultiMC" "Mojang's Launcher")
+LAUNCERCMD=( "betacraft" "multimc" "minecraft-launcher")
+for i in "${!LAUNCHERS[@]}"; do CHOICES[$((i*2))]="$((i + 1))"; CHOICES[$((2*i + 1))]="${LAUNCHERS[$i]}"; done
+
+CHOICE=$(dialog --clear \
+				--backtitle "$BACKTITLE" \
+				--title "$TITLE" \
+				--menu "$MENU" \
+				$HEIGHT $WIDTH $CHOICE_HEIGHT \
+				"${CHOICES[@]}" \
+				2>&1 >/dev/tty)
+
+if [[ $CHOICE -eq 0 ]]; then
+		clear;
+		exit 0;
+fi
+${LAUNCERCMD[$((CHOICE-1))]}

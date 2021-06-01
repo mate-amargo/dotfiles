@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+/home/e4/prog/Matlab/bin/matlab -desktop

@@ -1,0 +1,58 @@
+#!/bin/bash
+
+# "Database" of Books
+BOOKSDB=$HOME/.local/share/bookworm
+
+# Program to open books
+READER=zathura
+
+MENU="Add Book\nOpen Book\nEdit Books"
+
+CHOICE="$(echo -e $MENU | dmenu -l 10 | tr '[:upper:]' '[:lower:]')"
+
+# Assemble a list of open books
+addbooks () {
+	IFS=$'\n'
+	FILES=($(xwininfo -root -children | tail -n+7 | awk -F'"' '{print $2}'))
+
+	for books in ${FILES[*]}; do
+		if [ -f $books ]; then
+			MENU="$MENU\n$books"
+		fi
+	done
+	unset IFS
+}
+
+# Assemble the list of saved books
+openbooks () {
+	while read -r line; do
+		MENU="$MENU\n$line"
+	done < $BOOKSDB
+}
+
+case $CHOICE in
+	"add book")
+		MENU="Add all"
+		addbooks
+		CHOICE="$(echo -e $MENU | dmenu -l 10)"
+		if [[ $(echo $CHOICE  | tr '[:upper:]' '[:lower:]') == "add all" ]]; then
+			echo -e $MENU | tail -n+2 >> $BOOKSDB
+		elif [[ -n $CHOICE ]]; then
+			echo -e $CHOICE >> $BOOKSDB
+		fi
+		;;
+	"open book")
+		MENU="Open All"
+		openbooks
+		CHOICE="$(echo -e $MENU | dmenu -l 10)"
+		if [[ $(echo $CHOICE  | tr '[:upper:]' '[:lower:]') == "open all" ]]; then
+			eval $READER $(cat $BOOKSDB | sed 's/^/"/;s/$/"/')
+		elif [[ -n $CHOICE ]]; then
+			$READER "$CHOICE"
+		fi
+		;;
+	"edit books")
+		st $EDITOR $BOOKSDB
+		;;
+esac
+

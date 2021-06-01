@@ -1,0 +1,77 @@
+#!/bin/bash
+
+GAMES="
+Steam\n\
+Baldurs Gate: Enhanced Edition\n\
+Baldurs Gate 2: Enhanced Edition\n\
+Icewind Dale: Enhanced Edition\n\
+World of Goo\n\
+Machinarium\n\
+Braid\n\
+Supaplex\n\
+New Supaplex\n\
+Alley Cat\n\
+Alter Ego\n\
+Dino\n\
+Mach 3\n\
+Minecraft\n\
+mari0\n\
+0ad\n\
+Dwarf Fortress\n\
+Re-Volt\n\
+Track Editor\n\
+Wolfenstein 3D\n\
+TeeWorlds\n\
+Slime Volley
+"
+
+TERMINAL=st
+
+CHOICE="$(echo -e $GAMES | dmenu -l 10)"
+
+case $CHOICE in
+	"Steam") exec steam
+	;;
+	"Icewind Dale: Enhanced Edition") exec IcewindDale
+	;;
+	"Baldurs Gate: Enhanced Edition") exec BaldursGate
+	;;
+	"Baldurs Gate 2: Enhanced Edition") exec BaldursGate2
+	;;
+	"World of Goo") exec worldofgoo
+	;;
+	"Machinarium") exec machinarium
+	;;
+	"Braid") exec braid
+	;;
+	"Supaplex") exec dosbox -conf ~/.dosbox/supaplex.conf
+	;;
+	"New Supaplex") exec NewSupaplex
+	;;
+	"Minecraft") exec $TERMINAL -e minecraft
+	;;
+	"0ad") exec 0ad
+	;;
+	"mari0") exec mari0
+	;;
+	"Alley Cat") exec /usr/bin/dosbox -conf ~/.dosbox/alleycat.conf
+	;;
+	"Alter Ego") exec /usr/bin/dosbox -conf ~/.dosbox/alterego.conf
+	;;
+	"Dino") exec /usr/bin/dosbox -conf ~/.dosbox/dino.conf
+	;;
+	"Mach 3") exec /usr/bin/dosbox -conf ~/.dosbox/mach3.conf
+	;;
+	"Dwarf Fortress") exec dwarffortress
+	;;
+	"Re-Volt") exec revolt
+	;;
+	"Track Editor") exec trackeditor
+	;;
+	"Wolfenstein 3D") exec /usr/bin/dosbox -conf ~/.dosbox/wolf3d.conf
+	;;
+	"TeeWorlds") exec teeworlds
+	;;
+	"Slime Volley") exec slimevolley
+	;;
+esac

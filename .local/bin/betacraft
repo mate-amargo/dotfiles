@@ -1,0 +1,4 @@
+#!/bin/sh
+
+cd $HOME/games/minecraft
+java -jar betacraft.jar

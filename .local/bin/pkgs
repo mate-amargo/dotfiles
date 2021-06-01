@@ -1,0 +1,8 @@
+#!/bin/sh
+PKGMANAGER=yay
+FILE=/home/e4/.local/share/pkgs-updates
+
+$PKGMANAGER -Sy
+echo -n $($PKGMANAGER -Quq | wc -l) > $FILE
+
+exit 0

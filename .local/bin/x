@@ -1,0 +1,30 @@
+#!/bin/bash
+
+HEIGHT=20
+WIDTH=50
+CHOICE_HEIGHT=9
+BACKTITLE="Window Manager Chooser"
+TITLE="WMs"
+MENU="Select a Window Manager"
+WMS=(    "xmonad" "i3" "awesome" "dwm" "ratpoison" "Enlightenment" "bspwm" "compiz" "flwm" "twm" "tinywm" )
+WMSCMD=( "xmonad" "i3" "awesome" "dwm" "ratpoison" "enlightenment_start" "bspwm" "compiz" "flwm" "twm" "tinywm" )
+CHOICES=($(echo ${WMS[@]} | sed 's/ /\n/g' | awk '{print NR " "$s}'))
+WMS=("CANCEL" ${WMS[@]})
+WMSCMD=("CANCEL" ${WMSCMD[@]})
+
+CHOICE=$(dialog --clear \
+                --backtitle "$BACKTITLE" \
+                --title "$TITLE" \
+                --menu "$MENU" \
+                $HEIGHT $WIDTH $CHOICE_HEIGHT \
+                "${CHOICES[@]}" \
+                2>&1 >/dev/tty)
+
+echo
+
+if [[ $CHOICE -eq 0 ]]; then
+  exit 0;
+fi
+
+ln -sf ~/.x/"${WMS[$CHOICE]}".xinitrc ~/.xinitrc
+exec startx
