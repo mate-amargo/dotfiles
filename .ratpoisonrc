@@ -1,0 +1,8 @@
+# Redefine the meta key
+escape Super_L
+
+bind s-Return exec st
+bind q quit
+
+# Apps
+bind s-r exec dmenu_run
