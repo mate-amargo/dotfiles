@@ -1,0 +1,7 @@
+[Unit]
+Description=Periodically change wallpaper
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/home/e4/.local/bin/wallchange
