@@ -15,7 +15,9 @@ pad_percents=3
 }
 conky.text = [[
 [
-{ "full_text" : " ${catp /home/e4/.local/share/emilios-unread}", "color":"\#ff1900"},
+{ "full_text" : " ${exec xkblayout-state print %s}", "color":"\#c0f387"},
+{ "full_text" : "  ${catp /home/e4/.local/share/pkgs-updates}", "color":"\#8b00ea"},
+{ "full_text" : "  ${catp /home/e4/.local/share/emilios-unread}", "color":"\#ff1900"},
 { "full_text" : " ${if_mpd_playing}${if_match "${mpd_status}"=="Playing"}${endif}${if_match "${mpd_status}"=="Paused"}${endif}  ${mpd_smart 55} [${mpd_elapsed}/${mpd_length}]${else}${endif} ", "color":"\#df3a01"},
 {"full_text" : " ${if_pa_sink_muted}${else}${endif} ${pa_sink_volume}% ", "color":"\#268bd2"},
 { "full_text" : " ${wireless_link_qual_perc wlp2s0}%  ${wireless_essid wlp2s0} ${addrs wlp2s0} ", "color":"\#2fdc57"},
