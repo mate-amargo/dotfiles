@@ -4,7 +4,6 @@ cairo-dock &
 # conky -c ... &
 wallchange
 #xss-lock -- screenlock &
-#redshift &
 albert &
 ccsm &
 exec fusion-icon #compiz
