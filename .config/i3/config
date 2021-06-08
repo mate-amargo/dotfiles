@@ -1,16 +1,43 @@
-# i3 config file (v4) ~ JARG config
+# i3 config file (v4)
+# JARG config
 #
 # User Guide http://i3wm.org/docs/userguide.html
 
+### --------- ###
+### Variables ### {{{
+### --------- ###
+
 set $mod Mod4
+set $browser google-chrome-stable
+set $terminal st
+set $pdfreader zathura
+
+### ------- ### }}}
+### Options ### {{{
+### ------- ###
 
 # font for window titles. ISO 10646 = Unicode
-font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+#font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+font pango:Mononoki Regular 10
 
 # Use Mouse+$mod to drag floating windows to their wanted position
+# Additionally $mod+right_mouse_button resize them and
+# $mod+Shift+right_mouse_button resizes keeping the aspect ratio
 floating_modifier $mod
 
+# Window title bar and 1px border
+default_border normal 1
+
+# Hides edges on workspaces with only 1 window
+hide_edge_borders smart
+
 focus_follows_mouse no
+
+workspace_auto_back_and_forth yes
+
+### ----------- ### }}}
+### Keybindings ### {{{
+### ----------- ###
 
 # start a terminal
 bindsym $mod+Return exec $terminal
@@ -18,7 +45,7 @@ bindsym $mod+Return exec $terminal
 # kill focused window
 bindsym $mod+Shift+Q kill
 
-# start dmenu (a program launcher)
+# start dmenu
 bindsym $mod+r exec dmenu_run
 
 # change focus
@@ -60,30 +87,30 @@ bindsym $mod+a focus parent
 bindcode $mod+d focus child
 
 # switch to workspace
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindcode $mod+10 workspace 1
+bindcode $mod+11 workspace 2
+bindcode $mod+12 workspace 3
+bindcode $mod+13 workspace 4
+bindcode $mod+14 workspace 5
+bindcode $mod+15 workspace 6
+bindcode $mod+16 workspace 7
+bindcode $mod+17 workspace 8
+bindcode $mod+18 workspace 9
+bindcode $mod+19 workspace 10
 
 bindsym $mod+Tab workspace back_and_forth
 
 # move focused container to workspace
-bindsym $mod+Shift+exclam move workspace 1
-bindsym $mod+Shift+at move workspace 2
-bindsym $mod+Shift+numbersign move workspace 3
-bindsym $mod+Shift+dollar move workspace 4
-bindsym $mod+Shift+percent move workspace 5
-bindsym $mod+Shift+asciicircum move workspace 6
-bindsym $mod+Shift+ampersand move workspace 7
-bindsym $mod+Shift+asterisk move workspace 8
-bindsym $mod+Shift+parenleft move workspace 9
-bindsym $mod+Shift+parenright move workspace 10
+bindcode $mod+Shift+10 move workspace 1
+bindcode $mod+Shift+11 move workspace 2
+bindcode $mod+Shift+12 move workspace 3
+bindcode $mod+Shift+13 move workspace 4
+bindcode $mod+Shift+14 move workspace 5
+bindcode $mod+Shift+15 move workspace 6
+bindcode $mod+Shift+16 move workspace 7
+bindcode $mod+Shift+17 move workspace 8
+bindcode $mod+Shift+18 move workspace 9
+bindcode $mod+Shift+19 move workspace 10
 
 # reload the configuration file
 bindsym $mod+Shift+C reload
@@ -119,56 +146,37 @@ bindsym Escape mode "default"
 
 bindsym $mod+Ctrl+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-bar {
-	mode dock
-	hidden_state hide
-#	status_command i3status | ~/.i3/wrapper.py
-#	status_command i3blocks
-	status_command ~/.config/i3/conky
-	font pango:Dejavu Sans Mono 10, FontAwesome 10
-	colors {
-		background #000000
-		statusline #ffffff
-		separator #666666
+# Toggle between dock and hide mode
+bindsym $mod+b bar mode toggle
 
-		focused_workspace  #FF4000 #DF3A01 #ffffff
-		active_workspace   #333333 #5f676a #ffffff
-		inactive_workspace #333333 #222222 #888888
-		urgent_workspace   #2f343a #900000 #ffffff
-	}
-}
+# Make the currently focused window a scratchpad
+bindsym $mod+Control+minus move scratchpad
+# Show the first scratchpad window
+bindsym $mod+minus scratchpad show
 
 # Personal keybindings from here
-set $browser google-chrome-stable
-set $terminal st
-set $pdfreader zathura
 
 bindsym $mod+i exec $browser
 bindsym $mod+t exec transmission-gtk
-#bindsym $mod+m exec $terminal --class "MOC Player" --name "MOC Player" -e mocp
+#bindsym $mod+m exec $terminal -c "MOC Player" -n "MOC Player" -e mocp
 bindsym $mod+m exec $terminal -c "NCMPCPP" -e ncmpcpp
 bindsym $mod+Shift+M exec emilio
 bindsym $mod+Control+l exec xset s activate
 bindsym $mod+Control+Shift+L exec $terminal -c "ASCIIQuarium" -n "ASCIIQuarium" -e asciiquarium
-#bindsym $mod+F9 exec setxkbmap us -variant colemak
-#bindsym $mod+F1 exec setxkbmap latam
-#bindsym $mod+F2 exec setxkbmap ru
-#bindsym $mod+F3 exec xmodmap -e "remove Control = Control_R"
-#bindsym $mod+F10 exec setxkbmap -layout latam && setxkbmap -device $(xinput list --id-only "keyboard:Generic USB K/B") -layout es && xmodmap -e "remove Control = Control_R"
-#bindsym $mod+F11 exec setxkbmap ru && xmodmap -e "remove Control = Control_R"
-#bindsym $mod+F12 exec setxkbmap -layout us -variant dvp && xmodmap -e "remove Control = Control_R"
 bindsym $mod+F8 exec ~/videos/youtube/record.fish
 bindsym $mod+F9 exec ~/videos/youtube/play-pause.fish
 bindsym $mod+F10 exec ~/videos/youtube/stop.fish
 bindsym $mod+o exec $pdfreader
+bindsym Print exec --no-startup-id "scrot -u ~/images/screenshots/'%Y-%m-%d-%s_$wx$h.png' && notify-send -u low 'Screenshot saved'"
+bindsym --release $mod+Print exec --no-startup-id "scrot -s '%Y-%m-%d-%s_$wx$h.png' -e 'mv $f ~/images/screenshots' && notify-send -u low 'Screenshot saved'"
+bindsym $mod+g exec games
+bindsym $mod+p exec "passmenu --type"
 
+# Media Stuff
 #bindsym XF86AudioPlay exec mocp -G
 #bindsym XF86AudioPrev exec mocp -r
 #bindsym XF86AudioNext exec mocp -f
 #bindsym XF86AudioStop exec mocp -s
-#bindsym XF86AudioMute exec amixer -c 1 sset Headphone toggle
 bindsym XF86AudioPlay exec mpc toggle
 bindsym XF86AudioPrev exec mpc prev
 bindsym XF86AudioNext exec mpc next
@@ -176,55 +184,61 @@ bindsym XF86AudioStop exec mpc stop
 bindsym $mod+x exec ponymix toggle
 bindsym XF86AudioRaiseVolume exec amixer -c 0 sset Master 5%+
 bindsym XF86AudioLowerVolume exec amixer -c 0 sset Master 5%-
-#bindsym XF86MonBrightnessUp exec xbacklight -inc 5
-#bindsym XF86MonBrightnessDown exec xbacklight -dec 5
 bindsym XF86MonBrightnessUp exec backlight +50
 bindsym XF86MonBrightnessDown exec backlight -50
 
-# Make the currently focused window a scratchpad
-bindsym $mod+Control+minus move scratchpad
-# Show the first scratchpad window
-bindsym $mod+minus scratchpad show
-bindsym $mod+b bar mode toggle
-#bindsym $mod+less exec --no-startup-id variety --previous
-#bindsym $mod+dead_acute exec --no-startup-id variety --toggle-pause
-#bindsym $mod+Shift+greater exec --no-startup-id variety --next
-#bindsym $mod+plus exec --no-startup-id variety --show-selector
-bindsym Print exec --no-startup-id "scrot -u ~/images/screenshots/'%Y-%m-%d-%s_$wx$h.png' && notify-send -u low 'Screenshot saved'"
-#bindsym Print exec --no-startup-id "scrot -u '%Y-%m-%d-%s_$wx$h.png' -e 'mv $f ~/images/screenshots' && notify-send -u low 'Screenshot saved'"
-#bindsym --release $mod+p exec --no-startup-id "scrot -s ~/images/screenshots/'%Y-%m-%d-%s_$wx$h.png' && notify-send -u low 'Screenshot saved'"
-bindsym --release $mod+p exec --no-startup-id "scrot -s '%Y-%m-%d-%s_$wx$h.png' -e 'mv $f ~/images/screenshots' && notify-send -u low 'Screenshot saved'"
-bindsym $mod+g exec games
+### ------ ### }}}
+### Colors ### {{{
+### ------ ###
 
-# Auto-start applications
-# Set the wallpaper
-#exec feh --bg-fill ~/images/wallpapers/fondo
-#exec variety
+# class                 border  backgr. text    indicator child_border
+client.focused          #ff4000 #ff4000 #ffffff #ff4000   #ff4000
+client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
+client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+client.urgent           #2f343a #900000 #ffffff #900000   #900000
 
-# Colors
-# class                 border  backgr. text    indicator
-client.focused          #FF4000 #DF3A01 #ffffff #FF4000
-client.focused_inactive #333333 #5f676a #ffffff #484e50
-client.unfocused        #333333 #222222 #888888 #292d2e
-client.urgent           #2f343a #900000 #ffffff #900000
+### ---------- ### }}}
+### Status Bar ### {{{
+### ---------- ###
 
-#window settings
-#for_window [class="Variety" instance="variety"] floating enable
+# Use conky with i3bar
+bar {
+	mode dock
+	hidden_state hide
+	status_command ~/.config/i3/conky
+	font pango:Dejavu Sans Mono 10, FontAwesome 10
+	colors {
+		background #000000
+		statusline #ffffff
+		separator #666666
+
+		focused_workspace  #ff4000 #ff4000 #ffffff
+		active_workspace   #333333 #5f676a #ffffff
+		inactive_workspace #333333 #222222 #888888
+		urgent_workspace   #2f343a #900000 #ffffff
+	}
+}
+
+### --------------- ### }}}
+### Window settings ### {{{
+### --------------- ###
+
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [class="feh" instance="feh"] floating enable, move absolute position center
 for_window [class="ASCIIQuarium" instance="ASCIIQuarium"] fullscreen enable
 for_window [window_role="Preferences"] floating enable
 
-# Start a notification manager
-exec --no-startup-id dunst -config ~/.config/dunstrc
-
-workspace_auto_back_and_forth yes
-workspace_layout tabbed
-
-#assign [class="Firefox"] 1
 assign [class="Google-chrome"] 1
 assign [class="MOC Player"] 3
 assign [class="NCMPCPP"] 3
+assign [class="Zathura"] 4
 
-#new_window none
+### ----------------------- ### }}}
+### Auto-start applications ### {{{
+### ----------------------- ###
+
+# Start a notification manager
+exec --no-startup-id dunst -config ~/.config/dunstrc
+
+# vim: ft=conf:foldmethod=marker:expandtab:tabstop=4:softtabstop=4:shiftwidth=4
