@@ -18,7 +18,7 @@ set $pdfreader zathura
 
 # font for window titles. ISO 10646 = Unicode
 #font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-font pango:Mononoki Regular 10
+font pango:Z003 Bold 10
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 # Additionally $mod+right_mouse_button resize them and
