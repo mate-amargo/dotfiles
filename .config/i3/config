@@ -242,4 +242,6 @@ assign [class="Zathura"] 4
 # Start a notification manager
 exec --no-startup-id dunst -config ~/.config/dunstrc
 
+### ----------------------- ### }}}
+
 # vim: ft=conf:foldmethod=marker
