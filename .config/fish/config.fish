@@ -34,6 +34,9 @@ case 'st-*' # suckless' simple terminal
 	end
 end
 
+# ssh-agent
+set -xU SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/ssh-agent.socket"
+
 if test (tty | cut -d'/' -f3 | sed 's/[0-9]//g') = 'tty'
 	pgrep X || x
 end

@@ -29,4 +29,7 @@ export BROWSER="google-chrome-stable"
 # Display calendar
 #pal -r 1
 
+# ssh-agent
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
 source /home/e4/.config/broot/launcher/bash/br
