@@ -469,6 +469,7 @@ toggleStrutsKey XConfig {} = (0,0) -- Empty keybinding since we are doing more t
 -----------------------------------------------
 main = xmonad =<< (
     statusBar myBar myPP toggleStrutsKey
+    $ ewmh
     $ withUrgencyHook NoUrgencyHook
     $ withNavigation2DConfig myNav2DConf
     $ dynamicProjects projects
