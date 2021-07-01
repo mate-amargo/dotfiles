@@ -1,3 +1,4 @@
 #!/usr/bin/env sh
 
+export _JAVA_AWT_WM_NONREPARENTING=1 
 /home/e4/prog/Matlab/bin/matlab -desktop
