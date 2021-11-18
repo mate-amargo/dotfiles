@@ -7,6 +7,7 @@ set -xU LESS_TERMCAP_ue (printf "\e[0m")
 set -xU LESS_TERMCAP_us (printf "\e[01;32m")
 
 set -xU EDITOR vim
+set -xU BROWSER google-chrome-stable
 
 set -x PATH $HOME/.local/bin $PATH
 set -x MPD_HOST $HOME/.config/mpd/socket
