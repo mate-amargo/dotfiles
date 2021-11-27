@@ -219,6 +219,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = (subtitle "Custom Keys":) $
     , ((0,   xF86XK_AudioPrev), addName "Previous Song" $ spawn "mpc prev")
     , ((0,   xF86XK_AudioNext), addName "Next Song" $ spawn "mpc next")
     , ((0,   xF86XK_AudioStop), addName "Stop Music Player" $ spawn "mpc stop")
+    , ((shiftMask,   xF86XK_AudioPlay), addName "Toggle Media Player (browser)" $ spawn "playerctl play-pause")
     -- Volume
     , ((modm, xK_x     ), addName "Toggle Audio Output" $ spawn "ponymix toggle")
     , ((0, xF86XK_AudioLowerVolume), addName "Lower Volume by 5%" $ spawn "amixer -c 0 sset Master 5%-")
