@@ -202,8 +202,21 @@ map <F5> :set expandtab! <CR> :set expandtab? <CR>
 map <F6> :set spell! <CR>
 map <F7> :NERDTreeToggle<CR>
 map <F8> :IndentGuidesToggle<CR>
-map [5;5~ :tabp<CR>
-map [6;5~ :tabn<CR>
+" Left/Right = Previous/Next tabpage
+map OD :tabp<CR>
+map OC :tabn<CR>
+imap OD <esc>:tabp<CR>
+imap OC <esc>:tabn<CR>
+" Up/Down = First/Last tabpage
+map OA :tabfirst<CR>
+map OB :tablast<CR>
+imap OA <esc>:tabfirst<CR>
+imap OB <esc>:tablast<CR>
+" Ctrl-Up/Down = Previous/Next buffer
+map [1;5A :bp<CR>
+map [1;5A :bp<CR>
+imap [1;5B <esc>:bn<CR>
+imap [1;5B <esc>:bn<CR>
 
 " Split navigations
 nnoremap <C-J> <C-W><C-J>
