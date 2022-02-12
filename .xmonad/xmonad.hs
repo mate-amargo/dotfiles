@@ -244,9 +244,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = (subtitle "Custom Keys":) $
     , ((modm .|. controlMask, xK_g), addName "Toggle gaps" $ sequence_ [toggleWindowSpacingEnabled, toggleScreenSpacingEnabled])
     , ((modm, xK_b), addName "Bookworm" $ spawn "bookworm")
     -- Recording
-    , ((modm,       xK_F8     ), addName "Record Desktop" $ spawn "~/videos/youtube/record.fish")
-    , ((modm,       xK_F9     ), addName "Toggle Desktop recording" $ spawn "~/videos/youtube/play-pause.fish")
-    , ((modm,       xK_F10    ), addName "Stop Desktop recording" $ spawn "~/videos/youtube/stop.fish")
+    --, ((modm,       xK_F8     ), addName "Record Desktop" $ spawn "~/videos/youtube/record.fish")
+    --, ((modm,       xK_F9     ), addName "Toggle Desktop recording" $ spawn "~/videos/youtube/play-pause.fish")
+    --, ((modm,       xK_F10    ), addName "Stop Desktop recording" $ spawn "~/videos/youtube/stop.fish")
     , ((modm .|. shiftMask, xK_l), addName "Lock screen" $ spawn "xset s activate")
     -- Passwords
     , ((modm, xK_p ), addName "Password Manager autotype" $ spawn "passmenu --type")
