@@ -22,6 +22,8 @@ import qualified Data.Map        as M
 import Graphics.X11.ExtraTypes.XF86 -- For media keys
 
 import XMonad.Hooks.DynamicLog -- For xmobar
+import XMonad.Hooks.StatusBar -- For xmobar in MultiMonitors
+import XMonad.Hooks.StatusBar.PP
 import XMonad.Hooks.ManageDocks -- avoidStruts
 import XMonad.Hooks.ManageHelpers -- composeOne
 import XMonad.Hooks.InsertPosition -- For opening always right of current
@@ -374,7 +376,7 @@ myWorkspaces = [wsWEB, wsCMD, wsMSX, wsBOK, wsGAM, wsPIC, wsELE, wsMAT, wsCHT]
 -----------------------------------------------
 -- minimize adds the word minimize to the Layout name, regardless of what named says, so cut it with renamed [...]
 myLayout = avoidStruts $ renamed [CutWordsLeft 3] $ spacingRaw True (Border 5 5 5 5) False (Border 8 8 8 8) False $ baseLayout
-baseLayout = minimize $ maximize $ boringWindows $ smartBorders $ mkToggle (NOBORDERS ?? NBFULL ?? EOT) $ onWorkspace wsCMD layoutTerminals  $ onWorkspace wsMSX layoutMusic $ onWorkspace wsBOK layoutBooks layoutDefault
+baseLayout = minimize $ maximize $ boringWindows $ lessBorders Screen $ mkToggle (NOBORDERS ?? NBFULL ?? EOT) $ onWorkspace wsCMD layoutTerminals  $ onWorkspace wsMSX layoutMusic $ onWorkspace wsBOK layoutBooks layoutDefault
 
 layoutDefault = Full ||| named "MTall" (Mirror layoutTiled) ||| layoutTiled ||| Grid
 layoutTerminals = named "MTall" (Mirror layoutTiled) ||| layoutTiled ||| layoutCombined ||| Grid ||| Full
@@ -436,7 +438,7 @@ myManageHook =
 -- Event handling                           {{{
 -----------------------------------------------
 
-myEventHook = fullscreenEventHook
+--myEventHook = fullscreenEventHook
 
 --------------------------------------------}}}
 -- Status bars and logging                  {{{
@@ -454,6 +456,14 @@ myLogHook = return ()
 
 myStartupHook = setDefaultCursor xC_left_ptr <+> setWMName "LG3D" <+> spawnOnce "stalonetray" <+> spawnOnce "google-chrome-stable" <+> spawnOnce "google-chrome-stable --new-window web.whatsapp.com"
 
+barSpawner :: ScreenId -> IO StatusBarConfig
+barSpawner 0 = pure $ xmobar1
+barSpawner 1 = pure $ xmobar2
+barSpawner _ = mempty -- nothing on the rest of the screens
+
+xmobar1 = statusBarPropTo "_XMONAD_LOG_1" "xmobar -x 0 ~/.xmobar/xmobarrc-laptop" (pure myPP)
+xmobar2 = statusBarPropTo "_XMONAD_LOG_2" "xmobar -x 1 ~/.xmobar/xmobarrc-screen" (pure myPP)
+
 myBar = "xmobar"
 
 myPP = xmobarPP { ppCurrent = xmobarColor "#FF4000" ""
@@ -470,9 +480,10 @@ toggleStrutsKey XConfig {} = (0,0) -- Empty keybinding since we are doing more t
 --------------------------------------------}}}
 -- Main                                     {{{
 -----------------------------------------------
-main = xmonad =<< (
-    statusBar myBar myPP toggleStrutsKey
-    $ ewmh
+--main = xmonad =<< (
+--    statusBar myBar myPP toggleStrutsKey
+main = xmonad $ dynamicSBs barSpawner (
+    ewmhFullscreen . ewmh
     $ withUrgencyHook NoUrgencyHook
     $ withNavigation2DConfig myNav2DConf
     $ dynamicProjects projects
@@ -497,7 +508,7 @@ defaults = def {
     -- hooks, layouts
     layoutHook         = myLayout,
     manageHook         = myManageHook,
-    handleEventHook    = myEventHook,
+--    handleEventHook    = myEventHook,
     logHook            = myLogHook,
     startupHook        = myStartupHook
 }

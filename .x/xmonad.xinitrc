@@ -5,4 +5,5 @@ xss-lock -- screenlock &
 xcompmgr &
 wallchange
 xmonad --recompile
+xrandr --output LVDS1 --auto --output HDMI1 --auto --above LVDS1
 exec xmonad
