@@ -22,8 +22,6 @@ import qualified Data.Map        as M
 import Graphics.X11.ExtraTypes.XF86 -- For media keys
 
 import XMonad.Hooks.DynamicLog -- For xmobar
-import XMonad.Hooks.StatusBar -- For xmobar in MultiMonitors
-import XMonad.Hooks.StatusBar.PP
 import XMonad.Hooks.ManageDocks -- avoidStruts
 import XMonad.Hooks.ManageHelpers -- composeOne
 import XMonad.Hooks.InsertPosition -- For opening always right of current
@@ -246,9 +244,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = (subtitle "Custom Keys":) $
     , ((modm .|. controlMask, xK_g), addName "Toggle gaps" $ sequence_ [toggleWindowSpacingEnabled, toggleScreenSpacingEnabled])
     , ((modm, xK_b), addName "Bookworm" $ spawn "bookworm")
     -- Recording
-    --, ((modm,       xK_F8     ), addName "Record Desktop" $ spawn "~/videos/youtube/record.fish")
-    --, ((modm,       xK_F9     ), addName "Toggle Desktop recording" $ spawn "~/videos/youtube/play-pause.fish")
-    --, ((modm,       xK_F10    ), addName "Stop Desktop recording" $ spawn "~/videos/youtube/stop.fish")
+    , ((modm,       xK_F8     ), addName "Record Desktop" $ spawn "~/videos/youtube/record.fish")
+    , ((modm,       xK_F9     ), addName "Toggle Desktop recording" $ spawn "~/videos/youtube/play-pause.fish")
+    , ((modm,       xK_F10    ), addName "Stop Desktop recording" $ spawn "~/videos/youtube/stop.fish")
     , ((modm .|. shiftMask, xK_l), addName "Lock screen" $ spawn "xset s activate")
     -- Passwords
     , ((modm, xK_p ), addName "Password Manager autotype" $ spawn "passmenu --type")
@@ -306,19 +304,17 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = (subtitle "Custom Keys":) $
     , ((modm .|. shiftMask .|. controlMask, xK_m), addName "Manpage Prompt" $ manPrompt promptTheme)
     ]
     ++
+
     [((m .|. modm, k), addName (s ++ show n ++ e) $ f i)
         | (i, k, n) <- zip3 (XMonad.workspaces conf) [xK_1 .. xK_9] [1..9]
-        , (f, m, s, e) <- [(toggleOrView, 0, "Switch to WS ", ". Or if already in that WS, toggle to previous WS."), (windows . W.shift, shiftMask, "Move to client WS ", "."), (windows . copy, controlMask, "Copy client to WS ", ".")]
-    ]
-    ++
+        , (f, m, s, e) <- [(toggleOrView, 0, "Switch to WS ", ". Or if already in that WS, toggle to previous WS."), (windows . W.shift, shiftMask, "Move to client WS ", "."), (windows . copy, controlMask, "Copy client to WS ", ".")]]
+   --
+    -- mod-{w,e,r}, Switch to physical/Xinerama screens 1, 2, or 3
+    -- mod-shift-{w,e,r}, Move client to screen 1, 2, or 3
     --
-    -- mod-{a,s}, Switch to physical/Xinerama screens 1 or 2
-    -- mod-shift-{a,s}, Move client to screen 1 or 2
-    --
-    [((m .|. modm, key), addName (s ++ show n ++ ".") $ screenWorkspace sc >>= flip whenJust (windows . g))
-        | (key, sc, n) <- zip3 [xK_a, xK_s] [0..] [1..]
-        , (g, m, s) <- [(W.view, 0, "Switch to screen "), (W.shift, shiftMask, "Move client to screen ")]
-    ]
+--    [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
+--        | (key, sc) <- zip [xK_w, xK_e, xK_p] [0..]
+--        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 --------------------------------------------}}}
 -- Mouse bindings                           {{{
 -----------------------------------------------
@@ -376,7 +372,7 @@ myWorkspaces = [wsWEB, wsCMD, wsMSX, wsBOK, wsGAM, wsPIC, wsELE, wsMAT, wsCHT]
 -----------------------------------------------
 -- minimize adds the word minimize to the Layout name, regardless of what named says, so cut it with renamed [...]
 myLayout = avoidStruts $ renamed [CutWordsLeft 3] $ spacingRaw True (Border 5 5 5 5) False (Border 8 8 8 8) False $ baseLayout
-baseLayout = minimize $ maximize $ boringWindows $ lessBorders Screen $ mkToggle (NOBORDERS ?? NBFULL ?? EOT) $ onWorkspace wsCMD layoutTerminals  $ onWorkspace wsMSX layoutMusic $ onWorkspace wsBOK layoutBooks layoutDefault
+baseLayout = minimize $ maximize $ boringWindows $ smartBorders $ mkToggle (NOBORDERS ?? NBFULL ?? EOT) $ onWorkspace wsCMD layoutTerminals  $ onWorkspace wsMSX layoutMusic $ onWorkspace wsBOK layoutBooks layoutDefault
 
 layoutDefault = Full ||| named "MTall" (Mirror layoutTiled) ||| layoutTiled ||| Grid
 layoutTerminals = named "MTall" (Mirror layoutTiled) ||| layoutTiled ||| layoutCombined ||| Grid ||| Full
@@ -438,7 +434,7 @@ myManageHook =
 -- Event handling                           {{{
 -----------------------------------------------
 
---myEventHook = fullscreenEventHook
+myEventHook = fullscreenEventHook
 
 --------------------------------------------}}}
 -- Status bars and logging                  {{{
@@ -456,14 +452,6 @@ myLogHook = return ()
 
 myStartupHook = setDefaultCursor xC_left_ptr <+> setWMName "LG3D" <+> spawnOnce "stalonetray" <+> spawnOnce "google-chrome-stable" <+> spawnOnce "google-chrome-stable --new-window web.whatsapp.com"
 
-barSpawner :: ScreenId -> IO StatusBarConfig
-barSpawner 0 = pure $ xmobar1
-barSpawner 1 = pure $ xmobar2
-barSpawner _ = mempty -- nothing on the rest of the screens
-
-xmobar1 = statusBarPropTo "_XMONAD_LOG_1" "xmobar -x 0 ~/.xmobar/xmobarrc-laptop" (pure myPP)
-xmobar2 = statusBarPropTo "_XMONAD_LOG_2" "xmobar -x 1 ~/.xmobar/xmobarrc-screen" (pure myPP)
-
 myBar = "xmobar"
 
 myPP = xmobarPP { ppCurrent = xmobarColor "#FF4000" ""
@@ -480,10 +468,9 @@ toggleStrutsKey XConfig {} = (0,0) -- Empty keybinding since we are doing more t
 --------------------------------------------}}}
 -- Main                                     {{{
 -----------------------------------------------
---main = xmonad =<< (
---    statusBar myBar myPP toggleStrutsKey
-main = xmonad $ dynamicSBs barSpawner (
-    ewmhFullscreen . ewmh
+main = xmonad =<< (
+    statusBar myBar myPP toggleStrutsKey
+    $ ewmh
     $ withUrgencyHook NoUrgencyHook
     $ withNavigation2DConfig myNav2DConf
     $ dynamicProjects projects
@@ -508,7 +495,7 @@ defaults = def {
     -- hooks, layouts
     layoutHook         = myLayout,
     manageHook         = myManageHook,
---    handleEventHook    = myEventHook,
+    handleEventHook    = myEventHook,
     logHook            = myLogHook,
     startupHook        = myStartupHook
 }
