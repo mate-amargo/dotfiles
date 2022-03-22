@@ -1,0 +1,58 @@
+general {
+  output_format = "i3bar"
+  separator = " | "
+  markup = "pango"
+}
+
+order += "read_file pkgs"
+order += "read_file emails"
+order += "volume master"
+order += "ethernet _first_"
+order += "wireless _first_"
+order += "battery all"
+order += "time"
+
+time {
+  format = "<span color='#c8fe2e'>📆 %a %d %b %Y 🕙 %H:%M:%S</span>"
+}
+
+battery all {
+  format = "%status %percentage %remaining %emptytime"
+  format_down = "🔌"
+  status_chr = "⚡ CHR"
+  status_bat = "🔋 BAT"
+  status_unk = "? UNK"
+  status_full = "☻ FULL"
+  path = "/sys/class/power_supply/BAT%d/uevent"
+  low_threshold = 10
+  threshold_type = "percentage"
+  last_full_capacity = false
+  hide_seconds = true
+  integer_battery_capacity = true
+}
+
+wireless _first_ {
+  format_up = "📡%quality %essid (%bitrate) %ip"
+  format_down = ""
+}
+
+ethernet _first_ {
+  format_up = "🌎 %ip (%speed)"
+  format_down = ""
+}
+
+volume master {
+  format = "🔊 <span color='#268bd2'>%volume</span>"
+  format_muted = "🔇 <span color='#a1330b'>%volume</span>"
+}
+
+read_file emails {
+  format = "📬 <span color='#fc6500'>%content</span>"
+  format_bad = "📭 <span color='#fc6500'>%content</span>"
+  path = "/home/e4/.local/share/emilios-unread"
+}
+
+read_file pkgs {
+  format = "📦 <span color='#8b00ea'>%content</span>"
+  path = "/home/e4/.local/share/pkgs-updates"
+}
