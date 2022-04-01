@@ -1,0 +1,8 @@
+#!/bin/sh
+# i3status wrapper for running custom scripts
+
+i3status | (read line; echo "$line"; read line; echo "$line";  read line; echo "$line"; while true
+do
+	read line
+	echo ",[{\"markup\":\"pango\",\"full_text\":\"<span color='#c0f387'> $(layout)</span>\"},${line#,\[}"
+done)
