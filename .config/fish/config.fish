@@ -13,7 +13,7 @@ set -x PATH $HOME/.local/bin $PATH
 set -x MPD_HOST $HOME/.config/mpd/socket
 if status --is-interactive
 	abbr --add --global cdd "cd ~/downloads"
-	abbr --add --global l "exa -l --icons"
+	abbr --add --global l "exa -l --icons --git"
 	abbr --add --global mv "mv -vi"
 end
 
