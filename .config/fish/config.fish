@@ -14,6 +14,7 @@ set -x MPD_HOST $HOME/.config/mpd/socket
 if status --is-interactive
 	abbr --add --global cdd "cd ~/downloads"
 	abbr --add --global l "exa -l --icons"
+	abbr --add --global mv "mv -vi"
 end
 
 set fish_cursor_default     block      blink
