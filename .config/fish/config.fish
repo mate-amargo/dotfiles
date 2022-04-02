@@ -14,6 +14,8 @@ set -x MPD_HOST $HOME/.config/mpd/socket
 if status --is-interactive
 	abbr --add --global cdd "cd ~/downloads"
 	abbr --add --global l "exa -l --icons --git"
+	abbr --add --global lg "exa -l --icons --git --grid"
+	abbr --add --global t "exa -l --icons --tree --level=2"
 	abbr --add --global mv "mv -vi"
 end
 
