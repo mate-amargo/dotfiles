@@ -44,3 +44,7 @@ set -xU SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/ssh-agent.socket"
 if test (tty | cut -d'/' -f3 | sed 's/[0-9]//g') = 'tty'
 	pgrep X || x
 end
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/e4/prog/ee/google-cloud-sdk/path.fish.inc' ]; . '/home/e4/prog/ee/google-cloud-sdk/path.fish.inc'; end
+set -x CLOUDSDK_PYTHON python3.8
