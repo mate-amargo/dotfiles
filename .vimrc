@@ -117,6 +117,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'preservim/nerdcommenter'					" Vim plugin for intensely nerdy commenting powers
 	Plug 'ycm-core/YouCompleteMe'						" Code completion engine
 	Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']} " Markdown Preview
+	Plug 'chrisbra/Colorizer'               " Color Highlight
 
 " terryma/vim-multiple-cursors " True Sublime Text style multiple selections for Vim
 
