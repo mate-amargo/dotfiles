@@ -159,10 +159,10 @@ bindsym $mod+minus scratchpad show
 bindsym $mod+i exec $browser
 bindsym $mod+t exec transmission-gtk
 #bindsym $mod+m exec $terminal -c "MOC Player" -n "MOC Player" -e mocp
-bindsym $mod+m exec $terminal -c "NCMPCPP" -e ncmpcpp
+bindsym $mod+m exec $terminal --class "NCMPCPP" -e ncmpcpp
 bindsym $mod+Shift+M exec emilio
 bindsym $mod+Control+l exec xset s activate
-bindsym $mod+Control+Shift+L exec $terminal -c "ASCIIQuarium" -n "ASCIIQuarium" -e asciiquarium
+bindsym $mod+Control+Shift+L exec $terminal --class "ASCIIQuarium" --name "ASCIIQuarium" -e asciiquarium
 bindsym $mod+F8 exec ~/videos/youtube/record.fish
 bindsym $mod+F9 exec ~/videos/youtube/play-pause.fish
 bindsym $mod+F10 exec ~/videos/youtube/stop.fish
