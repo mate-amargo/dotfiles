@@ -6,11 +6,9 @@ CHOICE_HEIGHT=9
 BACKTITLE="Window Manager Chooser"
 TITLE="WMs"
 MENU="Select a Window Manager"
-WMS=(    "xmonad" "i3" "awesome" "dwm" "ratpoison" "Enlightenment" "bspwm" "compiz" "flwm" "twm" "tinywm" "fluxbox")
-WMSCMD=( "xmonad" "i3" "awesome" "dwm" "ratpoison" "enlightenment_start" "bspwm" "compiz" "flwm" "twm" "tinywm" "fluxbox")
+WMS=($(find ~/.x -name "*.xinitrc" -exec basename {} .xinitrc ';' |sort))
 CHOICES=($(echo ${WMS[@]} | sed 's/ /\n/g' | awk '{print NR " "$s}'))
 WMS=("CANCEL" ${WMS[@]})
-WMSCMD=("CANCEL" ${WMSCMD[@]})
 
 CHOICE=$(dialog --clear \
                 --backtitle "$BACKTITLE" \
@@ -19,8 +17,6 @@ CHOICE=$(dialog --clear \
                 $HEIGHT $WIDTH $CHOICE_HEIGHT \
                 "${CHOICES[@]}" \
                 2>&1 >/dev/tty)
-
-echo
 
 if [[ $CHOICE -eq 0 ]]; then
   exit 0;
