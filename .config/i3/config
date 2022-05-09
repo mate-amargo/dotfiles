@@ -112,6 +112,11 @@ bindcode $mod+Shift+17 move workspace 8
 bindcode $mod+Shift+18 move workspace 9
 bindcode $mod+Shift+19 move workspace 10
 
+# Move the current workspace/container to the next output
+# (effectively toggles when you only have two outputs)
+bindsym $mod+Shift+u move workspace to output next
+bindsym $mod+u move container to output next
+
 # reload the configuration file
 bindsym $mod+Shift+C reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
