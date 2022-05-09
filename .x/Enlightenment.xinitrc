@@ -1,2 +1,2 @@
-setxkbmap us,latam -option grp:alt_space_toggle -option caps:swapescape
+~/.x/base.sh
 exec enlightenment_start

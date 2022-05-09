@@ -1,8 +1,7 @@
-setxkbmap us,latam -option grp:alt_space_toggle -option caps:swapescape
+~/.x/base.sh
 emerald --replace &
 cairo-dock &
 # conky -c ... &
-wallchange
 #xss-lock -- screenlock &
 albert &
 ccsm &

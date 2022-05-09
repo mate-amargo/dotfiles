@@ -1,6 +1,5 @@
 #!/bin/sh
-setxkbmap us,latam -option grp:alt_space_toggle -option caps:swapescape
-wallchange
+~/.x/base.sh
 #xsetroot -solid \#006060
 xrdb -merge ~/.Xresources
 #dunst -config ~/.config/dunstrc &
