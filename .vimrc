@@ -51,7 +51,7 @@ set tabstop=2     " Number of spaces that a <Tab> in the file counts
 set softtabstop=2 " Number of spaces that a <Tab> counts for while performing
 									" editing operations like inserting a <Tab> or using <BS>
 set shiftwidth=2  " Amount that >> indents
-set noexpandtab   " (no)expandtab = (don't )replace tabs with spaces
+set expandtab   " (no)expandtab = (don't )replace tabs with spaces
 
 set linebreak " Wrap long lines
 set display=truncate " Show @@@ in the last line if it is truncated, instead of hiding the whole line.
