@@ -189,6 +189,9 @@ autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab fileformat=unix
 highlight BadWhitespace ctermbg=red guibg=darkred
 au BufRead,BufNewFile *.py,*.c,*.h match BadWhitespace /\s\+$/
 
+" Markdown settings
+autocmd FileType markdown setlocal ts=2 sts=2 sw=2 expandtab
+
 " Commands
 command TrailingRemove %s/\s\+$//e
 command AccentsConvert %s/\\'a/á/g | %s/\\'e/é/g | %s/\\'i/í/g | %s/\\'o/ó/g | %s/\\'u/ú/g
