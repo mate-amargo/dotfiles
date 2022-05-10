@@ -183,8 +183,8 @@ let g:vimtex_compiler_latexmk = {
 autocmd FileType haskell setlocal ts=2 sts=2 sw=2 expandtab
 
 " Python settings
-autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
-autocmd FileType python imap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+autocmd FileType python map <buffer> <S-F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+autocmd FileType python imap <buffer> <S-F9> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab fileformat=unix
 highlight BadWhitespace ctermbg=red guibg=darkred
 au BufRead,BufNewFile *.py,*.c,*.h match BadWhitespace /\s\+$/
@@ -204,6 +204,7 @@ map <F5> :set expandtab! <CR> :set expandtab? <CR>
 map <F6> :set spell! <CR>
 map <F7> :NERDTreeToggle<CR>
 map <F8> :IndentGuidesToggle<CR>
+map <F9> :set cursorcolumn! <CR>
 " Left/Right = Previous/Next tabpage
 map OD :tabp<CR>
 map OC :tabn<CR>
