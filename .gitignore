@@ -1,5 +1,9 @@
 */
 !.config/yadm
+!.config/yadm/alt/
+!.config/yadm/alt/.local
+!.config/yadm/alt/.local/bin
+!.local/bin
 !.local/share
 !.local/share/yadm
 !.*/
