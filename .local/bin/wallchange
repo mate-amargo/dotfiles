@@ -1,8 +1,5 @@
 #!/bin/sh
 
-#nitrogen --set-zoom-fill --force-setter=xwindows --random --display=:0
-#feh --recursive --randomize --bg-scale ~/images/wallpapers/artstation/andreas
-#DISPLAY=:0 xwallpaper --zoom $WALLPAPER
 WALLPAPER=$(find ~/images/wallpapers -type f | shuf -n1)
 for display in $(w | awk '{if (NR>=3) print $11}'); do
 	DISPLAY=$display wal -i "$WALLPAPER"
