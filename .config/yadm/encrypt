@@ -1,2 +1,2 @@
-.gitconfig.local##*
+.config/yadm/alt/.gitconfig.local##*
 .config/mopidy/mopidy.conf

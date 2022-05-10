@@ -1,4 +1,7 @@
 */
+!.config/yadm
+!.local/share
+!.local/share/yadm
 !.*/
 .password-store
 .ssh
