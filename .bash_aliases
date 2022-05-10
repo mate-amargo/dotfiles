@@ -2,16 +2,16 @@
 #===========#
 #           #
 #  Aliases  #
-#           # 
+#           #
 #===========#
 
-# ls 
+# ls
 alias ls='ls --color=auto'
 alias ll='ls -l'
 alias lh='ls -lh'
 alias lah='ls -lAh'
 
-# cd 
+# cd
 alias cdsrc='cd ~/prog/programas'
 alias cdsh='cd ~/prog/scripts'
 alias cddoc='cd ~/prog/docs'
@@ -22,7 +22,7 @@ alias cdw='cd ~/work'
 alias camello="awk '{print toupper(substr(\$1,1,1)) substr(\$1,2)}'"
 alias bounce='yes $COLUMNS $LINES|awk '"'BEGIN{x=y=e=f=1}{if(x=="'$1'"||!x){e*=-1};if(y=="'$2'"||!y){f*=-1};x+=e;y+=f;printf \"\033[%s;%sH\",y,x;system(\"sleep .03\")}'"
 
-# Time and date 
+# Time and date
 alias h='date +%T'
 alias d="echo \$(date +%A | camello) \$(date +%d) de \$(date +%B | camello) de \$(date +%Y)"
 

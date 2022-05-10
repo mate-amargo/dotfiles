@@ -2,7 +2,7 @@
 #=============#
 #             #
 #  Functions  #
-#             # 
+#             #
 #=============#
 
 # Human hour
@@ -94,12 +94,12 @@ fi
 
 # Create directory and change to it
 mkdircd () {
-  
+
 mkdir -p "$@" && eval cd "\"\$$#\"";
 
 }
 
-# Set a color depending on the value of i 
+# Set a color depending on the value of i
 colorplus() {
 
 if (( i < 7 )); then
@@ -112,7 +112,7 @@ fi
 
 # Coloured pushd
 cpushd() {
-   
+
 local i=0
 pushd "$@">/dev/null;
 for i in $( seq 0 $(( $(dirs -v | wc -l) -1 )) ); do
@@ -145,7 +145,7 @@ ud() {
   case $1 in
     -n | --not) ECHO=yes; shift;;
   esac
-  
+
   if [ -z $1 ]; then i=1; else i=$1; fi
 
   DIR=$(echo $PWD | cut -d/ -f-$(( $N - $i )) 2>/dev/null )
@@ -157,45 +157,45 @@ ud() {
 
 rot13 () {
 
-	tr A-Za-z N-ZA-Mn-za-m <<< "$*"
+  tr A-Za-z N-ZA-Mn-za-m <<< "$*"
 
 }
 
 rot47 () {
 
-	tr \'\!-~\' \'P-~\!-O\' <<< "$*"
+  tr \'\!-~\' \'P-~\!-O\' <<< "$*"
 
 }
 
 man() {
-    env LESS_TERMCAP_mb=$'\E[01;31m' \
-    LESS_TERMCAP_md=$'\E[01;38;5;83m' \
-    LESS_TERMCAP_me=$'\E[0m' \
-    LESS_TERMCAP_se=$'\E[0m' \
-    LESS_TERMCAP_so=$'\E[38;5;128m' \
-    LESS_TERMCAP_ue=$'\E[0m' \
-    LESS_TERMCAP_us=$'\E[04;38;5;146m' \
-    man "$@"
+  env LESS_TERMCAP_mb=$'\E[01;31m' \
+  LESS_TERMCAP_md=$'\E[01;38;5;83m' \
+  LESS_TERMCAP_me=$'\E[0m' \
+  LESS_TERMCAP_se=$'\E[0m' \
+  LESS_TERMCAP_so=$'\E[38;5;128m' \
+  LESS_TERMCAP_ue=$'\E[0m' \
+  LESS_TERMCAP_us=$'\E[04;38;5;146m' \
+  man "$@"
 }
 
 dice() {
 
-	local d l
+  local d l
 
-	if (( $# == 0 )); then
-		d=1
-	else
-		d=$1
-	fi
-	if (( $# < 2 )); then
-		l=6
-	else
-		l=$2
-	fi
+  if (( $# == 0 )); then
+    d=1
+  else
+    d=$1
+  fi
+  if (( $# < 2 )); then
+    l=6
+  else
+    l=$2
+  fi
 
-	for i in $(seq 1 $d); do 
-		echo -n "$(seq 1 $l | shuf | head -1) "
-	done 
-	echo
+  for i in $(seq 1 $d); do
+    echo -n "$(seq 1 $l | shuf | head -1) "
+  done
+  echo
 
 }
