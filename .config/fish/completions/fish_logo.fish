@@ -1,1 +1,1 @@
-complete -c fish_logo --exclusive -a '(set_color --print-colors)'
+../../yadm/alt/.config/fish/completions/fish_logo.fish##class.home

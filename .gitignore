@@ -3,6 +3,10 @@
 !.config/yadm/alt/
 !.config/yadm/alt/.local
 !.config/yadm/alt/.local/bin
+!.config/yadm/alt/.config
+!.config/yadm/alt/.config/fish
+!.config/yadm/alt/.config/fish/completions
+!.config/yadm/alt/.config/fish/functions
 !.local/bin
 !.local/share
 !.local/share/yadm
