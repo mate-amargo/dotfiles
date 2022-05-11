@@ -17,6 +17,7 @@ if status --is-interactive
 	abbr --add --global lg "exa -l --icons --git --grid"
 	abbr --add --global t "exa -l --icons --tree --level=2"
 	abbr --add --global mv "mv -vi"
+	abbr --add --global rm "rm -vi"
 end
 
 set fish_cursor_default     block      blink
