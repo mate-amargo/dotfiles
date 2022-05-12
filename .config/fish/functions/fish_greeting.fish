@@ -1,1 +1,1 @@
-/home/e4/.config/yadm/alt/.config/fish/functions/fish_greeting##class.home
+../../yadm/alt/.config/fish/functions/fish_greeting.fish##class.home
