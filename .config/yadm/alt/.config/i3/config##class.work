@@ -1,0 +1,240 @@
+# i3 config file (v4)
+# JARG config
+#
+# User Guide http://i3wm.org/docs/userguide.html
+
+### --------- ###
+### Variables ### {{{
+### --------- ###
+
+set $mod Mod4
+set $browser google-chrome-stable
+set $terminal kitty
+set $pdfreader zathura
+
+### ------- ### }}}
+### Options ### {{{
+### ------- ###
+
+# font for window titles. ISO 10646 = Unicode
+#font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+font pango:ProggyCleanTTCE Nerd Font Bold 12
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+# Additionally $mod+right_mouse_button resize them and
+# $mod+Shift+right_mouse_button resizes keeping the aspect ratio
+floating_modifier $mod
+
+# Window title bar and 1px border
+default_border normal 1
+
+# Hides edges on workspaces with only 1 window
+hide_edge_borders smart
+
+focus_follows_mouse no
+
+workspace_auto_back_and_forth yes
+
+### ----------- ### }}}
+### Keybindings ### {{{
+### ----------- ###
+
+# start a terminal
+bindsym $mod+Return exec $terminal
+
+# kill focused window
+bindsym $mod+Shift+Q kill
+
+# start dmenu
+bindsym $mod+r exec --no-startup-id dmenu_run
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# split in horizontal orientation
+bindsym $mod+Shift+bar split h
+
+# split in vertical orientation
+bindsym $mod+Shift+underscore split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen
+
+# change container layout (stacked, tabbed, default)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout default
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+bindcode $mod+d focus child
+
+# switch to workspace
+bindcode $mod+10 workspace 1
+bindcode $mod+11 workspace 2
+bindcode $mod+12 workspace 3
+bindcode $mod+13 workspace 4
+bindcode $mod+14 workspace 5
+bindcode $mod+15 workspace 6
+bindcode $mod+16 workspace 7
+bindcode $mod+17 workspace 8
+bindcode $mod+18 workspace 9
+bindcode $mod+19 workspace 10
+
+bindsym $mod+Tab workspace back_and_forth
+
+# move focused container to workspace
+bindcode $mod+Shift+10 move workspace 1
+bindcode $mod+Shift+11 move workspace 2
+bindcode $mod+Shift+12 move workspace 3
+bindcode $mod+Shift+13 move workspace 4
+bindcode $mod+Shift+14 move workspace 5
+bindcode $mod+Shift+15 move workspace 6
+bindcode $mod+Shift+16 move workspace 7
+bindcode $mod+Shift+17 move workspace 8
+bindcode $mod+Shift+18 move workspace 9
+bindcode $mod+Shift+19 move workspace 10
+
+# Move the current workspace/container to the next output
+# (effectively toggles when you only have two outputs)
+bindsym $mod+Shift+u move workspace to output next
+bindsym $mod+u move container to output next
+
+# reload the configuration file
+bindsym $mod+Shift+C reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+R restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+E exit
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+	# These bindings trigger as soon as you enter the resize mode
+
+	# They resize the border in the direction you pressed, e.g.
+	# when pressing left, the window is resized so that it has
+	# more space on its left
+
+bindsym h resize shrink left 10 px or 10 ppt
+bindsym Shift+H resize grow   left 10 px or 10 ppt
+
+bindsym j resize shrink down 10 px or 10 ppt
+bindsym Shift+J resize grow   down 10 px or 10 ppt
+
+bindsym k resize shrink up 10 px or 10 ppt
+bindsym Shift+K resize grow   up 10 px or 10 ppt
+
+bindsym l resize shrink right 10 px or 10 ppt
+bindsym Shift+L resize grow   right 10 px or 10 ppt
+
+	# back to normal: Enter or Escape
+bindsym Return mode "default"
+bindsym Escape mode "default"
+}
+
+bindsym $mod+Ctrl+r mode "resize"
+
+# Toggle between dock and hide mode
+bindsym $mod+b bar mode toggle
+
+# Make the currently focused window a scratchpad
+bindsym $mod+Control+minus move scratchpad
+# Show the first scratchpad window
+bindsym $mod+minus scratchpad show
+
+# Personal keybindings from here
+
+bindsym $mod+i exec $browser
+bindsym $mod+m exec $terminal --class "NCMPCPP" -e ncmpcpp
+bindsym $mod+Control+l exec xset s activate
+bindsym $mod+Control+Shift+L exec $terminal --class "ASCIIQuarium" --name "ASCIIQuarium" -e asciiquarium
+bindsym $mod+o exec $pdfreader
+bindsym Print exec --no-startup-id "scrot -u ~/images/screenshots/'%Y-%m-%d-%s_$wx$h.png' && notify-send -u low 'Screenshot of the focused window saved'"
+bindsym --release Shift+Print exec --no-startup-id "scrot -s '%Y-%m-%d-%s_$wx$h.png' -e 'mv $f ~/images/screenshots' && notify-send -u low 'Screenshot of the selected area saved'"
+bindsym --release $mod+Print exec --no-startup-id "scrot ~/images/screenshots/'%Y-%m-%d-%s_$wx$h.png' && notify-send -u low 'Screenshot of the full screen saved'"
+bindsym $mod+p exec "passmenu --type"
+
+# Media Stuff
+#bindsym XF86AudioPlay exec mpc toggle
+#bindsym XF86AudioPrev exec mpc prev
+#bindsym XF86AudioNext exec mpc next
+#bindsym XF86AudioStop exec mpc stop
+bindsym XF86AudioMute exec amixer -D pulse sset Master toggle
+bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 5%+
+bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 5%-
+#bindsym XF86MonBrightnessUp exec backlight +50
+#bindsym XF86MonBrightnessDown exec backlight -50
+
+### ------ ### }}}
+### Colors ### {{{
+### ------ ###
+
+# class                 border  backgr. text    indicator child_border
+client.focused          #ff4000 #ff4000 #ffffff #ff4000   #ff4000
+client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
+client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+client.urgent           #2f343a #900000 #ffffff #900000   #900000
+
+### ---------- ### }}}
+### Status Bar ### {{{
+### ---------- ###
+
+# Use conky with i3bar
+bar {
+	mode dock
+	hidden_state hide
+	status_command i3sw
+	font pango:Dejavu Sans Mono 10, FontAwesome 10
+	colors {
+		background #000000
+		statusline #ffffff
+		separator #666666
+
+		focused_workspace  #ff4000 #ff4000 #ffffff
+		active_workspace   #333333 #5f676a #ffffff
+		inactive_workspace #333333 #222222 #888888
+		urgent_workspace   #2f343a #900000 #ffffff
+	}
+}
+
+### --------------- ### }}}
+### Window settings ### {{{
+### --------------- ###
+
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [class="feh" instance="feh"] floating enable, move absolute position center
+for_window [class="ASCIIQuarium" instance="ASCIIQuarium"] fullscreen enable
+for_window [window_role="Preferences"] floating enable
+
+assign [class="Google-chrome"] 1
+assign [class="NCMPCPP"] 3
+assign [class="Zathura"] 4
+
+### ----------------------- ### }}}
+### Auto-start applications ### {{{
+### ----------------------- ###
+
+# Start a notification manager
+exec --no-startup-id dunst -config ~/.config/dunstrc
+
+### ----------------------- ### }}}
+
+# vim: ft=conf:foldmethod=marker
