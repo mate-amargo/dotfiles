@@ -1,1 +1,0 @@
-../../yadm/alt/.config/fish/completions/fish_logo.fish##class.home

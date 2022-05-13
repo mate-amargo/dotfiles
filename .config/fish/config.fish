@@ -1,1 +1,0 @@
-../yadm/alt/.config/fish/config.fish##class.home
