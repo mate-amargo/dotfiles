@@ -9,11 +9,29 @@ order += "read_file emails"
 order += "volume master"
 order += "ethernet _first_"
 order += "wireless _first_"
-order += "time"
+order += "tztime date"
+order += "tztime ru"
+order += "tztime arg"
 
-time {
-  format = "<span color='#c8fe2e'>📆 %a %d %b %Y 🕙 %H:%M:%S</span>"
+tztime date {
+  separator = false
+  separator_block_width = 2
+  format = "<span color='#c8fe2e'>📆 %a %d %b %Y 🕙</span>"
+  timezone = America/Argentina/Buenos_Aires
 }
+
+tztime ru {
+  separator = false
+  separator_block_width = 2
+  format = "<span color='#c8fe2e'> 🇷🇺 %H:%M</span>"
+  timezone = Asia/Omsk
+}
+
+tztime arg {
+  format = "<span color='#c8fe2e'> 🇦🇷 %H:%M:%S</span>"
+  timezone = America/Argentina/Buenos_Aires
+}
+
 
 battery all {
   format = "%status %percentage %remaining %emptytime"
