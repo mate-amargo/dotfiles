@@ -1,0 +1,18 @@
+#!/bin/bash
+#
+# Startup file executed for login shells
+
+# Load functions and aliases
+source ~/.bash_functions
+source ~/.bash_aliases
+
+# History settings
+export HISTTIMEFORMAT="[%d/%m/%Y %T] "
+export HISTSIZE=1000
+export HISTFILESIZE=1000
+export HISTCONTROL=ignoreboth
+
+export BROWSER="google-chrome-stable"
+
+# ssh-agent
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
