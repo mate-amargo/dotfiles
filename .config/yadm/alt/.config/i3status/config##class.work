@@ -16,18 +16,24 @@ order += "tztime arg"
 
 tztime date {
   format = "<span color='#c8fe2e'>%time</span>"
+  separator = false
+  separator_block_width = 1
   format_time = "📆 %a %d %b %Y 🕙"
   timezone = America/Argentina/Buenos_Aires
 }
 
 tztime saudi {
   format = "<span color='#c8fe2e'>%time</span>"
+  separator = false
+  separator_block_width = 1
   format_time = " 🇸🇦 %H:%M"
   timezone = Asia/Riyadh
 }
 
 tztime spain {
   format = "<span color='#c8fe2e'>%time</span>"
+  separator = false
+  separator_block_width = 1
   format_time = " 🇪🇸 %H:%M"
   timezone = Europe/Madrid
 }
