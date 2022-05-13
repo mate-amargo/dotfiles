@@ -1,0 +1,72 @@
+general {
+  output_format = "i3bar"
+  separator = " | "
+  markup = "pango"
+}
+
+order += "volume master"
+order += "read_file VPN"
+order += "ethernet _first_"
+order += "wireless _first_"
+order += "battery all"
+order += "tztime arg"
+
+tztime date {
+  format = "<span color='#c8fe2e'>%time</span>"
+  format_time = "📆 %a %d %b %Y 🕙"
+  timezone = America/Argentina/Buenos_Aires
+}
+
+tztime saudi {
+  format = "<span color='#c8fe2e'>%time</span>"
+  format_time = " 🇸🇦 %H:%M"
+  timezone = Asia/Riyadh
+}
+
+tztime spain {
+  format = "<span color='#c8fe2e'>%time</span>"
+  format_time = " 🇪🇸 %H:%M"
+  timezone = Europe/Madrid
+}
+
+tztime arg {
+  format = "<span color='#c8fe2e'>%time</span>"
+  format_time = " 🇦🇷 %H:%M:%S"
+  timezone = America/Argentina/Buenos_Aires
+}
+
+battery all {
+  format = "<span color='#bb33ff'>%status %percentage %remaining %emptytime</span>"
+  format_down = "🔌"
+  status_chr = "⚡ CHR"
+  status_bat = "🔋 BAT"
+  status_unk = "? UNK"
+  status_full = "☻ FULL"
+  path = "/sys/class/power_supply/BAT%d/uevent"
+  low_threshold = 10
+  threshold_type = "percentage"
+  last_full_capacity = false
+  hide_seconds = true
+  integer_battery_capacity = true
+}
+
+wireless _first_ {
+  format_up = "📡%quality %essid (%bitrate) %ip"
+  format_down = ""
+}
+
+read_file VPN {
+  path = "/sys/class/net/vpn0/operstate"
+  format = "<span color='#12c7c1'>%title: %content</span>"
+  format_bad = "%title: down"
+}
+
+ethernet _first_ {
+  format_up = "🌎 %ip (%speed)"
+  format_down = ""
+}
+
+volume master {
+  format = "🔊 <span color='#268bd2'>%volume</span>"
+  format_muted = "🔇 <span color='#a1330b'>%volume</span>"
+}
