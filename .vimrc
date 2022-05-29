@@ -195,6 +195,8 @@ autocmd FileType markdown setlocal ts=2 sts=2 sw=2 expandtab
 " Commands
 command TrailingRemove %s/\s\+$//e
 command AccentsConvert %s/\\'a/á/g | %s/\\'e/é/g | %s/\\'i/í/g | %s/\\'o/ó/g | %s/\\'u/ú/g
+" sudo write trick + reload the file to avoid 'file changed' message
+cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 " Keybindings
 let mapleader=" "
