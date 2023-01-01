@@ -1,6 +1,7 @@
 #!/bin/sh
 
 WALLPAPER=$(find ~/images/wallpapers -type f | shuf -n1)
-for display in $(w | awk '{if (NR>=3) print $11}'); do
-	DISPLAY=$display wal -i "$WALLPAPER"
-done
+#for display in $(w | awk '{if (NR>=3) print $11}'); do
+	#DISPLAY=$display wal -i "$WALLPAPER"
+#done
+feh --bg-fill "$WALLPAPER"
