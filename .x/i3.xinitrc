@@ -1,4 +1,5 @@
 ~/.x/base.sh
 xrdb -merge ~/.Xresources
-xss-lock -- screenlock &
+xss-lock -- ~/.local/bin/screenlock &
+compton &
 exec i3
