@@ -49,7 +49,7 @@ set wildmenu " Display all matching files when we tab complete
 " Tab settings
 set tabstop=2     " Number of spaces that a <Tab> in the file counts
 set softtabstop=2 " Number of spaces that a <Tab> counts for while performing
-									" editing operations like inserting a <Tab> or using <BS>
+                  " editing operations like inserting a <Tab> or using <BS>
 set shiftwidth=2  " Amount that >> indents
 set expandtab   " (no)expandtab = (don't )replace tabs with spaces
 
@@ -98,26 +98,36 @@ let g:netrw_banner=0        " disable banner, bring back up with I
 let g:netrw_liststyle=3     " tree view
 let g:netrw_list_hide=netrw_gitignore#Hide()
 let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'  " Hide filenames starting with a dot
-																								" gh toggles hidden filenames
+                                                " gh toggles hidden filenames
 let g:netrw_winsize = 0 " set default window size to be always equal
 let g:netrw_preview = 1 " open splits to the right
 
 " vim-plug plugin manager
 call plug#begin('~/.vim/plugged')
 
-	Plug 'vim-airline/vim-airline'					" Cool status bar
-	Plug 'vim-airline/vim-airline-themes'		" bar themes
-	"Plug 'sjl/badwolf'											" Colorscheme
-	Plug 'morhetz/gruvbox'									" Colorscheme
-	Plug 'nathanaelkane/vim-indent-guides'	" Visual indents
-	Plug 'lervag/vimtex'										" Latex Integration
-	Plug 'SirVer/ultisnips'									" Snippets engine
-	Plug 'honza/vim-snippets'								" Actual snippets
-	Plug 'preservim/nerdtree'								" File browser
-	Plug 'preservim/nerdcommenter'					" Vim plugin for intensely nerdy commenting powers
-	Plug 'ycm-core/YouCompleteMe'						" Code completion engine
-	Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']} " Markdown Preview
-	Plug 'chrisbra/Colorizer'               " Color Highlight
+  Plug 'vim-airline/vim-airline'          " Cool status bar
+  Plug 'vim-airline/vim-airline-themes'    " bar themes
+  "Plug 'sjl/badwolf'                      " Colorscheme
+  Plug 'morhetz/gruvbox'                  " Colorscheme
+  Plug 'nathanaelkane/vim-indent-guides'  " Visual indents
+  Plug 'lervag/vimtex'                    " Latex Integration
+  Plug 'SirVer/ultisnips'                  " Snippets engine
+  Plug 'honza/vim-snippets'                " Actual snippets
+  Plug 'preservim/nerdtree'                " File browser
+  Plug 'preservim/nerdcommenter'          " Vim plugin for intensely nerdy commenting powers
+  Plug 'ycm-core/YouCompleteMe'            " Code completion engine
+  Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']} " Markdown Preview
+  Plug 'chrisbra/Colorizer'                " Color Highlight
+"  Plug 'dense-analysis/ale'                " Asynchronous Lint Engine
+  Plug 'junegunn/goyo.vim'                " Zen Mode
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plug 'junegunn/fzf.vim'   " Fuzzy Find
+  Plug 'tpope/vim-fugitive' " Git vim pluggin
+  Plug 'dhruvasagar/vim-table-mode' " Easy tables
+  Plug 'sheerun/vim-polyglot'
+  Plug 'rodjek/vim-puppet'
+  Plug 'preservim/tagbar'
+  Plug 'vim/killersheep'
 
 " terryma/vim-multiple-cursors " True Sublime Text style multiple selections for Vim
 
@@ -129,7 +139,11 @@ let g:airline_powerline_fonts = 1
 
 " Indent-Guides config
 let g:indent_guides_enable_on_vim_startup = 0 " Autostart
-let g:indent_guides_default_mapping = 0				" Remove the <leader>ig default mapping
+let g:indent_guides_default_mapping = 0        " Remove the <leader>ig default mapping
+
+" Table settings
+let g:table_mode_corner_corner='+'
+let g:table_mode_header_fillchar='='
 
 " UltiSnips config
 let g:UltiSnipsExpandTrigger="<c-j>"
@@ -154,30 +168,36 @@ let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=black ctermbg=darkgray
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=white ctermbg=gray
 
+" Jenkinsfile syntax higlight
+au BufNewFile,BufRead Jenkinsfile setf groovy
+
+" Puppet syntax highlight
+"au BufNewFile,BufRead *.pp setf puppet
+
 "if empty(v:servername) && exists('*remote_startserver')
-"	call remote_startserver('VIM')
+"  call remote_startserver('VIM')
 "endif
 
 " Latex settings
-"set conceallevel=2		" Hidden unless it has a replacement character
+"set conceallevel=2    " Hidden unless it has a replacement character
 "set concealcursor=nvc " Conceal characters in Normal, Visual, Command
 "let g:tex_conceal="abdmgs"
-"	a = accents/ligatures
-"	b = bold and italic
-"	d = delimiters
-"	m = math symbols
-"	g = Greek
-"	s = superscripts/subscripts
+"  a = accents/ligatures
+"  b = bold and italic
+"  d = delimiters
+"  m = math symbols
+"  g = Greek
+"  s = superscripts/subscripts
 let g:vimtex_compiler_latexmk = {
-	\ 'options' : [
-	\ '-pdf',
-	\ '-shell-escape',
-	\ '-verbose',
-	\ '-file-line-error',
-	\ '-synctex=1',
-	\ '-interaction=nonstopmode',
-	\ ],
-	\}
+  \ 'options' : [
+  \ '-pdf',
+  \ '-shell-escape',
+  \ '-verbose',
+  \ '-file-line-error',
+  \ '-synctex=1',
+  \ '-interaction=nonstopmode',
+  \ ],
+  \}
 
 " Haskell settings
 autocmd FileType haskell setlocal ts=2 sts=2 sw=2 expandtab
@@ -208,8 +228,10 @@ map <F4> :set list! <CR>
 map <F5> :set expandtab! <CR> :set expandtab? <CR>
 map <F6> :set spell! <CR>
 map <F7> :NERDTreeToggle<CR>
-map <F8> :IndentGuidesToggle<CR>
+map <leader><F8> :IndentGuidesToggle<CR>
+map <F8> :TagbarToggle<CR>
 map <F9> :set cursorcolumn! <CR>
+map <silent> <leader><F9> :execute "set colorcolumn=" . (&colorcolumn == "" ? "80" : "")<CR>
 " Left/Right = Previous/Next tabpage
 map OD :tabp<CR>
 map OC :tabn<CR>
@@ -231,3 +253,17 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
+" Move lines up and down
+"execute "set <A-j>=\ej"
+"execute "set <A-k>=\ek"
+"nnoremap <A-j> :m .+1<CR>==
+"nnoremap <A-k> :m .-2<CR>==
+"inoremap <A-j> <Esc>:m .+1<CR>==gi
+"inoremap <A-k> <Esc>:m .-2<CR>==gi
+"vnoremap <A-j> :m '>+1<CR>gv=gv
+"vnoremap <A-k> :m '<-2<CR>gv=gv
+
+" FuzzyFind keybindings
+map <leader><C-F> :Files<CR>
+map <leader><C-B> :Buffers<CR>
