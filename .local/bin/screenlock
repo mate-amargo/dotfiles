@@ -1,9 +1,5 @@
 #!/bin/sh
-# -blur 0x3
-# -paint 1 -swirl 360
-#scrot -o /home/e4/images/wallpapers/lock.png -e 'convert $f -interpolate nearest -virtual-pixel mirror -spread 5 $f' && LANG=en_US.UTF-8 i3lock -n -e -i /home/e4/images/wallpapers/lock.png
-# Replaced i3lock with i3lock-color which provies the blurring functionality natively
-#i3lock -n -e -B 5 --keylayout 2 --indicator --pass-media-keys --pass-volume-keys --ringcolor=FF400000 --greetertext="Hello Master" --no-verify
+
 B='#00000000'  # blank
 C='#ffffff22'  # clear ish
 D='#fe4000dd'  # default
