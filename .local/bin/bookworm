@@ -13,10 +13,11 @@ CHOICE="$(echo -e $MENU | dmenu -l 10 | tr '[:upper:]' '[:lower:]')"
 # Assemble a list of open books
 addbooks () {
 	IFS=$'\n'
-	FILES=($(xwininfo -root -children | tail -n+7 | awk -F'"' '{print $2}'))
-
+	#FILES=($(xwininfo -root -children | tail -n+7 | awk -F'"' '{print $2}'))
+  FILES=($(wmctrl -l | grep '.pdf' | sed "s/.*$(hostname) \(.*\)/\"\1\"/g"))
 	for books in ${FILES[*]}; do
-		if [ -f $books ]; then
+    echo "x xx $books"
+		if [ -f "$books" ]; then
 			MENU="$MENU\n$books"
 		fi
 	done
