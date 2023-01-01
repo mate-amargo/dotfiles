@@ -10,6 +10,7 @@
 set $mod Mod4
 set $browser google-chrome-stable
 set $terminal kitty
+set $terminalopaque alacritty
 set $pdfreader zathura
 
 ### ------- ### }}}
@@ -41,6 +42,7 @@ workspace_auto_back_and_forth yes
 
 # start a terminal
 bindsym $mod+Return exec $terminal
+bindsym $mod+Shift+Return exec $terminalopaque
 
 # kill focused window
 bindsym $mod+Shift+Q kill
