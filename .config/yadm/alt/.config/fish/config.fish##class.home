@@ -49,3 +49,4 @@ end
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/e4/prog/ee/google-cloud-sdk/path.fish.inc' ]; . '/home/e4/prog/ee/google-cloud-sdk/path.fish.inc'; end
 set -x CLOUDSDK_PYTHON python3.8
+starship init fish | source
