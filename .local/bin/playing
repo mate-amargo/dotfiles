@@ -1,12 +1,16 @@
 #!/bin/bash
 
-IFS=$'\n'
-MPC_STATUS=($(mpc --format '%file%\n%artist% - %title% ' 2>/dev/null))
-SOURCE=$(test "${MPC_STATUS[0]/:*/}" = spotify && echo -en '\uf1bc' || echo -en '\uf015')
-PLAYING=${MPC_STATUS[1]}
-IFS=' '
-INFO=(${MPC_STATUS[2]})
-STATUS=$(test "${INFO[0]}" = '[playing]' && echo -en '\uf909' || echo -en '\uf8e3')
-TIME=${INFO[2]}
+ARTIST="$(playerctl -p spotify metadata artist)"
+TITLE="$(playerctl -p spotify metadata title)"
+STATUS="$(playerctl -p spotify status 2>/dev/null)"
 
-test -z "${MPC_STATUS[1]}" && echo '\uf04d' || echo -e "$SOURCE $STATUS $PLAYING$TIME"
+[[ -z "$STATUS" ]] && exit 0
+if [[ "$STATUS" = "Paused" ]]; then
+  echo -n ""
+elif [ "$STATUS" = "Playing" ]; then
+  echo -n ""
+else
+  echo -n ""
+fi
+
+echo -n " $ARTIST - $TITLE"
