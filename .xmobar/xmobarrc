@@ -43,17 +43,18 @@ Config {
                                                , "-o", "\xf026"
                                                , "-c", "#268BD2"
                                                ] 10
-               , Run MPD [ "--template", "<fc=#FF4000><statei></fc>"
-                         , "--maxwidth", "20"
-                         , "--"
-                         -- Playing
---                         , "-P", "\xf04b <artist> - <title> [<lapsed>/<length>]"
-                         , "-P", "\xf04b <title>"
-                         -- Paused
-                         , "-Z", "\xf04c <title>"
-                         -- Stoped
-                         , "-S", "\xf04d"
-                         ] 10
+--               , Run MPD [ "--template", "<fc=#FF4000><statei></fc>"
+--                         , "--maxwidth", "20"
+--                         , "--"
+--                         -- Playing
+----                         , "-P", "\xf04b <artist> - <title> [<lapsed>/<length>]"
+--                         , "-P", "\xf04b <title>"
+--                         -- Paused
+--                         , "-Z", "\xf04c <title>"
+--                         -- Stoped
+--                         , "-S", "\xf04d"
+--                         ] 10
+               , Run Mpris2 "spotify" ["-t", "<artist> - <title>"] 10
                , Run CatInt 0 "/home/e4/.local/share/emilios-unread" [] 20
                , Run CatInt 1 "/home/e4/.local/share/pkgs-updates" [] 600
 --               , Run Cpu ["--template", "\xf2db <total>% <iowait>", "-L","3","-H","50","--normal","green","--high","red"] 10
@@ -65,7 +66,7 @@ Config {
 --                           600
                ]
 --  , template = "%StdinReader% }{ <fc=#C0F387> %kbd%</fc> | <fc=purple> %cat1%</fc> | <fc=#DD1900> %cat0%</fc> | %mpd% | %default:Master% | %wlp2s0wi% | %disku% | %battery% | %date% %trayerpad%"
-  , template = "%StdinReader% }{ <fc=#C0F387> %kbd%</fc> | <fc=purple> %cat1%</fc> | <fc=#DD1900> %cat0%</fc> | %mpd% | %default:Master% | %wlp2s0wi% | %battery% | %date% %trayerpad%"
+  , template = "%StdinReader% }{ <fc=#C0F387> %kbd%</fc> | <fc=purple> %cat1%</fc> | <fc=#DD1900> %cat0%</fc> | <fc=#FF4000> %mpris2%</fc> | %default:Master% | %wlp2s0wi% | %battery% | %date% %trayerpad%"
 }
 
 -- vim: syntax=haskell

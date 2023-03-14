@@ -30,9 +30,9 @@ import XMonad.Hooks.EwmhDesktops -- For fullscreen support Hook
 import XMonad.Hooks.SetWMName -- Fix Matlab big gray square
 
 import XMonad.Util.Cursor -- To get rid of the default X cursor
-import XMonad.Util.ExclusiveScratchpads
+-- import XMonad.Util.ExclusiveScratchpads -- Deprecated
 import XMonad.ManageHook (title,appName)
---import XMonad.Util.NamedScratchpad -- As the title says
+import XMonad.Util.NamedScratchpad -- As the title says
 import XMonad.Util.NamedActions -- for Descriptive keys
 --import XMonad.Util.EZConfig -- for Descriptive keys
 import XMonad.Util.Run -- for runInTerm
@@ -116,7 +116,7 @@ import XMonad.Layout.Minimize
 import XMonad.Layout.MultiToggle -- To toggle Full
 import XMonad.Layout.MultiToggle.Instances -- MIRROR, NOBORDERS, FULL, etc
 --import XMonad.Layout.MultiToggle.TabBarDecoration
-import XMonad.Layout.Named -- Change default names of Layouts
+-- import XMonad.Layout.Named -- Change default names of Layouts -- Deprecated
 import XMonad.Layout.NoBorders -- Remove decorations on fullscreen floats
 --import XMonad.Layout.NoFrillsDecoration
 --import XMonad.Layout.OnHost
@@ -252,10 +252,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = (subtitle "Custom Keys":) $
     , ((modm, xK_p ), addName "Password Manager autotype" $ spawn "passmenu --type")
     , ((modm .|. controlMask, xK_p ), addName "Password Manager clipboard" $ spawn "passmenu")
     -- Scratchpads
-    , ((modm .|. shiftMask, xK_t), addName "Scratchpad terminal" $ scratchpadAction scratchpads "terminal")
-    , ((modm .|. shiftMask, xK_h), addName "Scratchpad htop" $ scratchpadAction scratchpads "htop")
-    , ((modm .|. shiftMask, xK_c), addName "Edit XMonad Config File in Scratchpad" $ scratchpadAction scratchpads "XMonadConfig")
-    , ((modm .|. controlMask, xK_h), addName "Hide all Scratchpads" $ hideAll scratchpads)
+    , ((modm .|. shiftMask, xK_t), addName "Scratchpad terminal" $ namedScratchpadAction scratchpads "terminal")
+    , ((modm .|. shiftMask, xK_h), addName "Scratchpad htop" $ namedScratchpadAction scratchpads "htop")
+    , ((modm .|. shiftMask, xK_c), addName "Edit XMonad Config File in Scratchpad" $ namedScratchpadAction scratchpads "XMonadConfig")
     -- Projects
     , ((modm, xK_slash), addName "Switch or Create Project" $ switchProjectPrompt promptTheme)
     , ((modm .|. shiftMask, xK_slash), addName "Shift to Project" $ shiftToProjectPrompt promptTheme)
@@ -373,13 +372,13 @@ myWorkspaces = [wsWEB, wsCMD, wsMSX, wsBOK, wsGAM, wsPIC, wsELE, wsMAT, wsCHT]
 -- minimize adds the word minimize to the Layout name, regardless of what named says, so cut it with renamed [...]
 myLayout = avoidStruts $ renamed [CutWordsLeft 3] $ spacingRaw True (Border 5 5 5 5) False (Border 8 8 8 8) False $ baseLayout
 baseLayout = minimize $ maximize $ boringWindows $ smartBorders $ mkToggle (NOBORDERS ?? NBFULL ?? EOT) $ onWorkspace wsCMD layoutTerminals  $ onWorkspace wsMSX layoutMusic $ onWorkspace wsBOK layoutBooks layoutDefault
-
-layoutDefault = Full ||| named "MTall" (Mirror layoutTiled) ||| layoutTiled ||| Grid
-layoutTerminals = named "MTall" (Mirror layoutTiled) ||| layoutTiled ||| layoutCombined ||| Grid ||| Full
-layoutCombined = named "TabSplit" (combineTwo (reflectVert $ Mirror $ layoutTiled) (tabbedLayout) (tabbedLayout))
+rreplace = XMonad.Layout.Renamed.Replace
+layoutDefault = Full ||| renamed [rreplace "MTall"] (Mirror layoutTiled) ||| layoutTiled ||| Grid
+layoutTerminals = renamed [rreplace "MTall"] (Mirror layoutTiled) ||| layoutTiled ||| layoutCombined ||| Grid ||| Full
+layoutCombined = renamed [rreplace "TabSplit"] (combineTwo (reflectVert $ Mirror $ layoutTiled) (tabbedLayout) (tabbedLayout))
 layoutTiled = Tall 1 (3/100) (1/2)
-layoutBooks = (named "Tabs" tabbedLayout ||| layoutTiled ||| Full)
-layoutMusic = named "MTall" $ Mirror $ Tall 2 (3/100) (7/9)
+layoutBooks = (renamed [rreplace "Tabs"] tabbedLayout ||| layoutTiled ||| Full)
+layoutMusic = renamed [rreplace "MTall"] $ Mirror $ Tall 2 (3/100) (7/9)
 
 tabbedLayout = tabbed shrinkText tabbedConf
 
@@ -399,18 +398,23 @@ myNav2DConf = def
 -- Window rules                             {{{
 -----------------------------------------------
 
-scratchpads = mkXScratchpads [ ("htop", myTerminal ++ " -t scratchpad-htop -e htop", title =? "scratchpad-htop")
-                             , ("XMonadConfig", myTerminal ++ " -c scratchpad-xmonadconfig -n scratchpad-xmonadconfig -e vim ~/.xmonad/xmonad.hs", className =? "scratchpad-xmonadconfig")
-                             , ("terminal", myTerminal ++ " -c scratchpad-terminal -n scratchpad-terminal", className =? "scratchpad-terminal")                   ] $ customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3)
+scratchpads = [ NS "htop" (myTerminal ++ " -t scratchpad-htop -e htop") (title =? "scratchpad-htop") floatingWindow,
+                NS "XMonadConfig" (myTerminal ++ " -c scratchpad-xmonadconfig -n scratchpad-xmonadconfig -e vim ~/.xmonad/xmonad.hs") (className =? "scratchpad-xmonadconfig") floatingWindow,
+                NS "terminal" (myTerminal ++ " -c scratchpad-terminal -n scratchpad-terminal") (className =? "scratchpad-terminal") floatingWindow
+              ] where floatingWindow = customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3)
+
+myExclusives = addExclusives
+    [ ["htop", "XMonadConfig", "terminal"]
+    ]
 
 myManageHook =
 --insertPosition Below Newer <+>
---    namedScratchpadManageHook scratchpads
-    composeOne [ isDialog -?> doCenterFloat ]
+    namedScratchpadManageHook scratchpads
+    <+> composeOne [ isDialog -?> doCenterFloat ]
 --    <+> insertPosition Master Newer
     <+> composeAll [
-      xScratchpadsManageHook scratchpads
-    , className =? "St" --> insertPosition Below Newer
+      --xScratchpadsManageHook scratchpads
+      className =? "St" --> insertPosition Below Newer
     , title     =? "WhatsApp - Google Chrome" --> doShift wsCHT
     , className =? "Google-chrome" --> doShift wsWEB
     , className =? "NCMPCPP" --> doShiftAndGo wsMSX
@@ -434,7 +438,7 @@ myManageHook =
 -- Event handling                           {{{
 -----------------------------------------------
 
-myEventHook = fullscreenEventHook
+myEventHook = ewmhFullscreen
 
 --------------------------------------------}}}
 -- Status bars and logging                  {{{
@@ -450,7 +454,7 @@ myLogHook = return ()
 -- with mod-q.  Used by, e.g., XMonad.Layout.PerWorkspace to initialize
 -- per-workspace layout choices.
 
-myStartupHook = setDefaultCursor xC_left_ptr <+> setWMName "LG3D" <+> spawnOnce "stalonetray" <+> spawnOnce "google-chrome-stable" <+> spawnOnce "google-chrome-stable --new-window web.whatsapp.com"
+myStartupHook = setDefaultCursor xC_left_ptr <+> setWMName "LG3D" <+> spawnOnce "stalonetray" <+> spawnOnce "google-chrome-stable" <+> spawnOnce "google-chrome-stable --new-window web.whatsapp.com" <+> myExclusives
 
 myBar = "xmobar"
 
@@ -470,7 +474,7 @@ toggleStrutsKey XConfig {} = (0,0) -- Empty keybinding since we are doing more t
 -----------------------------------------------
 main = xmonad =<< (
     statusBar myBar myPP toggleStrutsKey
-    $ ewmh
+    $ (ewmhFullscreen . ewmh)
     $ withUrgencyHook NoUrgencyHook
     $ withNavigation2DConfig myNav2DConf
     $ dynamicProjects projects
@@ -495,7 +499,7 @@ defaults = def {
     -- hooks, layouts
     layoutHook         = myLayout,
     manageHook         = myManageHook,
-    handleEventHook    = myEventHook,
+--    handleEventHook    = myEventHook,
     logHook            = myLogHook,
     startupHook        = myStartupHook
 }
