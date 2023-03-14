@@ -3,3 +3,4 @@ set sandbox none
 set statusbar-home-tilde true
 set selection-clipboard clipboard
 set selection-notification false
+set statusbar-page-percent true
