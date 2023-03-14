@@ -122,12 +122,13 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/goyo.vim'                " Zen Mode
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'   " Fuzzy Find
-  Plug 'tpope/vim-fugitive' " Git vim pluggin
+"  Plug 'tpope/vim-fugitive' " Git vim pluggin
   Plug 'dhruvasagar/vim-table-mode' " Easy tables
-  Plug 'sheerun/vim-polyglot'
+"  Plug 'sheerun/vim-polyglot'
   Plug 'rodjek/vim-puppet'
   Plug 'preservim/tagbar'
   Plug 'vim/killersheep'
+"  Plug 'wakatime/vim-wakatime'
 
 " terryma/vim-multiple-cursors " True Sublime Text style multiple selections for Vim
 
