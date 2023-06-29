@@ -13,4 +13,4 @@ else
   echo -n ""
 fi
 
-echo -n " $ARTIST - $TITLE"
+echo -n " $ARTIST - $TITLE" | sed -e 's/"//g' -e 's/&/and/g' -e "s/'//g"
