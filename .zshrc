@@ -17,6 +17,8 @@ fi
 
 #PS1="[%h]%{${fg[green]}%n%}%{${fg_bold[white]}@%}%{${fg_no_bold[magenta]}%m%}%{${fg_bold[white]}:%}%{${fg_no_bold[blue]}%15<...<%~%}%<<%(?..[%?])%# %{$reset_color%}"
 
+export PATH=$HOME/.local/bin:$PATH
+
 # History settings
 setopt histignorealldups # ignore all dups
 setopt sharehistory # share history between zshs
@@ -25,7 +27,7 @@ setopt histignorespace # Don't save lines beginning with a space
 setopt histnostore # Don't store history or fc commands
 HISTSIZE=1000 # Lines to keep within the shell
 SAVEHIST=1000 # Number of lines to be saved to HISTFILE
-HISTFILE=~/.zsh_history
+HISTFILE=$HOME/.zsh_history
 
 # CD stuff
 setopt autonamedirs # Use ~dir after dir=/some/dir
@@ -64,3 +66,5 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+[[ -f ~/.zalias ]] && source ~/.zalias

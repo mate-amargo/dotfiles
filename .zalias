@@ -1,0 +1,6 @@
+# zsh aliases
+alias l="exa -l --icons --git"
+alias lg="exa -l --icons --git --grid"
+alias t="exa -l --icons --tree --level=2"
+alias mv="mv -vi"
+alias rm="rm -vi"
