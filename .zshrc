@@ -43,6 +43,7 @@ DIRSTACKSIZE=10 # max dirs in the stack
 bindkey -v
 bindkey "^H" backward-delete-char
 bindkey "^?" backward-delete-char
+bindkey "^R" history-incremental-search-backward
 
 # Use modern completion system
 autoload -Uz compinit
