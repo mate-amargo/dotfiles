@@ -18,6 +18,7 @@ fi
 #PS1="[%h]%{${fg[green]}%n%}%{${fg_bold[white]}@%}%{${fg_no_bold[magenta]}%m%}%{${fg_bold[white]}:%}%{${fg_no_bold[blue]}%15<...<%~%}%<<%(?..[%?])%# %{$reset_color%}"
 
 export PATH=$HOME/.local/bin:$PATH
+export EDITOR=vim
 
 # History settings
 setopt histignorealldups # ignore all dups
