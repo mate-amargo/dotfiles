@@ -20,6 +20,8 @@ fi
 export PATH=$HOME/.local/bin:$PATH
 export EDITOR=vim
 
+export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
+
 # History settings
 setopt histignorealldups # ignore all dups
 setopt sharehistory # share history between zshs
