@@ -12,6 +12,7 @@ order += "wireless _first_"
 # order += "battery all"
 order += "tztime date"
 #order += "tztime ru"
+#order += "tztime us"
 order += "tztime arg"
 
 tztime date {
@@ -19,6 +20,13 @@ tztime date {
   separator_block_width = 2
   format = "<span color='#c8fe2e'>📆 %a %d %b %Y 🕙</span>"
   timezone = America/Argentina/Buenos_Aires
+}
+
+tztime us {
+  separator = false
+  separator_block_width = 2
+  format = "<span color='#c8fe2e'>🇺🇸 %H:%M</span>"
+  timezone = America/Los_Angeles
 }
 
 tztime ru {
