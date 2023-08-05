@@ -111,22 +111,22 @@ call plug#begin('~/.vim/plugged')
   Plug 'morhetz/gruvbox'                  " Colorscheme
   Plug 'nathanaelkane/vim-indent-guides'  " Visual indents
   Plug 'lervag/vimtex'                    " Latex Integration
-  Plug 'SirVer/ultisnips'                  " Snippets engine
-  Plug 'honza/vim-snippets'                " Actual snippets
-  Plug 'preservim/nerdtree'                " File browser
+"  Plug 'SirVer/ultisnips'                  " Snippets engine
+"  Plug 'honza/vim-snippets'                " Actual snippets
+"  Plug 'preservim/nerdtree'                " File browser
   Plug 'preservim/nerdcommenter'          " Vim plugin for intensely nerdy commenting powers
   Plug 'ycm-core/YouCompleteMe'            " Code completion engine
   Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']} " Markdown Preview
   Plug 'chrisbra/Colorizer'                " Color Highlight
 "  Plug 'dense-analysis/ale'                " Asynchronous Lint Engine
-  Plug 'junegunn/goyo.vim'                " Zen Mode
+"  Plug 'junegunn/goyo.vim'                " Zen Mode
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'   " Fuzzy Find
 "  Plug 'tpope/vim-fugitive' " Git vim pluggin
-  Plug 'dhruvasagar/vim-table-mode' " Easy tables
+"  Plug 'dhruvasagar/vim-table-mode' " Easy tables
 "  Plug 'sheerun/vim-polyglot'
-  Plug 'rodjek/vim-puppet'
-  Plug 'preservim/tagbar'
+"  Plug 'rodjek/vim-puppet'
+"  Plug 'preservim/tagbar'
   Plug 'vim/killersheep'
 "  Plug 'wakatime/vim-wakatime'
 
@@ -143,14 +143,14 @@ let g:indent_guides_enable_on_vim_startup = 0 " Autostart
 let g:indent_guides_default_mapping = 0        " Remove the <leader>ig default mapping
 
 " Table settings
-let g:table_mode_corner_corner='+'
-let g:table_mode_header_fillchar='='
+"let g:table_mode_corner_corner='+'
+"let g:table_mode_header_fillchar='='
 
 " UltiSnips config
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsListSnippets="<c-l>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+"let g:UltiSnipsExpandTrigger="<c-j>"
+"let g:UltiSnipsListSnippets="<c-l>"
+"let g:UltiSnipsJumpForwardTrigger="<c-j>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " YouCompleteMe config
 let g:ycm_key_list_stop_completion = ['<C-y>', '<CR>']
@@ -170,7 +170,7 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=black ctermbg=darkgray
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=white ctermbg=gray
 
 " Jenkinsfile syntax higlight
-au BufNewFile,BufRead Jenkinsfile setf groovy
+"au BufNewFile,BufRead Jenkinsfile setf groovy
 
 " Puppet syntax highlight
 "au BufNewFile,BufRead *.pp setf puppet
@@ -228,9 +228,9 @@ map <F3> :set nohlsearch! <CR>
 map <F4> :set list! <CR>
 map <F5> :set expandtab! <CR> :set expandtab? <CR>
 map <F6> :set spell! <CR>
-map <F7> :NERDTreeToggle<CR>
+"map <F7> :NERDTreeToggle<CR>
 map <leader><F8> :IndentGuidesToggle<CR>
-map <F8> :TagbarToggle<CR>
+"map <F8> :TagbarToggle<CR>
 map <F9> :set cursorcolumn! <CR>
 map <silent> <leader><F9> :execute "set colorcolumn=" . (&colorcolumn == "" ? "80" : "")<CR>
 " Left/Right = Previous/Next tabpage
@@ -268,3 +268,4 @@ nnoremap <C-H> <C-W><C-H>
 " FuzzyFind keybindings
 map <leader><C-F> :Files<CR>
 map <leader><C-B> :Buffers<CR>
+map <leader><C-R> :Rg <C-R><C-W><CR>
