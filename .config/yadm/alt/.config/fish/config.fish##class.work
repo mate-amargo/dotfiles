@@ -17,10 +17,17 @@ if status --is-interactive
 	abbr --add --global cdd "cd ~/downloads"
 	abbr --add --global l "exa -l --icons --git"
 	abbr --add --global lg "exa -l --icons --git --grid"
+	abbr --add --global la "exa -l --icons --git -a"
 	abbr --add --global t "exa -l --icons --tree --level=2"
 	abbr --add --global mv "mv -vi"
 	abbr --add --global rm "rm -vi"
+	abbr --add --global c "bat"
+	abbr --add --global s "kitty +kitten ssh"
 end
+
+alias gf='echo Sorry, no girlfriend found.'
+alias bye='sudo apt update && sudo apt upgrade -y && echo "$(date "+%Y-%m-%d %T") => Up $(uptime | sed "s/.* up *\(.*\),.*user.*/\1/")" >> ~/ups && poweroff'
+alias shouldideploytoday='curl -s "https://shouldideploy.today/api" | jq ".message"'
 
 set fish_cursor_default     block      blink
 set fish_cursor_insert      line       blink
