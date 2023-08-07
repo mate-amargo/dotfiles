@@ -10,7 +10,6 @@ order += "ethernet _first_"
 order += "wireless _first_"
 order += "battery all"
 order += "tztime date"
-order += "tztime saudi"
 order += "tztime spain"
 order += "tztime arg"
 
