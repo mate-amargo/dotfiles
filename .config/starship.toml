@@ -1,8 +1,8 @@
 format = """
 $username\
 $hostname\
-$directory\
 $python\
+$directory\
 $git_branch\
 $git_state\
 $git_status\
@@ -15,14 +15,14 @@ add_newline = false
 style = "blue"
 
 [character]
-success_symbol = "[❯](green)"
+success_symbol = "[❯](purple)"
 error_symbol = "[❯](red)"
-vimcmd_symbol = "[❮](green)"
+vicmd_symbol = "[❮](green)"
 
 [cmd_duration]
 format = "[$duration]($style) "
 style = "yellow"
 
 [python]
-format = '[$symbol($virtualenv )\[$version\]]($style) '
-style = "bright-yellow"
+format = "[$virtualenv]($style) "
+style = "bright-black"
