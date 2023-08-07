@@ -21,6 +21,14 @@ tztime date {
   timezone = America/Argentina/Buenos_Aires
 }
 
+tztime brasil {
+  format = "<span color='#c8fe2e'>%time</span>"
+  separator = false
+  separator_block_width = 1
+  format_time = " 🇧🇷 %H:%M"
+  timezone = America/Sao_Paulo
+}
+
 tztime saudi {
   format = "<span color='#c8fe2e'>%time</span>"
   separator = false
