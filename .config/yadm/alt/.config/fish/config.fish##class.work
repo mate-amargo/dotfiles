@@ -50,3 +50,12 @@ end
 
 # ssh-agent
 set -xU SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/ssh-agent.socket"
+
+# dbus-launch
+#set -x DBUS_SESSION_BUS_ADDRESS (dbus-launch | head -1 | cut -d"=" -f2-)
+#set DBUS_SESSION_BUS_PID (dbus-launch | head -2 | tail -1 | cut -d"=" -f2-)
+#set DBUS_SESSION_BUS_WINDOWID (dbus-launch | head -3 | tail -1 | cut -d"=" -f2-)
+
+if test (tty | cut -d'/' -f3 | sed 's/[0-9]//g') = 'tty'
+	pgrep X || x
+end
