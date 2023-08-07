@@ -14,5 +14,7 @@ export HISTCONTROL=ignoreboth
 
 export BROWSER="google-chrome-stable"
 
+export PATH=${HOME}/.local/bin:${PATH}
+
 # ssh-agent
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
