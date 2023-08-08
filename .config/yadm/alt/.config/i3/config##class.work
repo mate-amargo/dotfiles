@@ -116,8 +116,10 @@ bindcode $mod+Shift+19 move workspace 10
 
 # Move the current workspace/container to the next output
 # (effectively toggles when you only have two outputs)
-bindsym $mod+Shift+u move workspace to output next
-bindsym $mod+u move container to output next
+bindsym $mod+Shift+u move workspace to output left
+bindsym $mod+u move container to output left
+#bindsym $mod+Shift+u move workspace to output down
+#bindsym $mod+u move container to output down
 
 # reload the configuration file
 bindsym $mod+Shift+C reload
@@ -161,11 +163,13 @@ bindsym $mod+Control+minus move scratchpad
 # Show the first scratchpad window
 bindsym $mod+minus scratchpad show
 
+# Lock the screen
+bindsym $mod+Control+l exec xset s activate
+
 # Personal keybindings from here
 
 bindsym $mod+i exec $browser
 bindsym $mod+m exec $terminal --class "NCMPCPP" -e ncmpcpp
-bindsym $mod+Control+l exec xset s activate
 bindsym $mod+Control+Shift+L exec $terminal --class "ASCIIQuarium" --name "ASCIIQuarium" -e asciiquarium
 bindsym $mod+o exec $pdfreader
 bindsym Print exec --no-startup-id "scrot -u ~/images/screenshots/'%Y-%m-%d-%s_$wx$h.png' && notify-send -u low 'Screenshot of the focused window saved'"
