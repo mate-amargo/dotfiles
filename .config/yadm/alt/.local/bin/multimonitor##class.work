@@ -1,0 +1,8 @@
+#!/bin/sh
+
+test connected = "$(xrandr | awk '/HDMI/ {print $2}')"\
+ && STATUS="--auto --left-of eDP" || STATUS="--off"
+
+test off = "$1" && STATUS="--off"
+xrandr --output eDP --auto --output HDMI-A-0 $STATUS
+~/.fehbg # Fix wallpaper
