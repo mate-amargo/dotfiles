@@ -77,3 +77,7 @@ else
 fi
 
 [[ -f ~/.zalias ]] && source ~/.zalias
+
+if [[ $(tty | cut -d'/' -f3 | sed 's/[0-9]//g') == 'tty' ]]; then
+  pgrep X >/dev/null || x
+fi
