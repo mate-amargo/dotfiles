@@ -246,8 +246,8 @@ imap OA <esc>:tabfirst<CR>
 imap OB <esc>:tablast<CR>
 " Ctrl-Up/Down = Previous/Next buffer
 map [1;5A :bp<CR>
-map [1;5A :bp<CR>
-imap [1;5B <esc>:bn<CR>
+map [1;5B :bn<CR>
+imap [1;5A <esc>:bp<CR>
 imap [1;5B <esc>:bn<CR>
 
 " Split navigations
