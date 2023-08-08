@@ -176,6 +176,7 @@ bindsym Print exec --no-startup-id "scrot -u ~/images/screenshots/'%Y-%m-%d-%s_$
 bindsym --release Shift+Print exec --no-startup-id "scrot -s '%Y-%m-%d-%s_$wx$h.png' -e 'mv $f ~/images/screenshots' && notify-send -u low 'Screenshot of the selected area saved'"
 bindsym --release $mod+Print exec --no-startup-id "scrot ~/images/screenshots/'%Y-%m-%d-%s_$wx$h.png' && notify-send -u low 'Screenshot of the full screen saved'"
 bindsym $mod+p exec "passmenu --type"
+bindsym $mod+Shift+P exec "PASSWORD_STORE_DIR=~/.password-store-home passmenu --type"
 
 # Media Stuff
 #bindsym XF86AudioPlay exec mpc toggle
