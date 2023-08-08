@@ -179,7 +179,7 @@ bindsym $mod+p exec "passmenu --type"
 bindsym $mod+Shift+P exec "PASSWORD_STORE_DIR=~/.password-store-home passmenu --type"
 
 # Media Stuff
-#bindsym XF86AudioPlay exec mpc toggle
+bindsym XF86AudioPlay exec playerctl play-pause
 #bindsym XF86AudioPrev exec mpc prev
 #bindsym XF86AudioNext exec mpc next
 #bindsym XF86AudioStop exec mpc stop
