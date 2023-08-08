@@ -87,3 +87,6 @@ fpath=(~/.zfunctions $fpath)
 for f in ~/.zfunctions/*; do
   autoload -Uz $f
 done
+
+zle -N insert-sudo insert_sudo
+bindkey "^[s" insert-sudo
