@@ -81,3 +81,9 @@ fi
 if [[ $(tty | cut -d'/' -f3 | sed 's/[0-9]//g') == 'tty' ]]; then
   pgrep X >/dev/null || x
 fi
+
+# Autoload functions in fpath
+fpath=(~/.zfunctions $fpath)
+for f in ~/.zfunctions/*; do
+  autoload -Uz $f
+done

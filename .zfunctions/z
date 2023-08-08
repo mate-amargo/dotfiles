@@ -1,0 +1,15 @@
+#!/bin/zsh
+servers_file=~/.servers
+if [ $# -eq 1 ]; then
+  echo "$1" >> ${servers_file}
+  server=$1
+elif [ -f ${servers_file} ]; then
+  server=$(fzf < ${servers_file})
+  if [ -z ${server} ]; then
+    return
+  fi
+else
+  return
+fi
+ssh -q -o StrictHostKeyChecking=no -o PubkeyAuthentication=yes -o PasswordAuthentication=no "${server}" true || ssh-copy-id -i ~/.ssh/id_rsa "${server}"
+ssh "${server}"
