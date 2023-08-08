@@ -1,0 +1,7 @@
+~/.x/base.sh
+eval $(dbus-launch --sh-syntax --exit-with-x11)
+xrdb -merge ~/.Xresources
+xss-lock -- ~/.local/bin/screenlock &
+compton &
+nm-applet &
+exec i3
