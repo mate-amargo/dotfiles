@@ -227,6 +227,7 @@ map <leader><F2> :set nonu nornu <CR>
 map <F3> :set nohlsearch! <CR>
 map <F4> :set list! <CR>
 map <F5> :set expandtab! <CR> :set expandtab? <CR>
+map <leader><F5> <C-W>_<C-W><Bar>
 map <F6> :set spell! <CR>
 "map <F7> :NERDTreeToggle<CR>
 map <leader><F8> :IndentGuidesToggle<CR>
