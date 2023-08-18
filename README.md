@@ -30,6 +30,17 @@ yadm commit -m "Useful commit message"
 yadm push
 ```
 
+### Use a different user for commits
+
+If you have different `user` sections in your gitconfigs for your different machines, use the following to tell yadm which user to use:
+
+```
+yadm gitconfig "user.email" "alternate-email@domain"
+yadm gitconfig "user.name"  "Alternate Name"
+yadm gitconfig "user.signkey" "ALTERNATE_KEY_FINGERPRINT"
+yadm gitconfig "user.signingkey" "ALTERNATE_KEY_FINGERPRINT"
+```
+
 ### Alternates
 
 There are various ways of using alternate files. But I find that using the `class` system works best for me.
