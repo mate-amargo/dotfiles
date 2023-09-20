@@ -17,7 +17,7 @@ fi
 
 #PS1="[%h]%{${fg[green]}%n%}%{${fg_bold[white]}@%}%{${fg_no_bold[magenta]}%m%}%{${fg_bold[white]}:%}%{${fg_no_bold[blue]}%15<...<%~%}%<<%(?..[%?])%# %{$reset_color%}"
 
-export PATH=$HOME/.local/bin:$PATH
+export PATH=$HOME/.local/bin:$HOME/.cargo/bin:$PATH
 export EDITOR=vim
 
 export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
