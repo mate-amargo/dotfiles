@@ -12,6 +12,7 @@ order += "battery all"
 order += "tztime date"
 order += "tztime russia"
 order += "tztime spain"
+order += "tztime utc"
 order += "tztime arg"
 
 tztime date {
@@ -52,6 +53,14 @@ tztime spain {
   separator_block_width = 1
   format_time = " 🇪🇸 %H:%M"
   timezone = Europe/Madrid
+}
+
+tztime utc {
+  format = "<span color='#c8fe2e'>%time</span>"
+  separator = false
+  separator_block_width = 1
+  format_time = " 🤖 %H:%M"
+  timezone = UTC
 }
 
 tztime arg {
