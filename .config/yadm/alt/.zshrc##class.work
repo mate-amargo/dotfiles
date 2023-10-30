@@ -25,12 +25,12 @@ export GPG_TTY=$(tty)
 
 # History settings
 setopt histignorealldups # ignore all dups
-setopt sharehistory # share history between zshs
+setopt nosharehistory # share history between zshs
 setopt histverify # Press Enter before history expansion
 setopt histignorespace # Don't save lines beginning with a space
 setopt histnostore # Don't store history or fc commands
-HISTSIZE=1000 # Lines to keep within the shell
-SAVEHIST=1000 # Number of lines to be saved to HISTFILE
+HISTSIZE=10000 # Lines to keep within the shell
+SAVEHIST=10000 # Number of lines to be saved to HISTFILE
 HISTFILE=$HOME/.zsh_history
 
 # CD stuff
