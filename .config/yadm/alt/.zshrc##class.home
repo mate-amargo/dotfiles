@@ -45,6 +45,10 @@ bindkey "^H" backward-delete-char
 bindkey "^?" backward-delete-char
 bindkey "^R" history-incremental-search-backward
 bindkey "\e." insert-last-word
+bindkey "^o" accept-line-and-down-history
+bindkey "^xp" history-beginning-search-backward
+bindkey "^xn" history-beginning-search-forward
+bindkey "\eq" push-line-or-edit
 
 # Use modern completion system
 autoload -Uz compinit
