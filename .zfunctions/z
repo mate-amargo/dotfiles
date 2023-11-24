@@ -1,4 +1,5 @@
 #!/bin/zsh
+export TERM=xterm
 servers_file=~/.servers
 if [ $# -eq 1 ]; then
   echo "$1" >> ${servers_file}
