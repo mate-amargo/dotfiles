@@ -1,2 +1,6 @@
 .config/yadm/alt/.gitconfig.local##*
 .config/mopidy/mopidy.conf
+.config/yadm/alt/.config/neomutt/personalrc##class.work
+.config/yadm/alt/.config/neomutt/signature.html##class.work
+.config/yadm/alt/.config/neomutt/imaprc##class.work
+.config/yadm/alt/.config/neomutt/smtprc##class.work

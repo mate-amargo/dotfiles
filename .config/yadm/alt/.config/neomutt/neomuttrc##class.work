@@ -1,0 +1,123 @@
+# Personal Settings
+source personalrc
+
+# IMAP Settings (Read mail from server)
+source imaprc
+
+# SMTP Settings (Send mail)
+source smtprc
+
+# Signing and Encryption
+set crypt_auto_encrypt=no
+set crypt_auto_smime=yes
+set crypt_auto_sign=yes
+set crypt_verify_sig=yes
+set smime_is_default=yes
+set smime_self_encrypt=yes
+set smime_ca_location="~/.smime/ca-bundle.crt"
+set smime_ca_location=`for f in $HOME/.smime/ca-certificates.crt $HOME/.smime/ca-bundle.crt /etc/ssl/certs/ca-certificates.crt ; do if [ -e $f ] ; then echo $f ; exit ; fi ; done`
+set smime_certificates="~/.smime/certificates"
+set smime_keys="~/.smime/keys"
+## These are used to extract a certificate from a message.
+## First generate a PKCS#7 structure from the message.
+set smime_pk7out_command="openssl smime -verify -in %f -noverify -pk7out"
+## Extract the included certificate(s) from a PKCS#7 structure.
+set smime_get_cert_command="openssl pkcs7 -print_certs -in %f"
+## Extract the signer's certificate only from a S/MIME signature (sender verification)
+set smime_get_signer_cert_command="openssl smime -verify -in %f -noverify -signer %c -out /dev/null"
+## This is used to get the email address the certificate was issued to.
+set smime_get_cert_email_command="openssl x509 -in %f -noout -email"
+## Add a certificate to the database using smime_keys.
+set smime_import_cert_command="/usr/libexec/neomutt/smime_keys add_cert %f"
+## Algorithm to use for encryption.
+## valid choices are aes128, aes192, aes256, rc2-40, rc2-64, rc2-128, des, des3
+set smime_encrypt_with="aes256"
+## Encrypt a message.  Input file is a MIME entity.
+set smime_encrypt_command="openssl cms -encrypt -%a -outform DER -in %f %c"
+## Algorithm for the signature message digest.
+## Valid choices are md5, sha1, sha224, sha256, sha384, sha512.
+set smime_sign_digest_alg="sha256"
+## Sign.
+set smime_sign_command="openssl smime -sign -md %d -signer %c -inkey %k -passin stdin -in %f -certfile %i -outform DER"
+## Decrypt a message.  Output is a MIME entity.
+set smime_decrypt_command="openssl cms -decrypt -passin stdin -inform DER -in %f -inkey %k -recip %c"
+## Verify a signature of type multipart/signed
+set smime_verify_command="openssl smime -verify -inform DER -in %s %C -content %f"
+## Verify a signature of type application/x-pkcs7-mime
+set smime_verify_opaque_command="\
+openssl smime -verify -inform DER -in %s %C || \
+openssl smime -verify -inform DER -in %s -noverify 2>/dev/null"
+## Fix SMIME signing by not using gpgme
+set crypt_use_gpgme=no
+
+# General Settings
+set editor="vim"
+set sidebar_visible
+set mail_check_stats
+set sidebar_format="%B%<F? [%F]>%* %<N?%N/>%S"
+set index_format="%4C %Z %[%b %d %H:%M] %-15.15L (%<l?%4l&%4c>) %s"
+set sort="reverse-date"
+set mark_old = no	# mutt marks messages as Old if you exit the mailbox without reading them, this keeps unread messages as New
+auto_view text/html # automatically show html (mailcap uses lynx)
+set send_charset="utf-8"
+set content_type="text/html"
+set query_command="lbdbq %s 2>/dev/null"
+set new_mail_command="notify-send -i neomutt 'New Email' '%n new messages' &"
+
+# Keybindings
+bind index,pager g noop
+
+bind index gg first-entry
+bind index G last-entry
+bind index k previous-entry
+bind index j next-entry
+bind index l display-message
+
+bind pager gg top
+bind pager G bottom
+bind pager k previous-line
+bind pager j next-line
+bind pager h exit
+bind pager V view-raw-message
+bind pager \Ck extract-keys
+
+bind index,pager K sidebar-prev
+bind index,pager J sidebar-next
+bind index,pager O sidebar-open
+bind index,pager \Cp sidebar-prev-new
+bind index,pager \Cn sidebar-next-new
+bind index,pager S sync-mailbox
+
+bind browser gg top-page
+bind browser G bottom-page
+bind browser l select-entry
+
+# Macros
+macro index R "T~U<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" "mark all messages as read"
+macro index <backtab> "<next-unread-mailbox><enter><next-new-then-unread><enter>" "go to next new mail across all folders"
+macro pager f "<pipe-message> urlscan -dcs<enter>" "use urlscan to extract URLs from message"
+
+# Colors
+## Set defaults for non-color terminals
+mono bold bold
+mono underline underline
+mono indicator reverse
+mono error bold
+## Default status bar and stuff
+color normal white black
+color indicator brightwhite brightblack
+color status brightblack green
+## Default index
+color index white default '.*'
+color index_number blue default
+color index_author cyan default '.*'
+color index_subject magenta default '.*'
+## New messages
+color index brightgreen black "~N"
+color index_author brightyellow black "~N"
+color index_subject brightred black "~N"
+## PGP
+color body  brightwhite brightred '(\*BAD\* signature)'
+color body  brightwhite red '^Error: decryption/verification failed:.*'
+color body  brightwhite green '(Good signature)'
+color body  brightwhite cyan '(Problem signature)'
