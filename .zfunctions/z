@@ -1,5 +1,4 @@
 #!/bin/zsh
-export TERM=xterm
 servers_file=~/.servers
 if [ $# -eq 1 ]; then
   echo "$1" >> ${servers_file}
@@ -13,4 +12,4 @@ else
   return
 fi
 ssh -q -o StrictHostKeyChecking=no -o PubkeyAuthentication=yes -o PasswordAuthentication=no "${server}" true || ssh-copy-id -i ~/.ssh/id_rsa "${server}"
-ssh "${server}"
+TERM=xterm ssh "${server}"
