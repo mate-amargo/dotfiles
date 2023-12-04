@@ -392,9 +392,9 @@ myNav2DConf = def
 
 
 scratchpads = mkXScratchpads [
-        ("htop", myTerminal ++ " -t scratchpad-htop -e htop", title =? "scratchpad-htop")
-        , ("XMonadConfig", myTerminal ++ " -c scratchpad-xmonadconfig -n scratchpad-xmonadconfig -e vim ~/.xmonad/xmonad.hs", className =? "scratchpad-xmonadconfig")
-        , ("terminal", myTerminal ++ " -c scratchpad-terminal -n scratchpad-terminal", className =? "scratchpad-terminal")
+        ("htop", myTerminal ++ " -T scratchpad-htop htop", title =? "scratchpad-htop")
+        , ("XMonadConfig", myTerminal ++ " --class scratchpad-xmonadconfig --name scratchpad-xmonadconfig vim ~/.xmonad/xmonad.hs", className =? "scratchpad-xmonadconfig")
+        , ("terminal", myTerminal ++ " --class scratchpad-terminal --name scratchpad-terminal", className =? "scratchpad-terminal")
     ] $ customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3)
 
 myManageHook =
