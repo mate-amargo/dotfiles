@@ -1,0 +1,8 @@
+~/.x/base.sh
+dbus-update-activation-environment --systemd DISPLAY
+xrdb -merge ~/.Xresources
+dunst -config ~/.config/dunstrc &
+xss-lock -- screenlock &
+xcompmgr &
+xmonad --recompile
+exec xmonad
