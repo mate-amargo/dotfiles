@@ -1,0 +1,29 @@
+Config {
+    font = "Source Code Pro 11"
+  , fgColor = "#646464"
+  , alpha = 204
+  , alignSep = "}{"
+  , position = TopW L 100
+  , iconRoot = "~/.xmobar/xpm"
+  , commands = [
+                 Run XPropertyLog "_XMONAD_LOG_0"
+               , Run Com "~/.xmobar/trayer-padding-icon.sh" [] "trayerpad" 20
+               , Run Date "<fc=#C8FE2E> %a %d %b %Y  %H:%M:%S</fc>" "date" 10
+               , Run DynNetwork [ "--template", "<fc=#2FDC57>\xf6ff <dev> <rx>|<tx> [KB/s]</fc>"
+                                , "--", "--devices", "wlp2s0,enp1s0"
+                                ] 20
+               , Run Volume "default" "Master" [ "--template", "<fc=#268BD2><status> <volume>%</fc>"
+                                               , "--"
+                                               -- Mixer On
+                                               , "-O", "\xf028"
+                                               , "-C", "#268BD2"
+                                               -- Mixer Off
+                                               , "-o", "\xf026"
+                                               , "-c", "#268BD2"
+                                               ] 10
+               , Run Kbd [("us(altgr-intl)","us")]
+               ]
+  , template = "%_XMONAD_LOG_0% }{ <fc=#C0F387> %kbd%</fc> | %default:Master% | %dynnetwork% | %date% %trayerpad%"
+}
+
+-- vim: syntax=haskell
