@@ -28,6 +28,8 @@ import XMonad.Hooks.InsertPosition -- For opening always right of current
 import XMonad.Hooks.UrgencyHook -- For urgent calls
 import XMonad.Hooks.EwmhDesktops -- For fullscreen support Hook
 import XMonad.Hooks.SetWMName -- Fix Matlab big gray square
+import XMonad.Hooks.StatusBar -- For Multiple StatusBars
+import XMonad.Hooks.StatusBar.PP -- For Multiple StatusBars
 
 import XMonad.Util.Cursor -- To get rid of the default X cursor
 import XMonad.Util.ExclusiveScratchpads
@@ -437,35 +439,33 @@ myLogHook = return ()
 -----------------------------------------------
 
 -- Perform an arbitrary action each time xmonad starts or is restarted
--- with mod-q.  Used by, e.g., XMonad.Layout.PerWorkspace to initialize
--- per-workspace layout choices.
 
 myStartupHook = setDefaultCursor xC_left_ptr <+> setWMName "LG3D" <+> spawnOnce "stalonetray"
 
-myBar = "xmobar"
-
 myPP = xmobarPP { ppCurrent = xmobarColor "#FF4000" ""
+                , ppVisible = xmobarColor "#2040C0" ""
                 , ppTitle = xmobarColor "#00FF00" "" . shorten 45
                 , ppUrgent = xmobarColor "yellow" ""
---                , ppSort = fmap (namedScratchpadFilterOutWorkspace .) (ppSort def)
                 }
---myPP = xmobarPP { ppCurrent = xmobarColor "#FF4000" "" , ppTitle = xmobarColor "#00FF00" "" . shorten 55}
---myPP = xmobarPP { ppCurrent = xmobarColor "#FF4000" "" . wrap "[" "]" }
+xmobarLeft = statusBarPropTo "_XMONAD_LOG_0" "xmobar -x 0 ~/.xmobar/xmobarrc-left" (pure myPP)
+xmobarRight = statusBarPropTo "_XMONAD_LOG_1" "xmobar -x 1 ~/.xmobar/xmobarrc-right" (pure myPP)
 
---toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask .|. shiftMask, xK_b)
-toggleStrutsKey XConfig {} = (0,0) -- Empty keybinding since we are doing more than one thing and we redefine that on the general keybindings
+barSpawner :: ScreenId -> IO StatusBarConfig
+barSpawner 0 = pure $ xmobarLeft
+barSpawner 1 = pure $ xmobarRight
+barSpawner _ = mempty -- nothing on the rest of the screens
 
 --------------------------------------------}}}
 -- Main                                     {{{
 -----------------------------------------------
-main = xmonad =<< (
-    statusBar myBar myPP toggleStrutsKey
-    $ (ewmhFullscreen . ewmh)
-    $ withUrgencyHook NoUrgencyHook
-    $ withNavigation2DConfig myNav2DConf
-    $ dynamicProjects projects
-    $ addDescrKeys' ((myModMask, xK_F1), showKeybindings) myKeys
-    defaults)
+main = xmonad
+        $ dynamicEasySBs barSpawner
+        $ (ewmhFullscreen . ewmh)
+        $ withUrgencyHook NoUrgencyHook
+        $ withNavigation2DConfig myNav2DConf
+        $ dynamicProjects projects
+        $ addDescrKeys' ((myModMask, xK_F1), showKeybindings) myKeys
+        $ defaults
 
 defaults = def {
     -- simple stuff

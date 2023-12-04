@@ -1,0 +1,34 @@
+Config {
+    font = "Source Code Pro 11"
+  , fgColor = "#646464"
+  , alpha = 204
+  , alignSep = "}{"
+  , position = TopW L 100
+  , iconRoot = "/home/e4/.xmobar/xpm"
+  , commands = [
+                 Run XPropertyLog "_XMONAD_LOG_0"
+               , Run Com "/home/e4/.xmobar/trayer-padding-icon.sh" [] "trayerpad" 20
+               , Run Date "<fc=#C8FE2E> %a %d %b %Y  %H:%M:%S</fc>" "date" 10
+               , Run Wireless "wlp2s0" [ "--template", "<fc=#2FDC57>\xf1eb <essid> <quality>%</fc>"
+                                       , "-p"         , "3"
+                                       , "--low"      , "darkred"
+                                       , "--normal"   , "#2FDC57"
+                                       , "--high"     , "#2FDC57"
+                                       ] 20
+               , Run Volume "default" "Master" [ "--template", "<fc=#268BD2><status> <volume>%</fc>"
+                                               , "--"
+                                               -- Mixer On
+                                               , "-O", "\xf028"
+                                               , "-C", "#268BD2"
+                                               -- Mixer Off
+                                               , "-o", "\xf026"
+                                               , "-c", "#268BD2"
+                                               ] 10
+               , Run CatInt 0 "/home/e4/.local/share/emilios-unread" [] 20
+               , Run CatInt 1 "/home/e4/.local/share/pkgs-updates" [] 600
+               , Run Kbd [("us(altgr-intl)","us")]
+               ]
+  , template = "%_XMONAD_LOG_0% }{ <fc=#C0F387> %kbd%</fc> | <fc=purple> %cat1%</fc> | <fc=#DD1900> %cat0%</fc> | %default:Master% | %wlp2s0wi% | %date% %trayerpad%"
+}
+
+-- vim: syntax=haskell
