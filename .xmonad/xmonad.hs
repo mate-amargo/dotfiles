@@ -343,12 +343,6 @@ projects =
             , projectDirectory = "~/"
             , projectStartHook = Just $ do spawn myTerminal
             }
-  , Project { projectName      = wsMSX
-            , projectDirectory = "~/music"
-            , projectStartHook = Just $ do runInTerm "" "pulsemixer"
-                                           runInTerm "-t castero -c castero" "castero"
-                                           runInTerm "-c NCMPCPP" "ncmpcpp"
-            }
   ]
 
 --------------------------------------------}}}
@@ -450,7 +444,7 @@ myLogHook = return ()
 -- with mod-q.  Used by, e.g., XMonad.Layout.PerWorkspace to initialize
 -- per-workspace layout choices.
 
-myStartupHook = setDefaultCursor xC_left_ptr <+> setWMName "LG3D" <+> spawnOnce "stalonetray" <+> spawnOnce "google-chrome-stable" <+> spawnOnce "google-chrome-stable --new-window web.whatsapp.com"
+myStartupHook = setDefaultCursor xC_left_ptr <+> setWMName "LG3D" <+> spawnOnce "stalonetray"
 
 myBar = "xmobar"
 
