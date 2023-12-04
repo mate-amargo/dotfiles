@@ -303,17 +303,13 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = (subtitle "Custom Keys":) $
     , ((modm .|. shiftMask .|. controlMask, xK_m), addName "Manpage Prompt" $ manPrompt promptTheme)
     ]
     ++
-
     [((m .|. modm, k), addName (s ++ show n ++ e) $ f i)
         | (i, k, n) <- zip3 (XMonad.workspaces conf) [xK_1 .. xK_9] [1..9]
         , (f, m, s, e) <- [(toggleOrView, 0, "Switch to WS ", ". Or if already in that WS, toggle to previous WS."), (windows . W.shift, shiftMask, "Move to client WS ", "."), (windows . copy, controlMask, "Copy client to WS ", ".")]]
-   --
-    -- mod-{w,e,r}, Switch to physical/Xinerama screens 1, 2, or 3
-    -- mod-shift-{w,e,r}, Move client to screen 1, 2, or 3
-    --
---    [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
---        | (key, sc) <- zip [xK_w, xK_e, xK_p] [0..]
---        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+    ++
+    [((m .|. modm, key), addName (s ++ show sc ++ ".") $ screenWorkspace sc >>= flip whenJust (windows . f))
+        | (key, sc) <- zip [xK_a, xK_s] [0..]
+        , (f, m, s) <- [(W.view, 0, "Switch to physical/Xinerama screen "), (W.shift, shiftMask, "Move client to screen ")]]
 --------------------------------------------}}}
 -- Mouse bindings                           {{{
 -----------------------------------------------
