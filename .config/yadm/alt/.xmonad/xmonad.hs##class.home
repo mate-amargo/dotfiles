@@ -243,7 +243,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = (subtitle "Custom Keys":) $
     , ((shiftMask, xK_Print), addName "Take screenshot of the selected area" $ unGrab >> spawn "scrot -s '%Y-%m-%d-%s_$wx$h.png' -e 'mv $f ~/images/screenshots' && notify-send -u low 'Screenshot of the selected area saved'")
     , ((modm, xK_Print), addName "Take screenshot of the full screen" $ unGrab >> spawn "scrot ~/images/screenshots/'%Y-%m-%d-%s_$wx$h.png' && notify-send -u low 'Screenshot of the full screen saved'")
     , ((modm, xK_g), addName "Custom Game Launcher" $ spawn "games")
-    , ((modm .|. shiftMask, xK_g), addName "Audio Visualizer on the Desktop" $ spawn "pkill glava || glava --audio=fifo")
+    , ((modm .|. shiftMask, xK_g), addName "Audio Visualizer on the Desktop" $ spawn "pkill glava || glava")
     , ((modm .|. controlMask, xK_g), addName "Toggle gaps" $ sequence_ [toggleWindowSpacingEnabled, toggleScreenSpacingEnabled])
     , ((modm, xK_b), addName "Bookworm" $ spawn "bookworm")
     -- Recording
