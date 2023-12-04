@@ -9,12 +9,9 @@ Config {
                  Run XPropertyLog "_XMONAD_LOG_0"
                , Run Com "/home/e4/.xmobar/trayer-padding-icon.sh" [] "trayerpad" 20
                , Run Date "<fc=#C8FE2E> %a %d %b %Y  %H:%M:%S</fc>" "date" 10
-               , Run Wireless "wlp2s0" [ "--template", "<fc=#2FDC57>\xf1eb <essid> <quality>%</fc>"
-                                       , "-p"         , "3"
-                                       , "--low"      , "darkred"
-                                       , "--normal"   , "#2FDC57"
-                                       , "--high"     , "#2FDC57"
-                                       ] 20
+               , Run DynNetwork [ "--template", "<fc=#2FDC57>\xf6ff <dev> <rx>|<tx> [KB/s]</fc>"
+                                , "--", "--devices", "wlp2s0,enp1s0"
+                                ] 20
                , Run Volume "default" "Master" [ "--template", "<fc=#268BD2><status> <volume>%</fc>"
                                                , "--"
                                                -- Mixer On
@@ -28,7 +25,7 @@ Config {
                , Run CatInt 1 "/home/e4/.local/share/pkgs-updates" [] 600
                , Run Kbd [("us(altgr-intl)","us")]
                ]
-  , template = "%_XMONAD_LOG_0% }{ <fc=#C0F387> %kbd%</fc> | <fc=purple> %cat1%</fc> | <fc=#DD1900> %cat0%</fc> | %default:Master% | %wlp2s0wi% | %date% %trayerpad%"
+  , template = "%_XMONAD_LOG_0% }{ <fc=#C0F387> %kbd%</fc> | <fc=purple> %cat1%</fc> | <fc=#DD1900> %cat0%</fc> | %default:Master% | %dynnetwork% | %date% %trayerpad%"
 }
 
 -- vim: syntax=haskell
