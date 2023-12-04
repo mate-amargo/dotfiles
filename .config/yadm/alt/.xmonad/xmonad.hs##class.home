@@ -281,6 +281,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = (subtitle "Custom Keys":) $
     , ((modm, xK_k), addName "Move to the upper window" $ windowGo U False)
     , ((modm, xK_l), addName "Move to the right window" $ windowGo R False)
     , ((modm, xK_Tab   ), addName "Toggle between previous WS" $ toggleWS)
+    , ((modm .|. shiftMask, xK_Tab   ), addName "Toggle between previous screen" $ prevScreen)
     , ((modm, xK_grave   ), addName "Next WS" $ nextWS)
     , ((modm .|. shiftMask, xK_grave   ), addName "Previous WS" $ prevWS)
     , ((modm .|. shiftMask,   xK_j     ), addName "Move to the next window" $ focusDown)
