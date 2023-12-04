@@ -50,6 +50,7 @@ import XMonad.Actions.Navigation2D
 import XMonad.Actions.TagWindows
 import XMonad.Actions.CopyWindow
 import XMonad.Actions.Minimize
+import XMonad.Actions.SpawnOn
 
 import XMonad.Prompt
 import XMonad.Prompt.Man
@@ -231,7 +232,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = (subtitle "Custom Keys":) $
     , ((0, xF86XK_MonBrightnessDown), addName "Decrease Brightness" $ spawn "backlight -50")
     -- Apps
     , ((modm, xK_i ), addName "Web Browser" $ spawn "google-chrome-stable")
-    , ((modm, xK_m), addName "Music Player" $ runInTerm "-c NCMPCPP" "fish -c ncmpcpp")
+    , ((modm, xK_m), addName "Music Player" $ spawnOn wsMSX "spotify")
     , ((modm .|. controlMask .|. shiftMask, xK_p), addName "Podcast Player" $ runInTerm "-t castero -c castero" "castero")
     , ((modm .|. shiftMask, xK_p), addName "Toggle podcast player" $ spawn "xdotool key --window $(xwininfo -name castero | sed -n '/id:/s/.*\\(0x[0-9a-f]*\\).*/\\1/p') p")
     , ((modm .|. controlMask, xK_m), addName "Update e-mail count" $ spawn "emilio")
@@ -407,6 +408,7 @@ myManageHook =
     , className =? "Google-chrome" --> doShift wsWEB
     , className =? "NCMPCPP" --> doShiftAndGo wsMSX
     , className =? "castero" --> doShiftAndGo wsMSX
+    , className =? "spotify" --> doShiftAndGo wsMSX
     , className =? "Zathura" --> doShiftAndGo wsBOK <+> insertPosition Below Newer
     , className =? "vlc" --> doShiftAndGo wsPIC
     , className =? "Vlc" --> doShiftAndGo wsPIC
