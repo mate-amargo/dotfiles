@@ -1,7 +1,7 @@
 #!/bin/sh
 
 test connected = "$(xrandr | awk '/HDMI1/ {print $2}')"\
- && STATUS="--auto --left-of LVDS1" || STATUS="--off"
+ && STATUS="--auto --primary --left-of LVDS1" || STATUS="--off"
 
 test off = "$1" && STATUS="--off"
 xrandr --output LVDS1 --auto --output HDMI1 $STATUS
