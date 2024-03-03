@@ -10,7 +10,6 @@ order += "ethernet _first_"
 order += "wireless _first_"
 order += "battery all"
 order += "tztime date"
-order += "tztime russia"
 order += "tztime spain"
 order += "tztime utc"
 order += "tztime arg"
@@ -21,30 +20,6 @@ tztime date {
   separator_block_width = 1
   format_time = "📆 %a %d %b %Y 🕙"
   timezone = America/Argentina/Buenos_Aires
-}
-
-tztime russia {
-  format = "<span color='#c8fe2e'>%time</span>"
-  separator = false
-  separator_block_width = 1
-  format_time = "🇷🇺 %H:%M"
-  timezone = Asia/Omsk
-}
-
-tztime brasil {
-  format = "<span color='#c8fe2e'>%time</span>"
-  separator = false
-  separator_block_width = 1
-  format_time = " 🇧🇷 %H:%M"
-  timezone = America/Sao_Paulo
-}
-
-tztime saudi {
-  format = "<span color='#c8fe2e'>%time</span>"
-  separator = false
-  separator_block_width = 1
-  format_time = " 🇸🇦 %H:%M"
-  timezone = Asia/Riyadh
 }
 
 tztime spain {
