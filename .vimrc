@@ -129,6 +129,7 @@ call plug#begin('~/.vim/plugged')
 "  Plug 'preservim/tagbar'
   Plug 'vim/killersheep'
 "  Plug 'wakatime/vim-wakatime'
+  Plug 'godlygeek/tabular'
 
 " terryma/vim-multiple-cursors " True Sublime Text style multiple selections for Vim
 
