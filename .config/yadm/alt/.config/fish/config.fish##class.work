@@ -26,7 +26,7 @@ if status --is-interactive
 end
 
 alias gf='echo Sorry, no girlfriend found.'
-alias bye='sudo apt update && sudo apt upgrade -y && echo "$(date "+%Y-%m-%d %T") => Up $(uptime | sed "s/.* up *\(.*\),.*user.*/\1/")" >> ~/ups && poweroff'
+alias bye='sudo apt update && sudo apt upgrade -y && echo "(date "+%Y-%m-%d %T") => Up (uptime | sed "s/.* up *\(.*\),.*user.*/\1/")" >> ~/ups && poweroff'
 alias shouldideploytoday='curl -s "https://shouldideploy.today/api" | jq ".message"'
 
 set fish_cursor_default     block      blink
