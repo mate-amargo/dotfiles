@@ -185,7 +185,7 @@ myFocusedBorderColor = "#FF4000"
 
 promptTheme = def
     {
-      font = "xft:CodeNewRoman:size=11:antialias=true"
+      font = "xft:Code Sauce Pro:pixelsize=10:antialias=true:hinting=true"
     , bgColor               = "#646464"
     , fgColor               = "#FF4000"
     , promptBorderWidth     = 0
@@ -225,8 +225,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = (subtitle "Custom Keys":) $
     , ((shiftMask,   xF86XK_AudioPlay), addName "Toggle Media Player (browser)" $ spawn "playerctl play-pause")
     -- Volume
     , ((modm, xK_x     ), addName "Toggle Audio Output" $ spawn "ponymix toggle")
-    , ((0, xF86XK_AudioLowerVolume), addName "Lower Volume by 5%" $ spawn "amixer -c 0 sset Master 5%-")
-    , ((0, xF86XK_AudioRaiseVolume), addName "Raise Volume by 5%" $ spawn "amixer -c 0 sset Master 5%+")
+    , ((0, xF86XK_AudioLowerVolume), addName "Lower Volume by 5%" $ spawn "amixer -D pulse sset Master 5%-")
+    , ((0, xF86XK_AudioRaiseVolume), addName "Raise Volume by 5%" $ spawn "amixer -D pulse sset Master 5%+")
     -- Brightness
     , ((0, xF86XK_MonBrightnessUp), addName "Increase Brightness" $ spawn "backlight +50")
     , ((0, xF86XK_MonBrightnessDown), addName "Decrease Brightness" $ spawn "backlight -50")
@@ -253,6 +253,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = (subtitle "Custom Keys":) $
     , ((modm .|. shiftMask, xK_l), addName "Lock screen" $ spawn "xset s activate")
     -- Passwords
     , ((modm, xK_p ), addName "Password Manager autotype" $ spawn "passmenu --type")
+    , ((modm .|. shiftMask, xK_p ), addName "Password Manager autotype [home]" $ spawn "PASSWORD_STORE_DIR=~/.password-store-home passmenu --type")
     , ((modm .|. controlMask, xK_p ), addName "Password Manager clipboard" $ spawn "passmenu")
     -- Scratchpads
     , ((modm .|. shiftMask, xK_t), addName "Scratchpad terminal" $ scratchpadAction scratchpads "terminal")
@@ -287,11 +288,11 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = (subtitle "Custom Keys":) $
     , ((modm .|. shiftMask,   xK_j     ), addName "Move to the next window" $ focusDown)
     , ((modm .|. shiftMask,   xK_k     ),  addName "Move to the previous window" $ focusUp  )
     , ((modm .|. shiftMask,   xK_m     ), addName "Move focus to the master window" $ focusMaster  )
-    , ((modm .|. shiftMask, xK_Return), addName "Swap the focused window and the master window" $windows W.swapMaster)
+    , ((modm .|. shiftMask, xK_Return), addName "Swap the focused window and the master window" $ windows W.swapMaster)
     , ((modm .|. controlMask, xK_j     ), addName "Swap the focused window with the next window" $ windows W.swapDown  )
     , ((modm .|. controlMask, xK_k     ), addName "Swap the focused window with the previous window" $ windows W.swapUp    )
-    , ((modm, xK_less  ), addName "Shrink the master area" $ sendMessage Shrink)
-    , ((modm .|. shiftMask, xK_less ), addName "Expand the master area" $ sendMessage Expand)
+    , ((modm .|. shiftMask, xK_comma  ), addName "Shrink the master area" $ sendMessage Shrink)
+    , ((modm .|. shiftMask, xK_period ), addName "Expand the master area" $ sendMessage Expand)
     , ((modm,               xK_t     ), addName "Push window back into tiling" $ withFocused $ windows . W.sink)
     , ((modm              , xK_f ), addName "Swap window between tiled and fullscreen" $ sendMessage $ Toggle NBFULL)
     , ((modm .|. shiftMask, xK_f ), addName "Take window out of layout and maximize it to fill most of the screen" $ withFocused (sendMessage . maximizeRestore))
@@ -353,12 +354,12 @@ wsWEB = "\xf268" -- 1: web 
 wsCMD = "\xf120" -- 2: terminals 
 wsMSX = "\xf001" -- 3: music 
 wsBOK = "\xf02d" -- 4: books 
-wsGAM = "\xf11b" -- 5: games 
-wsPIC = "\xf03e" -- 6: pictures & video 
-wsELE = "\xf2db" -- 7: LTSpice 
-wsMAT = "\xf1ec" -- 8: Matlab 
+wsFFX = "\xf269" -- 5: firefox 
+wsMET = "\xf03e" -- 6: meets 
+wsELE = "\xf0e0" -- 7: Mail 
+wsMAT = "\xf233" -- 8: servers 
 wsCHT = "\xf086" -- 9: Chat 
-myWorkspaces = [wsWEB, wsCMD, wsMSX, wsBOK, wsGAM, wsPIC, wsELE, wsMAT, wsCHT]
+myWorkspaces = [wsWEB, wsCMD, wsMSX, wsBOK, wsFFX, wsMET, wsELE, wsMAT, wsCHT]
 
 --------------------------------------------}}}
 -- Layouts                                  {{{
@@ -377,7 +378,7 @@ layoutMusic = renamed [rreplace "MTall"] $ Mirror $ Tall 2 (3/100) (7/9)
 tabbedLayout = tabbed shrinkText tabbedConf
 
 tabbedConf = def {
-    fontName = "xft:CodeNewRoman:size=9:antialias=true"
+    fontName = "xft:monospace-20"
   , activeColor = myFocusedBorderColor
   , inactiveColor = myNormalBorderColor
   , inactiveBorderColor = myNormalBorderColor
@@ -411,16 +412,7 @@ myManageHook =
     , className =? "castero" --> doShiftAndGo wsMSX
     , className =? "spotify" --> doShiftAndGo wsMSX
     , className =? "Zathura" --> doShiftAndGo wsBOK <+> insertPosition Below Newer
-    , className =? "vlc" --> doShiftAndGo wsPIC
-    , className =? "Vlc" --> doShiftAndGo wsPIC
-    , className =? "MATLAB" --> doShift wsMAT
-    , className =? "com-mathworks-util-PostVMInit" --> doShift wsMAT
-    , className =? "Steam"          --> doShift wsGAM
-    , className =? "zoom"           --> doShift wsCHT
     , className =? "dialog"         --> doCenterFloat
-    , className =? "xviix64.exe"    --> doFloat -- wine
-    , resource  =? "desktop_window" --> doIgnore
-    , resource  =? "kdesktop"       --> doIgnore
     , manageDocks
    ] where
      doShiftAndGo ws = doF (W.greedyView ws) <+> doShift ws

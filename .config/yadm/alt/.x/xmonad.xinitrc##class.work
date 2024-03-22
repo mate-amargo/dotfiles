@@ -5,4 +5,5 @@ dunst -config ~/.config/dunstrc &
 xss-lock -- screenlock &
 xcompmgr &
 xmonad --recompile
+nm-applet &
 exec xmonad

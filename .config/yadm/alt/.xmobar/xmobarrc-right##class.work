@@ -1,9 +1,9 @@
 Config {
-    font = "Source Code Pro 11"
+    font = "SauceCodePro Nerd Font Mono 11"
   , fgColor = "#646464"
   , alpha = 204
   , alignSep = "}{"
-  , position = TopW L 100
+  , position = TopH 20
   , iconRoot = "~/.xmobar/xpm"
   , commands = [
                  Run XPropertyLog "_XMONAD_LOG_1"
@@ -21,11 +21,14 @@ Config {
                                                , "-o", "\xf026"
                                                , "-c", "#268BD2"
                                                ] 10
+               , Run Battery [ "--template", "<fc=#ebcc34><acstatus> <left>%</fc>"
+                                               , "-L", "10", "-H 80", "-p", "3"
+                                               ] 600
                , Run Mpris2 "spotify" ["-t", "<artist> - <title>"] 10
                , Run Kbd [("us(altgr-intl)","us")]
                , Run Locks
                ]
-  , template = "%_XMONAD_LOG_1% }{ <fc=#C0F387> %kbd%</fc> | <fc=#FF4000> %mpris2%</fc> | %default:Master% | %dynnetwork% | %date% %trayerpad%"
+  , template = "%_XMONAD_LOG_1% }{ <fc=#C0F387> %kbd%</fc> | <fc=#FF4000> %mpris2%</fc> | %default:Master% | %battery% | %dynnetwork% | %date% %trayerpad%"
 }
 
 -- vim: syntax=haskell

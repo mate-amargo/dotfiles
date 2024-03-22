@@ -1,9 +1,9 @@
 Config {
-    font = "Source Code Pro 11"
+    font = "SauceCodePro Nerd Font Mono 11"
   , fgColor = "#646464"
   , alpha = 204
   , alignSep = "}{"
-  , position = TopW L 100
+  , position = TopH 20
   , iconRoot = "~/.xmobar/xpm"
   , commands = [
                  Run XPropertyLog "_XMONAD_LOG_0"
@@ -12,6 +12,26 @@ Config {
                , Run DynNetwork [ "--template", "<fc=#2FDC57>\xf6ff <dev> <rx>|<tx> [KB/s]</fc>"
                                 , "--", "--devices", "wlp2s0,enp1s0"
                                 ] 20
+               , Run Battery [ "--template", "<fc=#ebcc34><acstatus> <left>%</fc>"
+                                               , "-L", "10", "-H 80", "-p", "3"
+                                               ] 600
+               , Run Battery [ "--template" , "<fc=gray><leftipat><acstatus><left>%</fc>"
+                             , "--Low"      , "10"        -- units: %
+                             , "--High"     , "80"        -- units: %
+                             , "--low"      , "darkred"
+                             , "--normal"   , "darkorange"
+                             , "--high"     , "green"
+                             , "--" -- battery specific options
+                                    -- AC "on" status
+                                    , "-O", ""
+                                    -- AC "idle" (charged) status
+                                    , "-i", ""
+                                    -- AC "off" (discharging) status
+                                    , "-o", " <timeleft> "
+                             , "--off-icon-pattern" , "<icon=battery/off/%%.xpm/>"
+                             , "--on-icon-pattern" , "<icon=battery/on/%%.xpm/>"
+                             , "--idle-icon-pattern" , "<icon=battery/idle/%%.xpm/>"
+                             ] 600
                , Run Volume "default" "Master" [ "--template", "<fc=#268BD2><status> <volume>%</fc>"
                                                , "--"
                                                -- Mixer On
@@ -23,7 +43,7 @@ Config {
                                                ] 10
                , Run Kbd [("us(altgr-intl)","us")]
                ]
-  , template = "%_XMONAD_LOG_0% }{ <fc=#C0F387> %kbd%</fc> | %default:Master% | %dynnetwork% | %date% %trayerpad%"
+  , template = "%_XMONAD_LOG_0% }{ <fc=#C0F387> %kbd%</fc> | %default:Master% | %battery% | %dynnetwork% | %date% %trayerpad%"
 }
 
 -- vim: syntax=haskell
