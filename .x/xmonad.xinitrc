@@ -1,1 +1,0 @@
-../.config/yadm/alt/.x/xmonad.xinitrc##class.work
