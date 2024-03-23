@@ -9,7 +9,7 @@ Config {
                  Run XPropertyLog "_XMONAD_LOG_1"
                , Run Com "/home/e4/.xmobar/trayer-padding-icon.sh" [] "trayerpad" 20
                , Run Date "<fc=#C8FE2E> %a %d %b %Y  %H:%M:%S</fc>" "date" 10
-               , Run DynNetwork [ "--template", "<fc=#2FDC57>\xf6ff <dev> <rx>|<tx> [KB/s]</fc>"
+               , Run DynNetwork [ "--template", "<fc=#2FDC57>\xf6ff <dev></fc>"
                                 , "--", "--devices", "wlp2s0,enp1s0"
                                 ] 20
                , Run Volume "default" "Master" [ "--template", "<fc=#268BD2><status> <volume>%</fc>"
