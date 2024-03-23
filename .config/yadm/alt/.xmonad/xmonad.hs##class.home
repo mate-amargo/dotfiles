@@ -377,7 +377,7 @@ layoutMusic = renamed [rreplace "MTall"] $ Mirror $ Tall 2 (3/100) (7/9)
 tabbedLayout = tabbed shrinkText tabbedConf
 
 tabbedConf = def {
-    fontName = "xft:CodeNewRoman:size=9:antialias=true"
+    fontName = "xft:MesloLGS NF Regular:pixelsize=11:antialias=true,xft:fontawesome"
   , activeColor = myFocusedBorderColor
   , inactiveColor = myNormalBorderColor
   , inactiveBorderColor = myNormalBorderColor
