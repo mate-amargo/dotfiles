@@ -258,14 +258,12 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 " Move lines up and down
-"execute "set <A-j>=\ej"
-"execute "set <A-k>=\ek"
-"nnoremap <A-j> :m .+1<CR>==
-"nnoremap <A-k> :m .-2<CR>==
-"inoremap <A-j> <Esc>:m .+1<CR>==gi
-"inoremap <A-k> <Esc>:m .-2<CR>==gi
-"vnoremap <A-j> :m '>+1<CR>gv=gv
-"vnoremap <A-k> :m '<-2<CR>gv=gv
+nnoremap <C-U> :m .+1<CR>==
+nnoremap <C-I> :m .-2<CR>==
+inoremap <C-U> <Esc>:m .+1<CR>==gi
+inoremap <C-I> <Esc>:m .-2<CR>==gi
+vnoremap <C-U> :m '>+1<CR>gv=gv
+vnoremap <C-I> :m '<-2<CR>gv=gv
 
 " FuzzyFind keybindings
 map <leader><C-F> :Files<CR>
