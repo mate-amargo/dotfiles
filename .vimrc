@@ -268,5 +268,7 @@ vnoremap <C-I> :m '<-2<CR>gv=gv
 
 " FuzzyFind keybindings
 map <leader><C-F> :Files<CR>
+map <leader><C-G> :GFiles<CR>
+map <leader><C-S> :GFiles?<CR>
 map <leader><C-B> :Buffers<CR>
 map <leader><C-R> :Rg <C-R><C-W><CR>
