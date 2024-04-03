@@ -130,6 +130,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'vim/killersheep'
 "  Plug 'wakatime/vim-wakatime'
   Plug 'godlygeek/tabular'
+  Plug 'mbbill/undotree'
 
 " terryma/vim-multiple-cursors " True Sublime Text style multiple selections for Vim
 
@@ -230,7 +231,7 @@ map <F4> :set list! <CR>
 map <F5> :set expandtab! <CR> :set expandtab? <CR>
 map <leader><F5> <C-W>_<C-W><Bar>
 map <F6> :set spell! <CR>
-"map <F7> :NERDTreeToggle<CR>
+map <F7> :UndotreeToggle<CR>
 map <leader><F8> :IndentGuidesToggle<CR>
 "map <F8> :TagbarToggle<CR>
 map <F9> :set cursorcolumn! <CR>
