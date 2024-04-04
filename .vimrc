@@ -253,18 +253,22 @@ imap [1;5A <esc>:bp<CR>
 imap [1;5B <esc>:bn<CR>
 
 " Split navigations
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+map <Esc>j <A-j>
+map <Esc>k <A-k>
+map <Esc>l <A-l>
+map <Esc>h <A-h>
+nnoremap <A-j> <C-W><C-J>
+nnoremap <A-k> <C-W><C-K>
+nnoremap <A-l> <C-W><C-L>
+nnoremap <A-h> <C-W><C-H>
 
 " Move lines up and down
-nnoremap <C-U> :m .+1<CR>==
-nnoremap <C-I> :m .-2<CR>==
-inoremap <C-U> <Esc>:m .+1<CR>==gi
-inoremap <C-I> <Esc>:m .-2<CR>==gi
-vnoremap <C-U> :m '>+1<CR>gv=gv
-vnoremap <C-I> :m '<-2<CR>gv=gv
+nnoremap <C-J> :m .+1<CR>==
+nnoremap <C-K> :m .-2<CR>==
+inoremap <C-J> <Esc>:m .+1<CR>==gi
+inoremap <C-K> <Esc>:m .-2<CR>==gi
+vnoremap <C-J> :m '>+1<CR>gv=gv
+vnoremap <C-K> :m '<-2<CR>gv=gv
 
 " FuzzyFind keybindings
 map <leader><C-F> :Files<CR>
