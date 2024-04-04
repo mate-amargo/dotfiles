@@ -50,6 +50,7 @@ bindkey "^H" backward-delete-char
 bindkey "^?" backward-delete-char
 bindkey "^R" history-incremental-search-backward
 bindkey "\e." insert-last-word
+bindkey "^P" push-input
 
 # Use modern completion system
 autoload -Uz compinit
