@@ -41,6 +41,9 @@ setopt autopushd # cd and autocd behaves like pushd
 DIRSTACKSIZE=10 # max dirs in the stack
 cdpath=(. ~/repos) # search this dirs for autocd
 
+# Interactive comments
+setopt interactivecomments
+
 # vim keys, just in case EDITOR or VISUAL aren't set to vim
 bindkey -v
 bindkey "^H" backward-delete-char
