@@ -48,7 +48,7 @@ bindkey "\e." insert-last-word
 bindkey "^o" accept-line-and-down-history
 bindkey "^xp" history-beginning-search-backward
 bindkey "^xn" history-beginning-search-forward
-bindkey "\eq" push-line-or-edit
+bindkey "^P" push-input
 
 # Use modern completion system
 autoload -Uz compinit
