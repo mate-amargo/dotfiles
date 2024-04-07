@@ -287,7 +287,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = (subtitle "Custom Keys":) $
     , ((modm .|. shiftMask,   xK_j     ), addName "Move to the next window" $ focusDown)
     , ((modm .|. shiftMask,   xK_k     ),  addName "Move to the previous window" $ focusUp  )
     , ((modm .|. shiftMask,   xK_m     ), addName "Move focus to the master window" $ focusMaster  )
-    , ((modm .|. shiftMask, xK_Return), addName "Swap the focused window and the master window" $windows W.swapMaster)
+    , ((modm .|. shiftMask, xK_Return), addName "Swap the focused window and the master window" $ windows W.swapMaster)
     , ((modm .|. controlMask, xK_j     ), addName "Swap the focused window with the next window" $ windows W.swapDown  )
     , ((modm .|. controlMask, xK_k     ), addName "Swap the focused window with the previous window" $ windows W.swapUp    )
     , ((modm, xK_less  ), addName "Shrink the master area" $ sendMessage Shrink)
