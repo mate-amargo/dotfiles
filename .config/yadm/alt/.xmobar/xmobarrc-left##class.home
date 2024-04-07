@@ -3,7 +3,7 @@ Config {
   , fgColor = "#646464"
   , alpha = 204
   , alignSep = "}{"
-  , position = TopW L 100
+  , position = Top
   , iconRoot = "/home/e4/.xmobar/xpm"
   , commands = [
                  Run XPropertyLog "_XMONAD_LOG_0"
