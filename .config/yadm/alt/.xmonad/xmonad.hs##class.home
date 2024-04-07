@@ -38,7 +38,7 @@ import XMonad.Util.NamedScratchpad -- As the title says
 import XMonad.Util.NamedActions -- for Descriptive keys
 --import XMonad.Util.EZConfig -- for Descriptive keys
 import XMonad.Util.Run -- for runInTerm
-import XMonad.Util.Ungrab -- for scrot -s
+import XMonad.Operations -- unGrab for scrot -s
 import XMonad.Util.SpawnOnce -- Spawns a commnad only once, nice for statusbar
 import XMonad.Util.Font
 
