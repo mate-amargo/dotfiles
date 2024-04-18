@@ -185,11 +185,14 @@ myFocusedBorderColor = "#FF4000"
 
 promptTheme = def
     {
-      font = "xft:Code Sauce Pro:pixelsize=10:antialias=true:hinting=true"
-    , bgColor               = "#646464"
+      font = "xft:FiraCode NF:pixelsize=14:antialias=true:hinting=true"
+    , bgColor               = "#BBBBBB"
     , fgColor               = "#FF4000"
+    , fgHLight              = "#222222"
+    , bgHLight              = "#FF942E"
     , promptBorderWidth     = 0
     , position              = Top
+    , height                = 20
     }
 
 --------------------------------------------}}}
@@ -378,12 +381,12 @@ layoutMusic = renamed [rreplace "MTall"] $ Mirror $ Tall 2 (3/100) (7/9)
 tabbedLayout = tabbed shrinkText tabbedConf
 
 tabbedConf = def {
-    fontName = "xft:monospace-20"
+    fontName = "xft:FiraCode NF:pixelsize=14:antialias=true:hinting=true"
   , activeColor = myFocusedBorderColor
   , inactiveColor = myNormalBorderColor
   , inactiveBorderColor = myNormalBorderColor
   , activeBorderColor = myFocusedBorderColor
-  , decoHeight = 14
+  , decoHeight = 16
 }
 
 myNav2DConf = def
