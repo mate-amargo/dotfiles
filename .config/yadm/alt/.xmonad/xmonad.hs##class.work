@@ -369,7 +369,7 @@ myWorkspaces = [wsWEB, wsCMD, wsMSX, wsBOK, wsFFX, wsMET, wsELE, wsMAT, wsCHT]
 -----------------------------------------------
 -- minimize adds the word minimize to the Layout name, regardless of what named says, so cut it with renamed [...]
 myLayout = avoidStruts $ renamed [CutWordsLeft 3] $ spacingRaw True (Border 5 5 5 5) False (Border 8 8 8 8) False $ baseLayout
-baseLayout = minimize $ maximize $ boringWindows $ smartBorders $ mkToggle (NOBORDERS ?? NBFULL ?? EOT) $ onWorkspace wsCMD layoutTerminals  $ onWorkspace wsMSX layoutMusic $ onWorkspace wsBOK layoutBooks layoutDefault
+baseLayout = minimize $ maximize $ boringWindows $ smartBorders $ mkToggle (NOBORDERS ?? NBFULL ?? EOT) $ onWorkspace wsCMD layoutTerminals  $ onWorkspace wsMSX layoutMusic $ onWorkspace wsBOK layoutBooks $ onWorkspace wsMAT layoutBooks layoutDefault
 rreplace = XMonad.Layout.Renamed.Replace
 layoutDefault = Full ||| renamed [rreplace "MTall"] (Mirror layoutTiled) ||| layoutTiled ||| Grid
 layoutTerminals = renamed [rreplace "MTall"] (Mirror layoutTiled) ||| layoutTiled ||| layoutCombined ||| Grid ||| Full
