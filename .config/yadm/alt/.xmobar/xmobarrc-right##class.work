@@ -8,7 +8,10 @@ Config {
   , commands = [
                  Run XPropertyLog "_XMONAD_LOG_1"
                , Run Com "~/.xmobar/trayer-padding-icon.sh" [] "trayerpad" 20
-               , Run Date "<fc=#C8FE2E> %a %d %b %Y  %H:%M:%S</fc>" "date" 10
+               , Run Date "<fc=#C8FE2E>📆 %a %d %b %Y 🕙</fc>" "date" 10
+               , Run DateZone "<fc=#C8FE2E>🇪🇸 %H:%M</fc>" "" "Europe/Madrid" "spaTime" 10
+               , Run DateZone "<fc=#C8FE2E>🤖 %H:%M</fc>" "" "UTC" "utcTime" 10
+               , Run DateZone "<fc=#C8FE2E>🇦🇷 %H:%M:%S</fc>" "" "America/Argentina/Buenos_Aires" "argTime" 10
                , Run DynNetwork [ "--template", "<fc=#2FDC57>\xf6ff <dev> <rx>|<tx> [KB/s]</fc>"
                                 , "--", "--devices", "wlp2s0,enp1s0"
                                 ] 20
@@ -21,14 +24,27 @@ Config {
                                                , "-o", "\xf026"
                                                , "-c", "#268BD2"
                                                ] 10
-               , Run Battery [ "--template", "<fc=#ebcc34><acstatus> <left>%</fc>"
-                                               , "-L", "10", "-H 80", "-p", "3"
-                                               ] 600
+               , Run Battery [ "--template" , "<fc=gray><leftipat> <acstatus><left>%</fc>"
+                             , "--Low"      , "10"        -- units: %
+                             , "--High"     , "80"        -- units: %
+                             , "--low"      , "darkred"
+                             , "--normal"   , "darkorange"
+                             , "--high"     , "green"
+                             , "--" -- battery specific options
+                                    -- AC "on" status
+                                    , "-O", ""
+                                    -- AC "idle" (charged) status
+                                    , "-i", ""
+                                    -- AC "off" (discharging) status
+                                    , "-o", " <timeleft> "
+                             , "--off-icon-pattern" , "<icon=battery/off/%%.xpm/>"
+                             , "--on-icon-pattern" , "<icon=battery/on/%%.xpm/>"
+                             , "--idle-icon-pattern" , "<icon=battery/idle/%%.xpm/>"
+                             ] 600
                , Run Mpris2 "spotify" ["-t", "<artist> - <title>"] 10
-               , Run Kbd [("us(altgr-intl)","us")]
+               , Run Kbd [("us(altgr-intl)","us"), ("ru", "ru")]
                , Run Locks
                ]
-  , template = "%_XMONAD_LOG_1% }{ <fc=#C0F387> %kbd%</fc> | <fc=#FF4000> %mpris2%</fc> | %default:Master% | %battery% | %dynnetwork% | %date% %trayerpad%"
+  , template = "%_XMONAD_LOG_1% }{ <fc=#C0F387> %kbd%</fc> | <fc=#FF4000> %mpris2%</fc> | %default:Master% | %battery% | %dynnetwork% | %date% %spaTime% %utcTime% %argTime% %trayerpad%"
 }
-
 -- vim: syntax=haskell
