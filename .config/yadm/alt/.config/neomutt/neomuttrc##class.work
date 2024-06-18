@@ -78,8 +78,10 @@ bind pager G bottom
 bind pager k previous-line
 bind pager j next-line
 bind pager h exit
+bind pager F forward-message
 bind pager V view-raw-message
 bind pager \Ck extract-keys
+bind index,pager \Cr group-chat-reply
 
 bind index,pager K sidebar-prev
 bind index,pager J sidebar-next
