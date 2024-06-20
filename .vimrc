@@ -122,7 +122,7 @@ call plug#begin('~/.vim/plugged')
 "  Plug 'junegunn/goyo.vim'                " Zen Mode
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'   " Fuzzy Find
-"  Plug 'tpope/vim-fugitive' " Git vim pluggin
+  Plug 'tpope/vim-fugitive' " Git vim pluggin
 "  Plug 'dhruvasagar/vim-table-mode' " Easy tables
 "  Plug 'sheerun/vim-polyglot'
   Plug 'rodjek/vim-puppet'
@@ -139,6 +139,7 @@ call plug#end()
 " Airline plugin config
 set t_Co=256
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#branch#displayed_head_limit = 10
 
 " Indent-Guides config
 let g:indent_guides_enable_on_vim_startup = 0 " Autostart
@@ -276,3 +277,8 @@ map <leader><C-G> :GFiles<CR>
 map <leader><C-S> :GFiles?<CR>
 map <leader><C-B> :Buffers<CR>
 map <leader><C-R> :Rg <C-R><C-W><CR>
+
+" Git keybindings
+nnoremap <leader>gs :Git<CR>
+nnoremap <leader>gd :Git diff<CR>
+nnoremap <leader>gb :Git blame<CR>
