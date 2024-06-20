@@ -237,10 +237,10 @@ map <leader><F8> :IndentGuidesToggle<CR>
 map <F9> :set cursorcolumn! <CR>
 map <silent> <leader><F9> :execute "set colorcolumn=" . (&colorcolumn == "" ? "80" : "")<CR>
 " Left/Right = Previous/Next tabpage
-map OD :tabp<CR>
-map OC :tabn<CR>
-imap OD <esc>:tabp<CR>
-imap OC <esc>:tabn<CR>
+map <C-H> :tabp<CR>
+map <C-L> :tabn<CR>
+imap <C-H> <esc>:tabp<CR>
+imap <C-L> <esc>:tabn<CR>
 " Up/Down = First/Last tabpage
 map OA :tabfirst<CR>
 map OB :tablast<CR>
