@@ -4,7 +4,7 @@
 i3status | (read -r line; echo "$line"; read -r line; echo "$line";  read -r line; echo "$line"; while true
 do
 	read -r line
-	echo ",[{\"markup\":\"pango\",\"full_text\":\"<span color='#c0f387'> $(layout)</span>\"}"
+	echo ",[{\"markup\":\"pango\",\"full_text\":\"<span color='#c0f387'>  $(layout)</span>\"}"
 	echo ",{\"markup\":\"pango\",\"full_text\":\"<span color='#F98400'> $(playing)</span>\"}"
 	echo ",${line#,\[}"
 done)
