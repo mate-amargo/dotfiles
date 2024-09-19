@@ -10,7 +10,7 @@ order += "read_file emails"
 order += "volume master"
 order += "ethernet _first_"
 order += "wireless _first_"
-# order += "battery all"
+order += "battery all"
 order += "tztime date"
 order += "tztime arg"
 
@@ -33,7 +33,7 @@ battery all {
   status_chr = "⚡ CHR"
   status_bat = "🔋 BAT"
   status_unk = "? UNK"
-  status_full = "☻ FULL"
+  status_full = "😋 FULL"
   path = "/sys/class/power_supply/BAT%d/uevent"
   low_threshold = 10
   threshold_type = "percentage"
