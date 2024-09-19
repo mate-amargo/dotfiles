@@ -248,7 +248,7 @@ assign [class="Zathura"] 4
 ### ----------------------- ###
 
 # Start a notification manager
-#exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
+exec --no-startup-id dunst -conf ~/.config/dunst/dunstrc
 
 ### ----------------------- ### }}}
 
