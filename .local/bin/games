@@ -2,6 +2,7 @@
 
 GAMES="
 Steam\n\
+Dota\n\
 Baldurs Gate: Enhanced Edition\n\
 Baldurs Gate 2: Enhanced Edition\n\
 Icewind Dale: Enhanced Edition\n\
@@ -32,6 +33,8 @@ CHOICE="$(echo -e $GAMES | dmenu -l 10)"
 
 case $CHOICE in
 	"Steam") exec steam
+	;;
+	"Dota") exec $TERMINAL -e dota
 	;;
 	"Icewind Dale: Enhanced Edition") exec IcewindDale
 	;;
