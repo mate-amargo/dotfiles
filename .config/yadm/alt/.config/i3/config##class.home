@@ -189,7 +189,7 @@ bindsym XF86AudioPlay exec mpc toggle
 bindsym XF86AudioPrev exec mpc prev
 bindsym XF86AudioNext exec mpc next
 bindsym XF86AudioStop exec mpc stop
-bindsym $mod+x exec ponymix toggle
+bindsym XF86AudioMute exec ponymix toggle
 bindsym XF86AudioRaiseVolume exec amixer -c 0 sset Master 5%+
 bindsym XF86AudioLowerVolume exec amixer -c 0 sset Master 5%-
 bindsym XF86MonBrightnessUp exec backlight +50
