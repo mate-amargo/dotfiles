@@ -4,6 +4,7 @@ general {
   markup = "pango"
 }
 
+order += "read_file performance"
 order += "read_file pkgs"
 order += "read_file emails"
 order += "volume master"
@@ -65,4 +66,9 @@ read_file emails {
 read_file pkgs {
   format = "📦 <span color='#8b00ea'>%content</span>"
   path = "/home/e4/.local/share/pkgs-updates"
+}
+
+read_file performance {
+  format = "<span color='#25d97c'>  %content</span>"
+  path = "/sys/firmware/acpi/platform_profile"
 }
