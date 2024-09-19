@@ -1,8 +1,9 @@
 #!/bin/sh
 
-test connected = "$(xrandr | awk '/HDMI1/ {print $2}')"\
- && STATUS="--auto --primary --left-of LVDS1" || STATUS="--off"
+test connected = "$(xrandr | awk '/HDMI-1/ {print $2}')"\
+ && STATUS="--auto --primary --left-of eDP-1" || STATUS="--off"
 
 test off = "$1" && STATUS="--off"
-xrandr --output LVDS1 --auto --output HDMI1 $STATUS
-sleep 2 && ~/.fehbg & # Fix wallpaper
+xrandr --output eDP-1 --auto --output HDMI-1 $STATUS
+xinput map-to-output $(xinput list --id-only "Wacom HID 535A Finger") eDP-1
+wallchange
