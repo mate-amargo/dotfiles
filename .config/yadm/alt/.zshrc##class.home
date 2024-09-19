@@ -93,5 +93,8 @@ for f in ~/.zfunctions/*; do
   autoload -Uz $f
 done
 
+# Load fzf functions (fzf --zsh > ~/.zfzf)
+source ~/.zfzf
+
 zle -N insert-sudo insert_sudo
 bindkey "^[s" insert-sudo
