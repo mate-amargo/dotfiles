@@ -3,7 +3,7 @@ dbus-update-activation-environment --systemd DISPLAY
 xrdb -merge ~/.Xresources
 dunst -config ~/.config/dunstrc &
 xss-lock -- screenlock &
-xcompmgr &
+compton &
 xmonad --recompile
 nm-applet &
 exec xmonad
