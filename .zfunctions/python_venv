@@ -1,0 +1,4 @@
+VENVS=~/venvs
+VENV=${VENVS}/${PWD:t}
+deactivate > /dev/null 2>&1 || true # deactivate current venv when switching dirs
+[[ -d $VENV ]] && source $VENV/bin/activate > /dev/null 2>&1

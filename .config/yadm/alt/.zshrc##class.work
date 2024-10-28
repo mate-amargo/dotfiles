@@ -96,6 +96,10 @@ for f in ~/.zfunctions/*; do
   autoload -Uz $f
 done
 
+# Activate python virtualenvs on entry
+autoload -U add-zsh-hook
+add-zsh-hook chpwd python_venv
+
 zle -N insert-sudo insert_sudo
 bindkey "^[s" insert-sudo
 
