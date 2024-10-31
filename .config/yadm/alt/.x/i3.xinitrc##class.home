@@ -2,5 +2,5 @@
 dbus-update-activation-environment --systemd DISPLAY
 xrdb -merge ~/.Xresources
 xss-lock -- ~/.local/bin/screenlock &
-compton &
+picom &
 exec i3
