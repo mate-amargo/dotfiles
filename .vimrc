@@ -239,7 +239,7 @@ map <F7> :UndotreeToggle<CR>
 map <leader><F8> :IndentGuidesToggle<CR>
 "map <F8> :TagbarToggle<CR>
 map <F9> :set cursorcolumn! <CR>
-map <silent> <leader><F9> :execute "set colorcolumn=" . (&colorcolumn == "" ? "80" : "")<CR>
+map <silent> <leader><F9> :execute "set colorcolumn=" . (&colorcolumn == "" ? "120" : "")<CR>
 " Left/Right = Previous/Next tabpage
 map <C-H> :tabp<CR>
 map <C-L> :tabn<CR>
