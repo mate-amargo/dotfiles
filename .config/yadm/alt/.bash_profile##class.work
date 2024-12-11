@@ -18,3 +18,7 @@ export PATH=${HOME}/.local/bin:${PATH}
 
 # ssh-agent
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
+# epc
+export dformat="%d/%m/%Y %H:%M"
+source ~/.epc/epcrc
