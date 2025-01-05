@@ -203,11 +203,11 @@ let g:vimtex_compiler_latexmk = {
   \ ],
   \}
 
+" C settings
+autocmd FileType c setlocal ts=4 sts=4 sw=4 noexpandtab fileformat=unix
+"
 " Haskell settings
 autocmd FileType haskell setlocal ts=2 sts=2 sw=2 expandtab
-
-" C settings
-autocmd FileType c setlocal ts=4 sts=4 sw=4 expandtab fileformat=unix
 
 " Python settings
 autocmd FileType python map <buffer> <S-F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
