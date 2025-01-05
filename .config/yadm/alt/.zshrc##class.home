@@ -103,3 +103,5 @@ source ~/.zfzf
 
 zle -N insert-sudo insert_sudo
 bindkey "^[s" insert-sudo
+
+eval "$(zoxide init zsh)"
