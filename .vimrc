@@ -205,7 +205,8 @@ let g:vimtex_compiler_latexmk = {
 
 " C settings
 autocmd FileType c setlocal ts=4 sts=4 sw=4 noexpandtab fileformat=unix
-"
+let g:airline#extensions#whitespace#mixed_indent_algo = 2
+
 " Haskell settings
 autocmd FileType haskell setlocal ts=2 sts=2 sw=2 expandtab
 
@@ -239,7 +240,7 @@ map <F7> :UndotreeToggle<CR>
 map <leader><F8> :IndentGuidesToggle<CR>
 "map <F8> :TagbarToggle<CR>
 map <F9> :set cursorcolumn! <CR>
-map <silent> <leader><F9> :execute "set colorcolumn=" . (&colorcolumn == "" ? "120" : "")<CR>
+map <silent> <leader><F9> :execute "set colorcolumn=" . (&colorcolumn == "" ? "80" : "")<CR>
 " Left/Right = Previous/Next tabpage
 map <C-H> :tabp<CR>
 map <C-L> :tabn<CR>
