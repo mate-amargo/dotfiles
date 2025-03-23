@@ -105,3 +105,6 @@ bindkey "^[s" insert-sudo
 
 # Setup fzf
 source <(fzf --zsh)
+
+# Dark theme
+export GTK_THEME=Adwaita-dark
