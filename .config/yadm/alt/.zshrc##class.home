@@ -104,4 +104,8 @@ source ~/.zfzf
 zle -N insert-sudo insert_sudo
 bindkey "^[s" insert-sudo
 
+# Setup zoxide
 eval "$(zoxide init zsh)"
+
+# Dark theme
+export GTK_THEME=Adwaita-dark
