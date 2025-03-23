@@ -70,7 +70,7 @@ case $CHOICE in
 	;;
 	"Dwarf Fortress") exec dwarffortress
 	;;
-	"Re-Volt") exec revolt
+	"Re-Volt") exec rvgl
 	;;
 	"Track Editor") exec trackeditor
 	;;
