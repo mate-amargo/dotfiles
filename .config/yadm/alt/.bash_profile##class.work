@@ -22,3 +22,9 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 # epc
 export dformat="%d/%m/%Y %H:%M"
 source ~/.epc/epcrc
+. "$HOME/.cargo/env"
+
+# bash completion
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    . /etc/bash_completion
+fi
