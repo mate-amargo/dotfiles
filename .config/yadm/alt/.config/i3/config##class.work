@@ -88,6 +88,9 @@ bindsym $mod+a focus parent
 # focus the child container
 bindcode $mod+d focus child
 
+# make window sticky (only works on floating windows)
+bindsym $mod+Shift+s sticky toggle
+
 # switch to workspace
 bindcode $mod+10 workspace 1
 bindcode $mod+11 workspace 2
