@@ -26,7 +26,7 @@ tztime ru {
   separator = false
   separator_block_width = 2
   format = "<span color='#c8fe2e'> 🇷🇺 %H:%M</span>"
-  timezone = Europe/Moscow
+  timezone = Asia/Omsk
 }
 
 tztime arg {
