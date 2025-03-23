@@ -76,7 +76,7 @@ wireless _first_ {
 }
 
 read_file VPN {
-  path = "/sys/class/net/vpn0/operstate"
+  path = "/sys/class/net/zcctun0/operstate"
   format = "<span color='#12c7c1'>%title: %content</span>"
   format_bad = "%title: down"
 }
