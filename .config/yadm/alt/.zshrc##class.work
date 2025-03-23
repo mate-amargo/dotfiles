@@ -40,7 +40,7 @@ setopt autocd # cd by tipying dirname, very useful with ..
 setopt pushdignoredups # don't save dup dirs in the stack
 setopt autopushd # cd and autocd behaves like pushd
 DIRSTACKSIZE=10 # max dirs in the stack
-cdpath=(. ~/repos) # search this dirs for autocd
+cdpath=(. ~/repos ~/repos/worktrees) # search this dirs for autocd
 
 # Interactive comments
 setopt interactivecomments
