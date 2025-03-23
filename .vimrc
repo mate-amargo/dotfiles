@@ -96,9 +96,6 @@ set spelllang=es,en_us
 " Netrw settings
 let g:netrw_banner=0        " disable banner, bring back up with I
 let g:netrw_liststyle=3     " tree view
-let g:netrw_list_hide=netrw_gitignore#Hide()
-let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'  " Hide filenames starting with a dot
-                                                " gh toggles hidden filenames
 let g:netrw_winsize = 0 " set default window size to be always equal
 let g:netrw_preview = 1 " open splits to the right
 
