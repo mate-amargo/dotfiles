@@ -9,6 +9,7 @@ Icewind Dale: Enhanced Edition\n\
 World of Goo\n\
 Machinarium\n\
 Braid\n\
+Color Lines\n\
 Supaplex\n\
 New Supaplex\n\
 Alley Cat\n\
@@ -59,6 +60,8 @@ case $CHOICE in
 	"mari0") exec mari0
 	;;
 	"Alley Cat") exec /usr/bin/dosbox -conf ~/.dosbox/alleycat.conf
+	;;
+	"Color Lines") exec /usr/bin/dosbox -conf ~/.dosbox/clines.conf
 	;;
 	"Alter Ego") exec /usr/bin/dosbox -conf ~/.dosbox/alterego.conf
 	;;
