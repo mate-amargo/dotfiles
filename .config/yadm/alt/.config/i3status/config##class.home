@@ -19,7 +19,7 @@ tztime date {
   separator = false
   separator_block_width = 2
   format = "<span color='#c8fe2e'>📆 %a %d %b %Y 🕙</span>"
-  timezone = Europe/Moscow
+  timezone = America/Argentina/Buenos_Aires
 }
 
 tztime ru {
