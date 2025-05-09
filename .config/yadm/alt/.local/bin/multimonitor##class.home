@@ -1,9 +1,5 @@
 #!/bin/sh
 
-test connected = "$(xrandr | awk '/HDMI-1/ {print $2}')"\
- && STATUS="--auto --primary --left-of eDP-1" || STATUS="--off"
-
-test off = "$1" && STATUS="--off"
-xrandr --output eDP-1 --auto --output HDMI-1 $STATUS
+autorandr horizontal
 xinput map-to-output $(xinput list --id-only "Wacom HID 535A Finger") eDP-1
-wallchange
+xinput map-to-output $(xinput list --id-only "Wacom HID 535A Pen Pen (0x81257869)") eDP-1
