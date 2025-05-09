@@ -174,9 +174,9 @@ bindsym $mod+F8 exec ~/videos/youtube/record.fish
 bindsym $mod+F9 exec ~/videos/youtube/play-pause.fish
 bindsym $mod+F10 exec ~/videos/youtube/stop.fish
 bindsym $mod+o exec $pdfreader
-bindsym Print exec --no-startup-id "scrot -u ~/images/screenshots/'%Y-%m-%d-%s_$wx$h.png' && notify-send -u low 'Screenshot of the focused window saved'"
-bindsym --release Shift+Print exec --no-startup-id "scrot -s '%Y-%m-%d-%s_$wx$h.png' -e 'mv $f ~/images/screenshots' && notify-send -u low 'Screenshot of the selected area saved'"
-bindsym --release $mod+Print exec --no-startup-id "scrot ~/images/screenshots/'%Y-%m-%d-%s_$wx$h.png' && notify-send -u low 'Screenshot of the full screen saved'"
+bindsym Print exec --no-startup-id "flameshot screen -n 1 -p ~/images/screenshots/"
+bindsym --release Shift+Print exec --no-startup-id "flameshot gui"
+bindsym $mod+Print exec --no-startup-id "flameshot full -p ~/images/screenshots/"
 bindsym $mod+g exec games
 bindsym $mod+p exec "passmenu --type"
 
