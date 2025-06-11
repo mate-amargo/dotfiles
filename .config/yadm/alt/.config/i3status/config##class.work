@@ -4,6 +4,7 @@ general {
   markup = "pango"
 }
 
+order += "read_file performance"
 order += "volume master"
 order += "read_file VPN"
 order += "ethernet _first_"
@@ -89,4 +90,9 @@ ethernet _first_ {
 volume master {
   format = "🔊 <span color='#268bd2'>%volume</span>"
   format_muted = "🔇 <span color='#a1330b'>%volume</span>"
+}
+
+read_file performance {
+  format = "<span color='#25d97c'>  %content</span>"
+  path = "/sys/firmware/acpi/platform_profile"
 }
