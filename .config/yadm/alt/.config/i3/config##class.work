@@ -119,10 +119,10 @@ bindcode $mod+Shift+19 move workspace 10
 
 # Move the current workspace/container to the next output
 # (effectively toggles when you only have two outputs)
-bindsym $mod+Shift+u move workspace to output left
-bindsym $mod+u move container to output left
-#bindsym $mod+Shift+u move workspace to output down
-#bindsym $mod+u move container to output down
+#bindsym $mod+Shift+u move workspace to output left
+#bindsym $mod+u move container to output left
+bindsym $mod+Shift+u move workspace to output down
+bindsym $mod+u move container to output down
 
 # reload the configuration file
 bindsym $mod+Shift+C reload

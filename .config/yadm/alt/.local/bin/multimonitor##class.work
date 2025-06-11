@@ -1,2 +1,2 @@
 #!/bin/sh
-autorandr horizontal
+autorandr horizontal-reverse
