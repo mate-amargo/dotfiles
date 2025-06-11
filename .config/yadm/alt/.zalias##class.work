@@ -5,3 +5,4 @@ alias t="exa -l --icons --tree --level=2"
 alias bye='sudo apt update && sudo apt upgrade -y && echo "$(date "+%Y-%m-%d %T") => Up $(uptime | sed "s/.* up *\(.*\),.*user.*/\1/")" >> ~/ups && poweroff'
 alias byebye='echo "$(date "+%Y-%m-%d %T") => Up $(uptime | sed "s/.* up *\(.*\),.*user.*/\1/")" >> ~/ups && poweroff'
 alias s='kitty +kitten ssh'
+alias fuck='git add -u && git commit --amend --no-edit && git push --force-with-lease'
