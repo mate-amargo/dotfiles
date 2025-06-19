@@ -174,6 +174,7 @@ bindsym $mod+i exec $browser
 bindsym $mod+m exec $terminal --class "NCMPCPP" -e ncmpcpp
 bindsym $mod+Control+Shift+L exec $terminal --class "ASCIIQuarium" --name "ASCIIQuarium" -e asciiquarium
 bindsym $mod+o exec $pdfreader
+bindsym $mod+g exec bukumenu
 bindsym Print exec --no-startup-id "flameshot screen -n 1 -p ~/images/screenshots/"
 bindsym --release Shift+Print exec --no-startup-id "flameshot gui"
 bindsym $mod+Print exec --no-startup-id "flameshot full -p ~/images/screenshots/"
