@@ -177,7 +177,8 @@ bindsym $mod+o exec $pdfreader
 bindsym Print exec --no-startup-id "flameshot screen -n 1 -p ~/images/screenshots/"
 bindsym --release Shift+Print exec --no-startup-id "flameshot gui"
 bindsym $mod+Print exec --no-startup-id "flameshot full -p ~/images/screenshots/"
-bindsym $mod+g exec games
+bindsym $mod+g exec bukumenu
+bindsym $mod+Shift+G exec games
 bindsym $mod+p exec "passmenu --type"
 
 # Media Stuff
