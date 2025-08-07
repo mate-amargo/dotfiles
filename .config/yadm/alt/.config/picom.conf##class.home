@@ -8,7 +8,6 @@ backend = "xrender";
 opacity-rule = [
   "100:class_g = 'Alacritty' && focused",
   "100:class_g = 'ghostty' && focused",
-  "0:class_g = 'Alacritty' && !focused",
   "100:class_g = 'kitty' && focused",
   "0:_NET_WM_STATE@[0]:32a = '_NET_WM_STATE_HIDDEN'",
   "0:_NET_WM_STATE@[1]:32a = '_NET_WM_STATE_HIDDEN'",

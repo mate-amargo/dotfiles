@@ -109,3 +109,11 @@ eval "$(zoxide init zsh)"
 
 # Dark theme
 export GTK_THEME=Adwaita-dark
+
+# Set window title in alacritty
+if [[ "${TERM}" == "alacritty" ]]; then
+  precmd_functions+=(set_alacritty_title)
+  function set_alacritty_title() {
+    printf "\033]0;%s\007" "${PWD/#$HOME/~}"
+  }
+fi
