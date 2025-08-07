@@ -120,7 +120,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'   " Fuzzy Find
   Plug 'tpope/vim-fugitive' " Git vim pluggin
-"  Plug 'dhruvasagar/vim-table-mode' " Easy tables
+  Plug 'dhruvasagar/vim-table-mode' " Easy tables
 "  Plug 'sheerun/vim-polyglot'
   Plug 'rodjek/vim-puppet'
 "  Plug 'preservim/tagbar'
