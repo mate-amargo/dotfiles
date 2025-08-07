@@ -48,7 +48,7 @@ bindsym $mod+Shift+Return exec $terminalopaque
 bindsym $mod+Shift+Q kill
 
 # start dmenu
-bindsym $mod+r exec --no-startup-id dmenu_run
+bindsym --release $mod+r exec --no-startup-id rofi -show combi -modes combi -combi-modes window#drun#run
 
 # change focus
 bindsym $mod+h focus left
@@ -163,7 +163,7 @@ bindsym $mod+minus scratchpad show
 
 # Personal keybindings from here
 
-bindsym $mod+i exec $browser
+bindsym --release $mod+i exec rofi -show emoji
 bindsym $mod+t exec transmission-gtk
 #bindsym $mod+m exec $terminal -c "MOC Player" -n "MOC Player" -e mocp
 bindsym $mod+m exec $terminal --class "NCMPCPP" -e ncmpcpp

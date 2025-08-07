@@ -1,3 +1,4 @@
 #!/bin/sh
 
-buku -p -f 3 | tr '\t' ' ' | dmenu -l 20 | cut -d' ' -f1 | xargs --no-run-if-empty buku -o
+#buku -p -f 3 | tr '\t' ' ' | dmenu -l 20 | cut -d' ' -f1 | xargs --no-run-if-empty buku -o
+buku -p -f 3 | tr '\t' ' ' | rofi -dmenu -i | cut -d' ' -f1 | xargs --no-run-if-empty buku -o
