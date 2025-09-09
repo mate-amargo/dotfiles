@@ -253,6 +253,7 @@ map [1;5A :bp<CR>
 map [1;5B :bn<CR>
 imap [1;5A <esc>:bp<CR>
 imap [1;5B <esc>:bn<CR>
+nnoremap <leader>d :put =strftime('# %Y-%m-%d %A %d of %B')<CR>
 
 " Split navigations
 map <Esc>j <A-j>
