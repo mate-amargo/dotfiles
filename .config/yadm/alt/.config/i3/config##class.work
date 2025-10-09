@@ -9,16 +9,16 @@
 
 set $mod Mod4
 set $browser google-chrome-stable
-set $terminal alacritty
+set $terminal wezterm
+set $terminalopaque wezterm --config window_background_opacity=1
 set $pdfreader zathura
 
 ### ------- ### }}}
 ### Options ### {{{
 ### ------- ###
 
-# font for window titles. ISO 10646 = Unicode
-#font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-font pango:Hasklug Nerd Font Bold, FontAwesome, 12
+# Font for window titles
+font pango:ComicShannsMonoNerdFontMono 12
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 # Additionally $mod+right_mouse_button resize them and
@@ -33,7 +33,7 @@ hide_edge_borders smart
 
 focus_follows_mouse no
 
-workspace_auto_back_and_forth yes
+title_align center
 
 ### ----------- ### }}}
 ### Keybindings ### {{{
@@ -46,8 +46,8 @@ bindsym $mod+Shift+Return exec $terminalopaque
 # kill focused window
 bindsym $mod+Shift+Q kill
 
-# start dmenu
-bindsym $mod+r exec --no-startup-id dmenu_run
+# start app launcher
+bindsym --release $mod+r exec --no-startup-id rofi -show combi -modes combi -combi-modes window#drun#run
 
 # change focus
 bindsym $mod+h focus left
@@ -67,6 +67,9 @@ bindsym $mod+Shift+bar split h
 # split in vertical orientation
 bindsym $mod+Shift+underscore split v
 
+# toggle split
+bindsym $mod+Shift+T split toggle
+
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
 
@@ -85,10 +88,7 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # focus the child container
-bindcode $mod+d focus child
-
-# make window sticky (only works on floating windows)
-bindsym $mod+Shift+s sticky toggle
+bindsym $mod+d focus child
 
 # switch to workspace
 bindcode $mod+10 workspace 1
@@ -116,12 +116,13 @@ bindcode $mod+Shift+17 move workspace 8
 bindcode $mod+Shift+18 move workspace 9
 bindcode $mod+Shift+19 move workspace 10
 
-# Move the current workspace/container to the next output
+# Move the current workspace to the next output
 # (effectively toggles when you only have two outputs)
-#bindsym $mod+Shift+u move workspace to output left
-#bindsym $mod+u move container to output left
-bindsym $mod+Shift+u move workspace to output down
-bindsym $mod+u move container to output down
+bindsym $mod+Shift+u move workspace to output next
+# Move the current container to the next output
+bindsym $mod+u move container to output next
+# Focus the next output
+bindsym $mod+Control+u focus output next
 
 # reload the configuration file
 bindsym $mod+Shift+C reload
@@ -165,32 +166,52 @@ bindsym $mod+Control+minus move scratchpad
 # Show the first scratchpad window
 bindsym $mod+minus scratchpad show
 
-# Lock the screen
-bindsym $mod+Control+l exec xset s activate
+# read 1 character and mark the current window with this character
+bindsym $mod+m exec --no-startup-id i3-input -F 'mark %s' -l 1 -P 'Mark: '
+
+# read 1 character and go to the window with the character
+bindsym $mod+apostrophe exec --no-startup-id i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
 
 # Personal keybindings from here
 
-bindsym $mod+i exec $browser
-bindsym $mod+m exec $terminal --class "NCMPCPP" -e ncmpcpp
-bindsym $mod+Control+Shift+L exec $terminal --class "ASCIIQuarium" --name "ASCIIQuarium" -e asciiquarium
+bindsym --release $mod+i exec rofi -show emoji
+bindsym $mod+Control+l exec xset s activate
+bindsym $mod+Control+Shift+L exec $terminal start --class="ASCIIQuarium" asciiquarium
 bindsym $mod+o exec $pdfreader
-bindsym $mod+g exec bukumenu
 bindsym Print exec --no-startup-id "flameshot screen -n 1 -p ~/images/screenshots/"
 bindsym --release Shift+Print exec --no-startup-id "flameshot gui"
 bindsym $mod+Print exec --no-startup-id "flameshot full -p ~/images/screenshots/"
+bindsym $mod+g exec bukumenu
 bindsym $mod+p exec "passmenu --type"
-bindsym $mod+Shift+P exec "PASSWORD_STORE_DIR=~/.password-store-home passmenu --type"
+bindsym $mod+t exec $terminal start --class="scratchpad"
 
 # Media Stuff
-bindsym XF86AudioPlay exec playerctl play-pause
-#bindsym XF86AudioPrev exec mpc prev
-#bindsym XF86AudioNext exec mpc next
-#bindsym XF86AudioStop exec mpc stop
-bindsym XF86AudioMute exec amixer -D pulse sset Master toggle
-bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 5%+
-bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 5%-
-#bindsym XF86MonBrightnessUp exec backlight +50
-#bindsym XF86MonBrightnessDown exec backlight -50
+bindsym XF86AudioPlay exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+bindsym XF86AudioPrev exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
+bindsym XF86AudioNext exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
+bindsym XF86AudioStop exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop
+bindsym XF86AudioMute exec ponymix toggle
+bindsym XF86AudioRaiseVolume exec amixer -c 0 sset Master 5%+
+bindsym XF86AudioLowerVolume exec amixer -c 0 sset Master 5%-
+bindsym XF86MonBrightnessUp exec backlight +50
+bindsym XF86MonBrightnessDown exec backlight -50
+
+### ----------------- ### }}}
+### Mouse Keybindings ### {{{
+### ----------------- ###
+
+# The middle button over a titlebar kills the window (kills on release, hold and release away from titlebar to cancel kill)
+bindsym --release button2 kill
+
+# The middle button and a modifier over any part of the window kills the window
+bindsym --whole-window $mod+button2 kill
+
+# The right button and a modifier toggles floating
+bindsym $mod+button3 floating toggle
+
+# The side buttons move the window around
+bindsym button8 move left
+bindsym button9 move right
 
 ### ------ ### }}}
 ### Colors ### {{{
@@ -211,7 +232,9 @@ bar {
 	mode dock
 	hidden_state hide
 	status_command i3sw
-	font pango:Dejavu Sans Mono 10, FontAwesome 10
+	font pango:ComicShannsMonoNerdFontMono 10
+	# take a screenshot when right clicking on the bar
+	bindsym --release button3 exec --no-startup-id "flameshot screen -n 1 -p ~/images/screenshots/"
 	colors {
 		background #000000
 		statusline #ffffff
@@ -231,20 +254,41 @@ bar {
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [class="feh" instance="feh"] floating enable, move absolute position center
-for_window [class="ASCIIQuarium" instance="ASCIIQuarium"] fullscreen enable
+for_window [class="ASCIIQuarium"] fullscreen enable
 for_window [window_role="Preferences"] floating enable
 for_window [class="firefox" instance="Alert"] floating enable
+for_window [class="scratchpad"] move scratchpad, scratchpad show, sticky enable
 
 assign [class="Google-chrome"] 1
-assign [class="NCMPCPP"] 3
-assign [class="Zathura"] 4
+assign [class="Spotify"] 3
+
+### ------------------ ### }}}
+### Workspace settings ### {{{
+### ------------------ ###
+
+workspace 1 output DP-1 eDP-1
+workspace 2 output DP-1 eDP-1
+workspace 3 output eDP-1 DP-1
+workspace 4 output DP-1 eDP-1
+workspace 5 output DP-1 eDP-1
+workspace 6 output DP-1 eDP-1
+workspace 7 output DP-1 eDP-1
+workspace 8 output eDP-1 DP-1
+workspace 9 output eDP-1 DP-1
+workspace 10 output eDP-1 DP-1
+
+# Presing mod+n will switch to previous workspace if currently on workspace n
+workspace_auto_back_and_forth yes
+
+# Change default layout to tabbed since I use it the most
+workspace_layout tabbed
 
 ### ----------------------- ### }}}
 ### Auto-start applications ### {{{
 ### ----------------------- ###
 
 # Start a notification manager
-#exec --no-startup-id dunst -config ~/.config/dunstrc
+exec --no-startup-id dunst -conf ~/.config/dunst/dunstrc
 
 ### ----------------------- ### }}}
 
