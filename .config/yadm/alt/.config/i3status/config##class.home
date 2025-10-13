@@ -79,6 +79,6 @@ read_file pkgs {
 }
 
 read_file performance {
-  format = "<span color='#25d97c'>  %content</span>"
+  format = "<span color='#25d97c'>🧠 %content</span>"
   path = "/sys/firmware/acpi/platform_profile"
 }
