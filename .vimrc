@@ -113,7 +113,7 @@ call plug#begin('~/.vim/plugged')
 "  Plug 'preservim/nerdtree'                " File browser
   Plug 'preservim/nerdcommenter'          " Vim plugin for intensely nerdy commenting powers
   Plug 'ycm-core/YouCompleteMe'            " Code completion engine
-  Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']} " Markdown Preview
+  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
   Plug 'chrisbra/Colorizer'                " Color Highlight
 "  Plug 'dense-analysis/ale'                " Asynchronous Lint Engine
 "  Plug 'junegunn/goyo.vim'                " Zen Mode
