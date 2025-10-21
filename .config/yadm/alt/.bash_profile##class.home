@@ -32,4 +32,4 @@ export BROWSER="google-chrome-stable"
 # ssh-agent
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
-source /home/e4/.config/broot/launcher/bash/br
+#source /home/e4/.config/broot/launcher/bash/br
