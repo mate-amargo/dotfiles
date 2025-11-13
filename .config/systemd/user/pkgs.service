@@ -1,6 +1,7 @@
 [Unit]
 Description=Shows number of package updates available
-After=network.target
+After=network-online.target
+Wants=network-online.target
 
 [Service]
 Type=simple

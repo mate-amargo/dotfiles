@@ -1,6 +1,5 @@
 [Unit]
 Description=Shows number of package updates available
-After=network.target
 
 [Timer]
 OnBootSec=2m
