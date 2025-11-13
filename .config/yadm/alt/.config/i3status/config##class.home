@@ -5,6 +5,7 @@ general {
 }
 
 order += "read_file performance"
+order += "read_file dni"
 order += "read_file pkgs"
 order += "read_file emails"
 order += "volume master"
@@ -81,4 +82,9 @@ read_file pkgs {
 read_file performance {
   format = "<span color='#25d97c'>🧠 %content</span>"
   path = "/sys/firmware/acpi/platform_profile"
+}
+
+read_file dni {
+  format = "🪪 <span color='#f000aa'>%content</span>"
+  path = "/home/e4/.local/share/dni_status"
 }
