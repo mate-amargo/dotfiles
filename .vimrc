@@ -121,8 +121,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/fzf.vim'   " Fuzzy Find
   Plug 'tpope/vim-fugitive' " Git vim pluggin
   Plug 'dhruvasagar/vim-table-mode' " Easy tables
-"  Plug 'sheerun/vim-polyglot'
-  Plug 'rodjek/vim-puppet'
+  Plug 'sheerun/vim-polyglot'
+"  Plug 'rodjek/vim-puppet'
 "  Plug 'preservim/tagbar'
   Plug 'vim/killersheep'
 "  Plug 'wakatime/vim-wakatime'
@@ -173,7 +173,7 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=white ctermbg=gray
 "au BufNewFile,BufRead Jenkinsfile setf groovy
 
 " Puppet syntax highlight
-"au BufNewFile,BufRead *.pp setf puppet
+au BufNewFile,BufRead *.pp set filetype=puppet
 
 "if empty(v:servername) && exists('*remote_startserver')
 "  call remote_startserver('VIM')
