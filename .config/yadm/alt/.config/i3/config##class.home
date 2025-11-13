@@ -207,7 +207,7 @@ bindsym XF86MonBrightnessDown exec backlight -50
 ### ----------------- ###
 
 # The middle button over a titlebar kills the window (kills on release, hold and release away from titlebar to cancel kill)
-bindsym --release button2 kill
+bindsym --release Shift+button2 kill
 
 # The middle button and a modifier over any part of the window kills the window
 bindsym --whole-window $mod+button2 kill
