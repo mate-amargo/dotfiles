@@ -182,7 +182,7 @@ bindsym $mod+Control+l exec xset s activate
 bindsym $mod+Control+Shift+L exec $terminal start --class="ASCIIQuarium" asciiquarium
 bindsym $mod+o exec $pdfreader
 bindsym $mod+Shift+O workspace --no-auto-back-and-forth 4; exec --no-startup-id bookworm
-bindsym Print exec --no-startup-id "flameshot screen -n 1 -p ~/images/screenshots/"
+bindsym Print exec --no-startup-id "flameshot screen -n 0 -p ~/images/screenshots/"
 bindsym --release Shift+Print exec --no-startup-id "flameshot gui"
 bindsym $mod+Print exec --no-startup-id "flameshot full -p ~/images/screenshots/"
 bindsym $mod+g exec bukumenu
