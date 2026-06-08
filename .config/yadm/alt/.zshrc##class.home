@@ -18,7 +18,8 @@ fi
 #PS1="[%h]%{${fg[green]}%n%}%{${fg_bold[white]}@%}%{${fg_no_bold[magenta]}%m%}%{${fg_bold[white]}:%}%{${fg_no_bold[blue]}%15<...<%~%}%<<%(?..[%?])%# %{$reset_color%}"
 
 export GOPATH=$HOME/.go
-export PATH=$HOME/.local/bin:$GOPATH/bin:/opt/google-cloud-cli/bin:$PATH
+export GEM_HOME=/home/e4/.local/share/gem/ruby/3.4.0
+export PATH=$HOME/.local/bin:$GOPATH/bin:/opt/google-cloud-cli/bin:$GEM_HOME/bin:$PATH
 export EDITOR=vim
 
 export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
