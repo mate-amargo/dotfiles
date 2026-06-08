@@ -119,6 +119,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'vim/killersheep'
   Plug 'godlygeek/tabular'
   Plug 'mbbill/undotree'
+  Plug 'skywind3000/vim-quickui'
 
 call plug#end()
 
@@ -202,9 +203,45 @@ command AccentsConvert %s/\\'a/á/g | %s/\\'e/é/g | %s/\\'i/í/g | %s/\\'o/ó/g
 " sudo write trick + reload the file to avoid 'file changed' message
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
+" --- BEGIN QuickUI settings ---
+let g:quickui_color_scheme = 'gruvbox'
+call quickui#menu#reset()
+
+call quickui#menu#install('&File', [
+            \ [ "&Save\t(:w)", 'w'],
+            \ [ "--", ],
+            \ [ "Save and E&xit\t(:x)", 'x'],
+            \ [ "&Exit\t(:qa!)", 'qa!'],
+            \ ])
+
+call quickui#menu#install('&View', [
+            \ [ "&Maximize window\t(⎵F5)", 'call feedkeys("\<C-W>_\<C-W>\<Bar>")'],
+            \ [ "--", ],
+            \ [ "Set Line &Numbers %{&nu? 'Off':'On'}", 'set nu!'],
+            \ [ "Set &Relative Line Numbers %{&rnu? 'Off':'On'}", 'set rnu!'],
+            \ [ "Turn &off line numbers\t(⎵F2)", 'set nonu nornu'],
+            \ [ "--", ],
+            \ [ "Set Highlight &Search %{&hlsearch? 'Off':'On'}\t(F3)", 'set hlsearch!'],
+            \ [ "Set &whitespace markers %{&list? 'Off':'On'}\t(F4)", 'set list!'],
+            \ [ "Toggle &Indent guides\t(F8)", 'IndentGuidesToggle'],
+            \ [ "Set &cursor column %{&cursorcolumn? 'Off':'On'}\t(F9)", 'set cursorcolumn!'],
+            \ [ "Set ma&x cursor column %{&colorcolumn == ''? 'On':'Off'}\t(⎵F9)", 'execute "set colorcolumn=" . (&colorcolumn == "" ? "80" : "")'],
+            \ ])
+
+call quickui#menu#install('&Option', [
+            \ [ "Set expand &Tab %{&expandtab? 'Off':'On'}\t(F5)", 'set expandtab!'],
+            \ [ "Set &Spell %{&spell? 'Off':'On'}\t(F6)", 'set spell!'],
+            \ [ "Set &Paste %{&paste? 'Off':'On'}", 'set paste!'],
+            \ ])
+call quickui#menu#install('&Tools', [
+            \ [ "&Undo Tree toggle\t(F7)", 'UndotreeToggle'],
+            \ ])
+" --- END QuickUI settings ---
+
 " Keybindings
 let mapleader=" "
 let maplocalleader=" "
+map <F1> :call quickui#menu#open()<CR>
 map <F2> :set nu rnu! <CR>
 map <leader><F2> :set nonu nornu <CR>
 map <F3> :set nohlsearch! <CR>
@@ -213,8 +250,7 @@ map <F5> :set expandtab! <CR> :set expandtab? <CR>
 map <leader><F5> <C-W>_<C-W><Bar>
 map <F6> :set spell! <CR>
 map <F7> :UndotreeToggle<CR>
-map <leader><F8> :IndentGuidesToggle<CR>
-"map <F8> :TagbarToggle<CR>
+map <F8> :IndentGuidesToggle<CR>
 map <F9> :set cursorcolumn! <CR>
 map <silent> <leader><F9> :execute "set colorcolumn=" . (&colorcolumn == "" ? "80" : "")<CR>
 " Left/Right = Previous/Next tabpage
