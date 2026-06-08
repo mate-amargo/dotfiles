@@ -19,7 +19,7 @@
 "                    .
 "
 
-set nocompatible " This option is set if vimrc exists, i.e. it's not really necesary
+set nocompatible " This option is set if vimrc exists (useful if invoked like `vim -u /path/to/this/vimrc")
 
 syntax enable
 filetype plugin indent on
@@ -104,32 +104,21 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'vim-airline/vim-airline'          " Cool status bar
   Plug 'vim-airline/vim-airline-themes'    " bar themes
-  "Plug 'sjl/badwolf'                      " Colorscheme
   Plug 'morhetz/gruvbox'                  " Colorscheme
   Plug 'nathanaelkane/vim-indent-guides'  " Visual indents
   Plug 'lervag/vimtex'                    " Latex Integration
-"  Plug 'SirVer/ultisnips'                  " Snippets engine
-"  Plug 'honza/vim-snippets'                " Actual snippets
-"  Plug 'preservim/nerdtree'                " File browser
   Plug 'preservim/nerdcommenter'          " Vim plugin for intensely nerdy commenting powers
   Plug 'ycm-core/YouCompleteMe'            " Code completion engine
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
   Plug 'chrisbra/Colorizer'                " Color Highlight
-"  Plug 'dense-analysis/ale'                " Asynchronous Lint Engine
-"  Plug 'junegunn/goyo.vim'                " Zen Mode
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'   " Fuzzy Find
   Plug 'tpope/vim-fugitive' " Git vim pluggin
   Plug 'dhruvasagar/vim-table-mode' " Easy tables
   Plug 'sheerun/vim-polyglot'
-"  Plug 'rodjek/vim-puppet'
-"  Plug 'preservim/tagbar'
   Plug 'vim/killersheep'
-"  Plug 'wakatime/vim-wakatime'
   Plug 'godlygeek/tabular'
   Plug 'mbbill/undotree'
-
-" terryma/vim-multiple-cursors " True Sublime Text style multiple selections for Vim
 
 call plug#end()
 
@@ -145,12 +134,6 @@ let g:indent_guides_default_mapping = 0        " Remove the <leader>ig default m
 " Table settings
 "let g:table_mode_corner_corner='+'
 "let g:table_mode_header_fillchar='='
-
-" UltiSnips config
-"let g:UltiSnipsExpandTrigger="<c-j>"
-"let g:UltiSnipsListSnippets="<c-l>"
-"let g:UltiSnipsJumpForwardTrigger="<c-j>"
-"let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " YouCompleteMe config
 let g:ycm_key_list_stop_completion = ['<C-y>', '<CR>']
@@ -174,10 +157,6 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=white ctermbg=gray
 
 " Puppet syntax highlight
 au BufNewFile,BufRead *.pp set filetype=puppet
-
-"if empty(v:servername) && exists('*remote_startserver')
-"  call remote_startserver('VIM')
-"endif
 
 " Latex settings
 "set conceallevel=2    " Hidden unless it has a replacement character
