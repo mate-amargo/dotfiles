@@ -19,7 +19,7 @@
 "                    .
 "
 
-set nocompatible " This option is set if vimrc exists (useful if invoked like `vim -u /path/to/this/vimrc")
+set nocompatible " This option is set if vimrc exists (useful if invoked like `vim -u /path/to/this/vimrc`)
 
 syntax enable
 filetype plugin indent on
@@ -67,10 +67,6 @@ set hlsearch
 
 set clipboard=unnamedplus "allows yanking to (or pasting from) the system clipboard
 
-" Latex Macros
-" map \e Ypki\begin{<Esc>ea}<Esc>j^i\end{<Esc>ea}<Esc>
-" map \t i\texttt{}<Esc>
-
 " Tab character to      → u2192
 " and EOL to            ↲ u21b2
 " and space to          ⎵ u23b5
@@ -88,33 +84,30 @@ let &t_SI = "\<Esc>[6 q" "SI = INSERT mode
 let &t_SR = "\<Esc>[4 q" "SR = REPLACE mode
 let &t_EI = "\<Esc>[2 q" "EI = NORMAL mode (ELSE)
 
-abbr ture true
-abbr flase false
-
 set spelllang=es,en_us
 
 " Netrw settings
-let g:netrw_banner=0        " disable banner, bring back up with I
-let g:netrw_liststyle=3     " tree view
-let g:netrw_winsize = 0 " set default window size to be always equal
-let g:netrw_preview = 1 " open splits to the right
+let g:netrw_banner=0     " disable banner, bring back up with I
+let g:netrw_liststyle=3  " tree view
+let g:netrw_winsize = 0  " set default window size to be always equal
+let g:netrw_preview = 1  " open splits to the right
 
 " vim-plug plugin manager
 call plug#begin('~/.vim/plugged')
 
-  Plug 'vim-airline/vim-airline'          " Cool status bar
-  Plug 'vim-airline/vim-airline-themes'    " bar themes
-  Plug 'morhetz/gruvbox'                  " Colorscheme
-  Plug 'nathanaelkane/vim-indent-guides'  " Visual indents
-  Plug 'lervag/vimtex'                    " Latex Integration
-  Plug 'preservim/nerdcommenter'          " Vim plugin for intensely nerdy commenting powers
-  Plug 'ycm-core/YouCompleteMe'            " Code completion engine
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  Plug 'morhetz/gruvbox'
+  Plug 'nathanaelkane/vim-indent-guides'
+  Plug 'lervag/vimtex'
+  Plug 'preservim/nerdcommenter'
+  Plug 'ycm-core/YouCompleteMe'
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
-  Plug 'chrisbra/Colorizer'                " Color Highlight
+  Plug 'chrisbra/Colorizer'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-  Plug 'junegunn/fzf.vim'   " Fuzzy Find
-  Plug 'tpope/vim-fugitive' " Git vim pluggin
-  Plug 'dhruvasagar/vim-table-mode' " Easy tables
+  Plug 'junegunn/fzf.vim'
+  Plug 'tpope/vim-fugitive'
+  Plug 'dhruvasagar/vim-table-mode'
   Plug 'sheerun/vim-polyglot'
   Plug 'vim/killersheep'
   Plug 'godlygeek/tabular'
@@ -129,12 +122,8 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#branch#displayed_head_limit = 10
 
 " Indent-Guides config
-let g:indent_guides_enable_on_vim_startup = 0 " Autostart
+let g:indent_guides_enable_on_vim_startup = 0  " Autostart
 let g:indent_guides_default_mapping = 0        " Remove the <leader>ig default mapping
-
-" Table settings
-"let g:table_mode_corner_corner='+'
-"let g:table_mode_header_fillchar='='
 
 " YouCompleteMe config
 let g:ycm_key_list_stop_completion = ['<C-y>', '<CR>']
@@ -153,16 +142,13 @@ let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=black ctermbg=darkgray
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=white ctermbg=gray
 
-" Jenkinsfile syntax higlight
-"au BufNewFile,BufRead Jenkinsfile setf groovy
-
 " Puppet syntax highlight
 au BufNewFile,BufRead *.pp set filetype=puppet
 
 " Latex settings
-"set conceallevel=2    " Hidden unless it has a replacement character
-"set concealcursor=nvc " Conceal characters in Normal, Visual, Command
-"let g:tex_conceal="abdmgs"
+set conceallevel=2    " Hidden unless it has a replacement character
+set concealcursor=nvc " Conceal characters in Normal, Visual, Command
+let g:tex_conceal="abdmgs"
 "  a = accents/ligatures
 "  b = bold and italic
 "  d = delimiters
