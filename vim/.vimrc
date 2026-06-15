@@ -1,0 +1,287 @@
+"                    .
+"    ##############..... ##############
+"    ##############......##############
+"      ##########..........##########
+"      ##########........##########
+"      ##########.......##########
+"      ##########.....##########..                _
+"      ##########....##########.....       __   _(_)_ __ ___  _ __ ___
+"    ..##########..##########.........     \ \ / / | '_ ` _ \| '__/ __|
+"  ....##########.#########.............    \ V /| | | | | | | | | (__
+"    ..################JJJ............       \_/ |_|_| |_| |_|_|  \___|
+"      ################.............
+"      ##############.JJJ.JJJJJJJJJJ
+"      ############...JJ...JJ..JJ  JJ
+"      ##########....JJ...JJ..JJ  JJ
+"      ########......JJJ..JJJ JJJ JJJ
+"      ######    .........
+"                  .....
+"                    .
+"
+
+set nocompatible " This option is set if vimrc exists (useful if invoked like `vim -u /path/to/this/vimrc`)
+
+syntax enable
+filetype plugin indent on
+
+" This specifies where in Insert mode the <BS> is allowed to delete
+" the white space at the start of the line, a line break and the
+" character before where Insert mode started.
+set backspace=indent,eol,start
+
+set history=100
+
+" Peristent undo
+set undofile
+set undodir=~/.vim/undo
+
+" Search down into subfolders
+" Provides tab-completion for all file-related tasks
+set path+=**
+
+set ruler
+set showcmd
+
+set splitright
+
+set wildmenu " Display all matching files when we tab complete
+
+" Tab settings
+set tabstop=2     " Number of spaces that a <Tab> in the file counts
+set softtabstop=2 " Number of spaces that a <Tab> counts for while performing
+                  " editing operations like inserting a <Tab> or using <BS>
+set shiftwidth=2  " Amount that >> indents
+set expandtab   " (no)expandtab = (don't )replace tabs with spaces
+
+set linebreak " Wrap long lines
+set display=truncate " Show @@@ in the last line if it is truncated, instead of hiding the whole line.
+
+set hidden " Don't warn when changing buffers with unsaved changes
+
+set number
+set relativenumber
+set cursorline
+
+set incsearch "show partial matches for a search phrase
+set hlsearch
+
+set clipboard=unnamedplus "allows yanking to (or pasting from) the system clipboard
+
+" Tab character to      → u2192
+" and EOL to            ↲ u21b2
+" and space to          ⎵ u23b5
+set listchars=tab:→\ ,eol:↲,space:⎵
+
+" Different cursors for different modes
+"  1 -> blinking block
+"  2 -> solid block
+"  3 -> blinking underscore
+"  4 -> solid underscore
+"  5 -> blinking vertical bar
+"  6 -> solid vertical bar
+
+let &t_SI = "\<Esc>[6 q" "SI = INSERT mode
+let &t_SR = "\<Esc>[4 q" "SR = REPLACE mode
+let &t_EI = "\<Esc>[2 q" "EI = NORMAL mode (ELSE)
+
+set spelllang=es,en_us
+
+" Netrw settings
+let g:netrw_banner=0     " disable banner, bring back up with I
+let g:netrw_liststyle=3  " tree view
+let g:netrw_winsize = 0  " set default window size to be always equal
+let g:netrw_preview = 1  " open splits to the right
+
+" vim-plug plugin manager
+call plug#begin('~/.vim/plugged')
+
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  Plug 'morhetz/gruvbox'
+  Plug 'nathanaelkane/vim-indent-guides'
+  Plug 'lervag/vimtex'
+  Plug 'preservim/nerdcommenter'
+  Plug 'ycm-core/YouCompleteMe'
+  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
+  Plug 'chrisbra/Colorizer'
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plug 'junegunn/fzf.vim'
+  Plug 'tpope/vim-fugitive'
+  Plug 'dhruvasagar/vim-table-mode'
+  Plug 'sheerun/vim-polyglot'
+  Plug 'vim/killersheep'
+  Plug 'godlygeek/tabular'
+  Plug 'mbbill/undotree'
+  Plug 'skywind3000/vim-quickui'
+
+call plug#end()
+
+" Airline plugin config
+set t_Co=256
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#branch#displayed_head_limit = 10
+
+" Indent-Guides config
+let g:indent_guides_enable_on_vim_startup = 0  " Autostart
+let g:indent_guides_default_mapping = 0        " Remove the <leader>ig default mapping
+
+" YouCompleteMe config
+let g:ycm_key_list_stop_completion = ['<C-y>', '<CR>']
+let g:ycm_autoclose_preview_window_after_completion=1
+
+" Colorschemes
+colorscheme gruvbox
+set background=dark
+let g:gruvbox_contrast_dark="hard"
+hi Normal guibg=NONE ctermbg=NONE
+hi TabLineFill guibg=NONE ctermbg=NONE
+hi TabLine guibg=NONE ctermbg=NONE
+hi NonText guibg=NONE ctermbg=NONE
+let g:airline_theme='gruvbox'
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=black ctermbg=darkgray
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=white ctermbg=gray
+
+" Puppet syntax highlight
+au BufNewFile,BufRead *.pp set filetype=puppet
+
+" Latex settings
+set conceallevel=2    " Hidden unless it has a replacement character
+set concealcursor=nvc " Conceal characters in Normal, Visual, Command
+let g:tex_conceal="abdmgs"
+"  a = accents/ligatures
+"  b = bold and italic
+"  d = delimiters
+"  m = math symbols
+"  g = Greek
+"  s = superscripts/subscripts
+let g:vimtex_compiler_latexmk = {
+  \ 'options' : [
+  \ '-pdf',
+  \ '-shell-escape',
+  \ '-verbose',
+  \ '-file-line-error',
+  \ '-synctex=1',
+  \ '-interaction=nonstopmode',
+  \ ],
+  \}
+
+" C settings
+autocmd FileType c setlocal ts=4 sts=4 sw=4 noexpandtab fileformat=unix
+let g:airline#extensions#whitespace#mixed_indent_algo = 2
+
+" Haskell settings
+autocmd FileType haskell setlocal ts=2 sts=2 sw=2 expandtab
+
+" Python settings
+autocmd FileType python map <buffer> <S-F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+autocmd FileType python imap <buffer> <S-F9> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab fileformat=unix
+highlight BadWhitespace ctermbg=red guibg=darkred
+au BufRead,BufNewFile *.py,*.c,*.h match BadWhitespace /\s\+$/
+
+" Markdown settings
+autocmd FileType markdown setlocal ts=2 sts=2 sw=2 expandtab
+
+" Commands
+command TrailingRemove %s/\s\+$//e
+command AccentsConvert %s/\\'a/á/g | %s/\\'e/é/g | %s/\\'i/í/g | %s/\\'o/ó/g | %s/\\'u/ú/g
+" sudo write trick + reload the file to avoid 'file changed' message
+cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+
+" --- BEGIN QuickUI settings ---
+let g:quickui_color_scheme = 'gruvbox'
+call quickui#menu#reset()
+
+call quickui#menu#install('&File', [
+            \ [ "&Save\t(:w)", 'w'],
+            \ [ "--", ],
+            \ [ "Save and E&xit\t(:x)", 'x'],
+            \ [ "&Exit\t(:qa!)", 'qa!'],
+            \ ])
+
+call quickui#menu#install('&View', [
+            \ [ "&Maximize window\t(⎵F5)", 'call feedkeys("\<C-W>_\<C-W>\<Bar>")'],
+            \ [ "--", ],
+            \ [ "Set Line &Numbers %{&nu? 'Off':'On'}", 'set nu!'],
+            \ [ "Set &Relative Line Numbers %{&rnu? 'Off':'On'}", 'set rnu!'],
+            \ [ "Turn &off line numbers\t(⎵F2)", 'set nonu nornu'],
+            \ [ "--", ],
+            \ [ "Set Highlight &Search %{&hlsearch? 'Off':'On'}\t(F3)", 'set hlsearch!'],
+            \ [ "Set &whitespace markers %{&list? 'Off':'On'}\t(F4)", 'set list!'],
+            \ [ "Toggle &Indent guides\t(F8)", 'IndentGuidesToggle'],
+            \ [ "Set &cursor column %{&cursorcolumn? 'Off':'On'}\t(F9)", 'set cursorcolumn!'],
+            \ [ "Set ma&x cursor column %{&colorcolumn == ''? 'On':'Off'}\t(⎵F9)", 'execute "set colorcolumn=" . (&colorcolumn == "" ? "80" : "")'],
+            \ ])
+
+call quickui#menu#install('&Option', [
+            \ [ "Set expand &Tab %{&expandtab? 'Off':'On'}\t(F5)", 'set expandtab!'],
+            \ [ "Set &Spell %{&spell? 'Off':'On'}\t(F6)", 'set spell!'],
+            \ [ "Set &Paste %{&paste? 'Off':'On'}", 'set paste!'],
+            \ ])
+call quickui#menu#install('&Tools', [
+            \ [ "&Undo Tree toggle\t(F7)", 'UndotreeToggle'],
+            \ ])
+" --- END QuickUI settings ---
+
+" Keybindings
+let mapleader=" "
+let maplocalleader=" "
+map <F1> :call quickui#menu#open()<CR>
+map <F2> :set nu rnu! <CR>
+map <leader><F2> :set nonu nornu <CR>
+map <F3> :set nohlsearch! <CR>
+map <F4> :set list! <CR>
+map <F5> :set expandtab! <CR> :set expandtab? <CR>
+map <leader><F5> <C-W>_<C-W><Bar>
+map <F6> :set spell! <CR>
+map <F7> :UndotreeToggle<CR>
+map <F8> :IndentGuidesToggle<CR>
+map <F9> :set cursorcolumn! <CR>
+map <silent> <leader><F9> :execute "set colorcolumn=" . (&colorcolumn == "" ? "80" : "")<CR>
+" Left/Right = Previous/Next tabpage
+map <C-H> :tabp<CR>
+map <C-L> :tabn<CR>
+imap <C-H> <esc>:tabp<CR>
+imap <C-L> <esc>:tabn<CR>
+" Up/Down = First/Last tabpage
+map OA :tabfirst<CR>
+map OB :tablast<CR>
+imap OA <esc>:tabfirst<CR>
+imap OB <esc>:tablast<CR>
+" Ctrl-Up/Down = Previous/Next buffer
+map [1;5A :bp<CR>
+map [1;5B :bn<CR>
+imap [1;5A <esc>:bp<CR>
+imap [1;5B <esc>:bn<CR>
+nnoremap <leader>d :put =strftime('# %Y-%m-%d %A %d of %B')<CR>
+
+" Split navigations
+map <Esc>j <A-j>
+map <Esc>k <A-k>
+map <Esc>l <A-l>
+map <Esc>h <A-h>
+nnoremap <A-j> <C-W><C-J>
+nnoremap <A-k> <C-W><C-K>
+nnoremap <A-l> <C-W><C-L>
+nnoremap <A-h> <C-W><C-H>
+
+" Move lines up and down
+nnoremap <C-J> :m .+1<CR>==
+nnoremap <C-K> :m .-2<CR>==
+inoremap <C-J> <Esc>:m .+1<CR>==gi
+inoremap <C-K> <Esc>:m .-2<CR>==gi
+vnoremap <C-J> :m '>+1<CR>gv=gv
+vnoremap <C-K> :m '<-2<CR>gv=gv
+
+" FuzzyFind keybindings
+map <leader><C-F> :Files<CR>
+map <leader><C-G> :GFiles<CR>
+map <leader><C-S> :GFiles?<CR>
+map <leader><C-B> :Buffers<CR>
+map <leader><C-R> :Rg <C-R><C-W><CR>
+
+" Git keybindings
+nnoremap <leader>gs :Git<CR>
+nnoremap <leader>gd :Git diff<CR>
+nnoremap <leader>gb :Git blame<CR>
