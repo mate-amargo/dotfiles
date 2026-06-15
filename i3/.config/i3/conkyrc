@@ -1,0 +1,27 @@
+conky.config = {
+out_to_x=false,
+own_window=false,
+out_to_console=true,
+background=false,
+max_text_width=0,
+update_interval=1,
+total_run_times=0,
+short_units=true,
+if_up_strictness="address",
+use_spacer="none",
+override_utf8_locale=true,
+cpu_avg_samples=2,
+pad_percents=3
+}
+conky.text = [[
+[
+{ "full_text" : " ${exec xkblayout-state print %s}", "color":"\#c0f387"},
+{ "full_text" : "  ${catp /home/e4/.local/share/pkgs-updates}", "color":"\#8b00ea"},
+{ "full_text" : "  ${catp /home/e4/.local/share/emilios-unread}", "color":"\#ff1900"},
+{ "full_text" : " ${if_mpd_playing}${if_match "${mpd_status}"=="Playing"}${endif}${if_match "${mpd_status}"=="Paused"}${endif}  ${mpd_smart 35} [${mpd_elapsed}/${mpd_length}]${else}${endif} ", "color":"\#df3a01"},
+{"full_text" : " ${if_pa_sink_muted}${else}${endif} ${pa_sink_volume}% ", "color":"\#268bd2"},
+{ "full_text" : " ${wireless_link_qual_perc wlp2s0}%  ${wireless_essid wlp2s0} ${addrs wlp2s0} ", "color":"\#2fdc57"},
+{ "full_text" : " ${if_match ${battery_percent BAT1}<25}${else}${if_match ${battery_percent BAT1}<50}${else}${if_match ${battery_percent BAT1}<75} ${else}${if_match ${battery_percent BAT1}<100} ${else} ${endif}${endif}${endif}${endif} ${battery BAT1} ${battery_time BAT1}", "color":${if_match ${battery_percent BAT1}<10}"\#df0101"${else}"\#80ff00"${endif}},
+{"full_text": "  ${time %a %d %b %Y}  ${time %H:%M:%S}","color": "\#c8fe2e"}
+],
+]]
