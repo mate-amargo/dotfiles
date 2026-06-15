@@ -5,10 +5,10 @@ The files are managed nicely by [yadm](https://github.com/TheLocehiliosan/yadm/)
 
 ## Installation
 
-Specify the main branch:
+Specify the yadm branch:
 
 ```
-yadm clone -b main https://github.com/mate-amargo/dotfiles.git
+yadm clone -b yadm https://github.com/mate-amargo/dotfiles.git
 ```
 
 After that, remember to decrypt the files:
