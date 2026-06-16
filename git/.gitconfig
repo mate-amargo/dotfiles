@@ -1,0 +1,38 @@
+[include]
+	# include the [user] section from the local user file
+	path = .gitconfig.user
+[credential]
+	helper = cache --timeout=7200
+[alias]
+	co = checkout
+	mend = commit --amend --no-edit
+	ss = status
+	l = log --oneline --graph --decorate
+[color]
+	status = always
+[core]
+	editor = vim
+	pager = delta
+	excludesFile = ~/.config/.global_gitignore
+[commit]
+	gpgsign = true
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true  # use n and N to move between diff sections
+	light = false
+	side-by-side = false
+	line-numbers = true
+[merge]
+	conflictstyle = diff3
+	tool = vimdiff
+[push]
+	autoSetupRemote = true
+[diff]
+	colorMoved = default
+[init]
+	defaultBranch = master
+[column]
+	ui = auto
+[branch]
+	sort = -committerdate
