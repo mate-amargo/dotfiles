@@ -1,0 +1,18 @@
+#!/bin/zsh
+SERVERS_FILE=~/.servers
+SSH_KEY=~/.ssh/id_rsa.pub
+E_NO_SERVERS_FILE=1
+E_NO_SERVER_SELECTED=2
+if [ $# -eq 1 ]; then
+  echo "$1" >> ${SERVERS_FILE}
+  server=$1
+elif [ -f ${SERVERS_FILE} ]; then
+  server=$(fzf < ${SERVERS_FILE})
+  if [ -z ${server} ]; then
+    return $E_NO_SERVER_SELECTED
+  fi
+else
+  return $E_NO_SERVERS_FILE
+fi
+ssh -q -o StrictHostKeyChecking=no -o PubkeyAuthentication=yes -o PasswordAuthentication=no "${server}" true || ssh-copy-id -i "${SSH_KEY}" "${server}"
+ssh "${server}"

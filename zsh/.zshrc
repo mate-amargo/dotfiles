@@ -1,0 +1,112 @@
+#  ____  ______ __
+# /_  / / __/ // /
+#  / /__\ \/ _  /
+# /___/___/_//_/
+#
+
+if [[ $(tty | cut -d'/' -f3 | sed 's/[0-9]//g') == 'tty' ]]; then
+  pgrep X >/dev/null || x
+fi
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# Set up the prompt
+#setopt promptsubst # allow parameter substitution in the prompt
+#autoload -U colors && colors
+#PS1="[%h]%{${fg[green]}%n%}%{${fg_bold[white]}@%}%{${fg_no_bold[magenta]}%m%}%{${fg_bold[white]}:%}%{${fg_no_bold[blue]}%15<...<%~%}%<<%(?..[%?])%# %{$reset_color%}"
+
+export GOPATH=$HOME/.go
+export GEM_HOME=/home/e4/.local/share/gem/ruby/3.4.0
+export PATH=$HOME/.local/bin:$GOPATH/bin:$GEM_HOME/bin:$PATH
+export EDITOR=vim
+
+export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
+
+# History settings
+setopt histignorealldups # ignore all dups
+setopt sharehistory # share history between zshs
+setopt histverify # Press Enter before history expansion
+setopt histignorespace # Don't save lines beginning with a space
+setopt histnostore # Don't store history or fc commands
+HISTSIZE=1000 # Lines to keep within the shell
+SAVEHIST=1000 # Number of lines to be saved to HISTFILE
+HISTFILE=$HOME/.zsh_history
+
+# CD stuff
+setopt autonamedirs # Use ~dir after dir=/some/dir
+setopt autocd # cd by tipying dirname, very useful with ..
+setopt pushdignoredups # don't save dup dirs in the stack
+setopt autopushd # cd and autocd behaves like pushd
+DIRSTACKSIZE=10 # max dirs in the stack
+
+# vim keys, just in case EDITOR or VISUAL aren't set to vim
+bindkey -v
+bindkey "^H" backward-delete-char
+bindkey "^?" backward-delete-char
+bindkey "^R" history-incremental-search-backward
+bindkey "\e." insert-last-word
+bindkey "^o" accept-line-and-down-history
+bindkey "^xp" history-beginning-search-backward
+bindkey "^xn" history-beginning-search-forward
+bindkey "^P" push-input
+
+# Use modern completion system
+autoload -Uz compinit
+compinit
+
+zstyle ':completion:*' auto-description 'specify: %d'
+zstyle ':completion:*' completer _expand _complete _correct _approximate
+zstyle ':completion:*' format 'Completing %d'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' menu select=2
+eval "$(dircolors -b)"
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
+zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
+zstyle ':completion:*' menu select=long
+zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+zstyle ':completion:*' use-compctl false
+zstyle ':completion:*' verbose true
+
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
+source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+
+# Set up the prompt
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+if zmodload zsh/terminfo && (( terminfo[colors] >= 256 )); then
+  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+else
+  [[ ! -f ~/.p10k-tty.zsh ]] || source ~/.p10k-tty.zsh
+fi
+
+[[ -f ~/.zalias ]] && source ~/.zalias
+
+
+# Autoload functions in fpath
+fpath=(~/.zfunctions $fpath)
+for f in ~/.zfunctions/*; do
+  autoload -Uz $f
+done
+
+# Activate python virtualenvs on entry
+autoload -U add-zsh-hook
+add-zsh-hook chpwd python_venv
+
+# Load fzf functions (fzf --zsh > ~/.zfzf)
+source ~/.zfzf
+
+zle -N insert-sudo insert_sudo
+bindkey "^[s" insert-sudo
+
+# Setup zoxide
+eval "$(zoxide init zsh)"
+
+# Dark theme
+export GTK_THEME=Adwaita-dark

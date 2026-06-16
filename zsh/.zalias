@@ -1,0 +1,8 @@
+# zsh aliases
+alias l="exa -l --icons --git"
+alias la="exa -l --icons --git --all"
+alias laa="exa -l --icons --git --all --all"
+alias t="exa -l --icons --tree --level=3"
+alias mv="mv -vi"
+alias rm="rm -vi"
+alias b="buku --suggest"
