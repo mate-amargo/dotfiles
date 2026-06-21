@@ -4,6 +4,10 @@
 # /___/___/_//_/
 #
 
+export GOPATH=$HOME/.go
+export GEM_HOME=/home/e4/.local/share/gem/ruby/3.4.0
+export PATH=$HOME/.local/bin:$GOPATH/bin:$GEM_HOME/bin:$PATH
+
 if [[ $(tty | cut -d'/' -f3 | sed 's/[0-9]//g') == 'tty' ]]; then
   pgrep X >/dev/null || x
 fi
@@ -15,16 +19,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Set up the prompt
-#setopt promptsubst # allow parameter substitution in the prompt
-#autoload -U colors && colors
-#PS1="[%h]%{${fg[green]}%n%}%{${fg_bold[white]}@%}%{${fg_no_bold[magenta]}%m%}%{${fg_bold[white]}:%}%{${fg_no_bold[blue]}%15<...<%~%}%<<%(?..[%?])%# %{$reset_color%}"
-
-export GOPATH=$HOME/.go
-export GEM_HOME=/home/e4/.local/share/gem/ruby/3.4.0
-export PATH=$HOME/.local/bin:$GOPATH/bin:$GEM_HOME/bin:$PATH
 export EDITOR=vim
-
 export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
 
 # History settings
