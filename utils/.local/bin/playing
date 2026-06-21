@@ -1,0 +1,16 @@
+#!/bin/bash
+
+ARTIST="$(playerctl -p spotify metadata artist)"
+TITLE="$(playerctl -p spotify metadata title)"
+STATUS="$(playerctl -p spotify status 2>/dev/null)"
+
+[[ -z "$STATUS" ]] && exit 0
+if [[ "$STATUS" = "Paused" ]]; then
+  echo -n ""
+elif [ "$STATUS" = "Playing" ]; then
+  echo -n ""
+else
+  echo -n ""
+fi
+
+echo -n " $ARTIST - $TITLE" | sed -e 's/"/\\"/g' -e 's/&/and/g' -e "s/'/\\'/g"

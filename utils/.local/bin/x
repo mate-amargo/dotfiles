@@ -1,0 +1,26 @@
+#!/bin/bash
+
+HEIGHT=20
+WIDTH=50
+CHOICE_HEIGHT=9
+BACKTITLE="Window Manager Chooser"
+TITLE="WMs"
+MENU="Select a Window Manager"
+mapfile -t WMS < <(find ~/.x -name "*.xinitrc" -exec basename {} .xinitrc ';' |sort)
+mapfile -t CHOICES < <(printf '%s\n' "${WMS[@]}" | awk '{print NR"\n"$0}')
+WMS=("CANCEL" "${WMS[@]}")
+
+CHOICE=$(dialog --clear \
+                --backtitle "$BACKTITLE" \
+                --title "$TITLE" \
+                --menu "$MENU" \
+                $HEIGHT $WIDTH $CHOICE_HEIGHT \
+                "${CHOICES[@]}" \
+                2>&1 >/dev/tty)
+
+if [[ $CHOICE -eq 0 ]]; then
+  exit 0;
+fi
+
+ln -sf ~/.x/"${WMS[$CHOICE]}".xinitrc ~/.xinitrc
+exec startx

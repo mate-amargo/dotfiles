@@ -1,0 +1,69 @@
+#!/bin/python3
+from pathlib import Path
+
+import httplib2
+from apiclient import discovery
+from oauth2client import client, tools
+from oauth2client.file import Storage
+
+APPLICATION_NAME = "e-milio reader"
+SCOPES = "https://www.googleapis.com/auth/gmail.readonly"
+HOME = Path.home()
+CLIENT_SECRET_FILE = Path(HOME, ".config/emilio/client_secret.json")
+UNREADS_FILE = Path(HOME, ".local/share/emilios-unread")
+
+
+def get_credentials():
+    """Gets valid user credentials from storage.
+
+    If nothing has been stored, or if the stored credentials are invalid,
+    the OAuth2 flow is completed to obtain the new credentials.
+
+    Returns:
+        Credentials, the obtained credential.
+    """
+    credentials_dir = Path(HOME, ".credentials")
+    if not credentials_dir.exists():
+        credentials_dir.mkdir()
+    credentials_path = Path(credentials_dir, "gmail-python.json")
+
+    store = Storage(credentials_path)
+    credentials = store.get()
+    if not credentials or credentials.invalid:
+        flow = client.flow_from_clientsecrets(CLIENT_SECRET_FILE, SCOPES)
+        flow.user_agent = APPLICATION_NAME
+        flags = argparse.ArgumentParser(parents=[tools.argparser]).parse_args()
+        credentials = tools.run_flow(flow, store, flags)
+        print("Storing credentials to " + credentials_path)
+    return credentials
+
+
+def main() -> int:
+    """
+    Search the user's gmail account for unread emails.
+    """
+    credentials = get_credentials()
+    http = credentials.authorize(httplib2.Http())
+    service = discovery.build("gmail", "v1", http=http)
+    results = service.users().messages().list(userId="me", q="in:unread").execute()
+    messages = []
+    if "messages" in results:
+        messages.extend(results["messages"])
+
+    while "nextPageToken" in results:
+        page_token = results["nextPageToken"]
+        results = (
+            service.users()
+            .messages()
+            .list(userId="me", q="in:unread", pageToken=page_token)
+            .execute()
+        )
+        messages.extend(results["messages"])
+
+    with open(UNREADS_FILE, "w") as f:
+        f.write(str(len(messages)))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
