@@ -1,0 +1,9 @@
+[Unit]
+Description=Shows number of package updates available
+
+[Timer]
+OnBootSec=2m
+OnUnitActiveSec=1h
+
+[Install]
+WantedBy=timers.target

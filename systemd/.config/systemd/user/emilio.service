@@ -1,0 +1,7 @@
+[Unit]
+Description=Shows number of unread messages on GMail
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/home/e4/.local/bin/emilio

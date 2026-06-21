@@ -1,2 +1,4 @@
 fish/.config/fish/fish_variables
 newsboat/.newsboat/cache.db
+systemd/.config/systemd/user/default.target.wants
+systemd/.config/systemd/user/timers.target.wants
