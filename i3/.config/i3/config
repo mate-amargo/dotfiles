@@ -188,7 +188,7 @@ bindsym $mod+Print exec --no-startup-id "flameshot full -p ~/images/screenshots/
 bindsym $mod+g exec bukumenu
 bindsym $mod+Shift+G exec games
 bindsym $mod+Control+g gaps inner current toggle 10
-bindsym $mod+p exec "passmenu --type"
+bindsym $mod+p exec "passmenu_rofi --type"
 bindsym $mod+t exec $terminal start --class="scratchpad"
 
 # Media Stuff
