@@ -1,0 +1,205 @@
+#!/bin/bash
+
+declare -A GAMES=(
+	["Steam"]="execgame steam"
+	["Dota"]=dota
+	["Age of Empires II"]=age
+	["Baldurs Gate: Enhanced Edition"]=baldurs
+	["Baldurs Gate 2: Enhanced Edition"]=baldurs2
+	["Icewind Dale: Enhanced Edition"]=icewind
+	["New Supaplex"]=newsupa
+	["Supaplex"]="dosgame SUPAPLEX"
+	["Alley Cat"]="dosgame ALLEYCAT"
+	["Alter Ego"]="dosgame ALTEREGO"
+	["Dino"]="dosgame DINO"
+	["Color Lines"]="dosgame CLINES"
+	["PC GLOBE"]="dosgame PCGLOBE"
+	["Mach 3"]="dosgame MACH3"
+	["Wolfenstein"]="dosgame WOLF3D"
+	["TeeWorlds"]="execgame teeworlds"
+	["Slime Volley"]="execgame slimevolley"
+	["Dwarf Fortress"]="execgame dwarffortress"
+	["Re-Volt"]="execgame rvgl"
+	["Minecraft"]=minecraft
+)
+
+execgame () {
+	exec $1
+}
+
+dota () {
+	pushd "${HOME}/games/Warcraft III" || exit 1
+	FREETYPE_PROPERTIES="truetype:interpreter-version=35" WINEARCH=win64 WINEDEBUG=-all wine 'Frozen Throne.exe' -opengl
+	popd || exit 1
+	exit 0
+}
+
+age () {
+	pushd "${HOME}/games/Age of Empires II" || exit 1
+	FREETYPE_PROPERTIES="truetype:interpreter-version=35" WINEARCH=win64 WINEDEBUG=-all wine 'age2_x1_1.0e_1366x768.exe' -opengl
+	popd || exit 1
+	exit 0
+}
+
+baldurs () {
+	pushd "${HOME}/games/Baldurs Gate: Enhanced Edition" || exit 1
+	./BaldursGate
+	popd || exit 1
+	exit 0
+}
+
+baldurs2 () {
+	pushd "${HOME}/games/Baldurs Gate 2: Enhanced Edition" || exit 1
+	./BaldursGateII
+	popd || exit 1
+	exit 0
+}
+
+icewind () {
+	pushd "${HOME}/games/Icewind Dale: Enhanced Edition" || exit 1
+	./IcewindDale
+	popd || exit 1
+	exit 0
+}
+
+newsupa () {
+	pushd "${HOME}/games/NewSupaplex" || exit 1
+	./run.sh
+	popd || exit 1
+	exit 0
+}
+
+### DOS GAMES ####
+
+dosgame () {
+	GAME_NAME=$1
+	load_dos_config
+	exec dosbox -conf <(echo "${DOS_CONFIG}")
+}
+
+load_dos_config () {
+
+	DOS_CONFIG=$(cat <<-EOF
+		[sdl]
+		fullscreen=true
+		fulldouble=false
+		fullresolution=original
+		windowresolution=1366x768
+		output=opengl
+		autolock=true
+		sensitivity=100
+		waitonerror=true
+		priority=higher,normal
+		mapperfile=mapper-0.74.map
+		usescancodes=true
+
+		[dosbox]
+		language=
+		machine=svga_s3
+		captures=capture
+		memsize=16
+
+		[render]
+		frameskip=0
+		aspect=false
+		scaler=normal2x
+
+		[cpu]
+		core=auto
+		cputype=auto
+		cycles=auto
+		cycleup=10
+		cycledown=20
+
+		[mixer]
+		nosound=false
+		rate=44100
+		blocksize=1024
+		prebuffer=20
+
+		[midi]
+		mpu401=intelligent
+		mididevice=default
+		midiconfig=
+
+		[sblaster]
+		sbtype=sb16
+		sbbase=220
+		irq=7
+		dma=1
+		hdma=5
+		sbmixer=true
+		oplmode=auto
+		oplemu=default
+		oplrate=44100
+
+		[gus]
+		gus=false
+		gusrate=44100
+		gusbase=240
+		gusirq=5
+		gusdma=3
+		ultradir=C:\ULTRASND
+
+		[speaker]
+		pcspeaker=true
+		pcrate=44100
+		tandy=auto
+		tandyrate=44100
+		disney=true
+
+		[joystick]
+		joysticktype=auto
+		timed=true
+		autofire=false
+		swap34=false
+		buttonwrap=false
+
+		[serial]
+		serial1=dummy
+		serial2=dummy
+		serial3=disabled
+		serial4=disabled
+
+		[dos]
+		xms=true
+		ems=true
+		umb=true
+		keyboardlayout=auto
+
+		[ipx]
+		ipx=false
+
+		[autoexec]
+		MOUNT C /home/e4/games/dos
+		C:
+		cd ${GAME_NAME}
+		${GAME_NAME}
+		EXIT
+	EOF
+	)
+}
+
+### END DOS GAMES ###
+
+minecraft () {
+	declare -A LAUNCHERS=(
+		["BetaCraft"]=betacraft
+		["MultiMC"]=multimc
+		["Mojang's Launcher"]=minecraft-launcher
+	)
+	CHOICE="$(printf "%s\n" "${!LAUNCHERS[@]}"| dmenu -fn 'ComicShannsMono Nerd Font-12' -l 10)"
+	eval "${LAUNCHERS[$CHOICE]}"
+
+	${LAUNCERCMD[$((CHOICE-1))]}
+}
+
+betacraft () {
+	pushd $HOME/games/minecraft || exit 1
+	java -jar betacraft.jar
+	popd || exit 1
+}
+
+CHOICE="$(printf "%s\n" "${!GAMES[@]}"| dmenu -fn 'ComicShannsMono Nerd Font-12' -l 10)"
+
+eval "${GAMES[$CHOICE]}"
