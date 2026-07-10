@@ -231,7 +231,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = (subtitle "Custom Keys":) $
     , ((0, xK_Print), addName "Take screenshot of the focused window" $ spawn "flameshot screen -p ~/images/screenshots/")
     , ((shiftMask, xK_Print), addName "Take screenshot of the selected area" $ unGrab >> spawn "flameshot gui")
     , ((modm, xK_Print), addName "Take screenshot of the full screen" $ unGrab >> spawn "flameshot full -p ~/images/screenshots/")
-    , ((modm, xK_g), addName "Custom Game Launcher" $ spawn "games")
+    , ((modm, xK_g), addName "Web bookmarks launcher" $ spawn "bukumenu")
+    , ((modm .|. shiftMask, xK_g), addName "Custom Game Launcher" $ spawn "games")
     , ((modm .|. controlMask, xK_g), addName "Toggle gaps" $ sequence_ [toggleWindowSpacingEnabled, toggleScreenSpacingEnabled])
     , ((modm, xK_b), addName "Bookworm" $ spawn "bookworm")
     -- Recording
