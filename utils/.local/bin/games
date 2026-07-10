@@ -21,6 +21,11 @@ declare -A GAMES=(
 	["Dwarf Fortress"]="execgame dwarffortress"
 	["Re-Volt"]="execgame rvgl"
 	["Minecraft"]=minecraft
+	["Tux Racer"]="execgame tuxracer"
+	["Beyond All Reason"]="execgame beyondallreason"
+	["0 A.D."]="execgame 0ad"
+	["Super Tux Kart"]="execgame supertuxkart"
+	["Xonotic"]="execgame xonotic-sdl"
 )
 
 execgame () {
