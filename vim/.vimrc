@@ -212,7 +212,7 @@ call quickui#menu#install('&View', [
             \ [ "Toggle &Indent guides\t(F8)", 'IndentGuidesToggle'],
             \ [ "Set &cursor column %{&cursorcolumn? 'Off':'On'}\t(F9)", 'set cursorcolumn!'],
             \ [ "Set ma&x cursor column %{&colorcolumn == ''? 'On':'Off'}\t(⎵F9)", 'execute "set colorcolumn=" . (&colorcolumn == "" ? "80" : "")'],
-            \ [ "Set &Conceal level %{&conceallevel == 2 ? 0 : 2}", 'call feedkeys(":let &conceallevel  = &conceallevel == 2 ? 0 : 2\<CR>:set conceallevel?\<CR>")'],
+            \ [ "Set Conceal le&vel %{&conceallevel == 2 ? 0 : 2}", 'call feedkeys(":let &conceallevel  = &conceallevel == 2 ? 0 : 2\<CR>:set conceallevel?\<CR>")'],
             \ ])
 
 call quickui#menu#install('&Option', [
