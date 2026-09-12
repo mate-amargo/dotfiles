@@ -35,7 +35,7 @@ set history=100
 set undofile
 set undodir=~/.vim/undo
 
-" Search down into subfolders
+" Search down into subdirectories
 " Provides tab-completion for all file-related tasks
 set path+=**
 
