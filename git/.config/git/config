@@ -1,6 +1,6 @@
 [include]
 	# include the [user] section from the local user file
-	path = .gitconfig.user
+	path = user
 [credential]
 	helper = cache --timeout=7200
 [alias]
@@ -13,7 +13,7 @@
 [core]
 	editor = vim
 	pager = delta
-	excludesFile = ~/.config/.global_gitignore
+	excludesFile = gitignore
 [commit]
 	gpgsign = true
 [interactive]
