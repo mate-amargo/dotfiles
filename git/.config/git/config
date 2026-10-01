@@ -7,6 +7,7 @@
 	co = checkout
 	mend = commit --amend --no-edit
 	ss = status
+	s = status --short
 	l = log --oneline --graph --decorate
 [color]
 	status = always
