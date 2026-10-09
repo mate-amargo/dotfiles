@@ -1,6 +1,5 @@
-#!/bin/bash
-#
-# Startup file executed for login shells
+# ~/.bash_profile
+# Read by login shells only (TTY login, ssh, bash -l) once per session.
 
 # Load functions and aliases
 source ~/.bash_functions

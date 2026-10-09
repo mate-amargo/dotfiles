@@ -1,5 +1,4 @@
-#!/bin/bash
-#
-# Startup file executed for non-login shells
+# ~/.bashrc
+# Read by interactive non-login shells (new terminal window/tab, nested bash)
 
 source ~/.bash_profile
