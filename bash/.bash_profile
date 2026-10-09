@@ -1,20 +1,8 @@
 # ~/.bash_profile
 # Read by login shells only (TTY login, ssh, bash -l) once per session.
 
-# Load functions and aliases
-source ~/.bash_functions
-source ~/.bash_aliases
-
-# History settings
-export HISTTIMEFORMAT="[%d/%m/%Y %T] "
-export HISTSIZE=1000
-export HISTFILESIZE=1000
-export HISTCONTROL=ignoreboth
-
-# Set the path
 export PATH=${HOME}/.local/bin:${PATH}
-
 export BROWSER="google-chrome-stable"
-
-# ssh-agent
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
+[[ -f ~/.bashrc ]] && . ~/.bashrc
