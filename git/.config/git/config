@@ -46,3 +46,5 @@
 	enabled = true
 [status]
 	submodulesummary = true
+[help]
+	autocorrect = 10
