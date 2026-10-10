@@ -9,6 +9,9 @@
 	ss = status
 	s = status --short
 	l = log --oneline --graph --decorate
+	sdiff = !git diff && git submodule foreach 'git diff'
+	spush = push --recurse-submodules=on-demand
+	supdate = submodule update --remote --rebase
 [color]
 	status = always
 [core]
