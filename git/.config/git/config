@@ -31,6 +31,7 @@
 	autoSetupRemote = true
 [diff]
 	colorMoved = default
+	submodule = log
 [init]
 	defaultBranch = master
 [column]
@@ -39,3 +40,5 @@
 	sort = -committerdate
 [rerere]
 	enabled = true
+[status]
+	submodulesummary = true
