@@ -18,6 +18,7 @@
 	editor = vim
 	pager = delta
 	excludesFile = gitignore
+	autocrlf = input
 [commit]
 	gpgsign = true
 [interactive]
