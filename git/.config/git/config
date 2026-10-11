@@ -19,6 +19,7 @@
 	pager = delta
 	excludesFile = gitignore
 	autocrlf = input
+	whitespace = trailing-space,space-before-tab,-indent-with-non-tab,-tab-in-indent,-cr-at-eol,incomplete-line
 [commit]
 	gpgsign = true
 [interactive]
