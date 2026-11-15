@@ -211,7 +211,7 @@ call quickui#menu#install('&View', [
             \ [ "Set &whitespace markers %{&list? 'Off':'On'}\t(F4)", 'set list!'],
             \ [ "Toggle &Indent guides\t(F8)", 'IndentGuidesToggle'],
             \ [ "Set &cursor column %{&cursorcolumn? 'Off':'On'}\t(F9)", 'set cursorcolumn!'],
-            \ [ "Set ma&x cursor column %{&colorcolumn == ''? 'On':'Off'}\t(⎵F9)", 'execute "set colorcolumn=" . (&colorcolumn == "" ? "80" : "")'],
+            \ [ "Set ma&x cursor column %{&colorcolumn == ''? 'On':'Off'}\t(⎵F9)", 'execute "set colorcolumn=" . (&colorcolumn == "" ? "120" : "")'],
             \ [ "Set Conceal le&vel %{&conceallevel == 2 ? 0 : 2}", 'call feedkeys(":let &conceallevel  = &conceallevel == 2 ? 0 : 2\<CR>:set conceallevel?\<CR>")'],
             \ ])
 
@@ -240,7 +240,7 @@ map <leader><F6> :let &conceallevel = &conceallevel == 2 ? 0 : 2 <CR> : set conc
 map <F7> :UndotreeToggle<CR>
 map <F8> :IndentGuidesToggle<CR>
 map <F9> :set cursorcolumn! <CR>
-map <silent> <leader><F9> :execute "set colorcolumn=" . (&colorcolumn == "" ? "80" : "")<CR>
+map <silent> <leader><F9> :execute "set colorcolumn=" . (&colorcolumn == "" ? "120" : "")<CR>
 " Left/Right = Previous/Next tabpage
 map <C-H> :tabp<CR>
 map <C-L> :tabn<CR>
