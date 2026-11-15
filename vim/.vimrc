@@ -196,7 +196,7 @@ let g:vimwiki_list = [{'path': '~/docs/vimwiki', 'syntax': 'markdown', 'ext': 'm
 
 function! s:CreateDiaryTemplate()
   let l:timestamp = strptime("%Y-%m-%d", expand('%:t:r'))
-  let l:date_str = strftime("%Y-%m-%d %A %d of %B", timestamp)
+  let l:date_str = strftime("%Y-%m-%d %A %d of %B", l:timestamp)
 
   call append(0, [
         \ "# " . l:date_str,
