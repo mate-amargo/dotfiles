@@ -113,6 +113,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'godlygeek/tabular'
   Plug 'mbbill/undotree'
   Plug 'skywind3000/vim-quickui'
+  Plug 'mattn/calendar-vim'
+  Plug 'vimwiki/vimwiki'
 
 call plug#end()
 
@@ -188,6 +190,24 @@ command TrailingRemove %s/\s\+$//e
 command AccentsConvert %s/\\'a/á/g | %s/\\'e/é/g | %s/\\'i/í/g | %s/\\'o/ó/g | %s/\\'u/ú/g
 " sudo write trick + reload the file to avoid 'file changed' message
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+
+" VimWiki Settings
+let g:vimwiki_list = [{'path': '~/docs/vimwiki', 'syntax': 'markdown', 'ext': 'md'}]
+
+function! s:CreateDiaryTemplate()
+  let l:timestamp = strptime("%Y-%m-%d", expand('%:t:r'))
+  let l:date_str = strftime("%Y-%m-%d %A %d of %B", timestamp)
+
+  call append(0, [
+        \ "# " . l:date_str,
+        \ "",
+  \ ])
+endfunction
+
+augroup VimwikiDiaryAutoTemplate
+  autocmd!
+  autocmd BufNewFile ~/docs/vimwiki/diary/????-??-??.md call s:CreateDiaryTemplate()
+augroup END
 
 " --- BEGIN QuickUI settings ---
 let g:quickui_color_scheme = 'gruvbox'
